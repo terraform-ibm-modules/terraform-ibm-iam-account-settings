@@ -68,7 +68,7 @@ variable "access_token_expiration" {
   default     = "3600"
 }
 variable "ignore_ibm_approved_ip_addresses" {
-  default     = true
+  default     = false
   type        = bool
   description = "If true IP address control will only be evaluate custom_allowed_ip_addresses, If false, restricion will be consider both IBM approved IP sets and custom_allowed_ip_addresses (if configured)"
 }
