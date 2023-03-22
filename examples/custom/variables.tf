@@ -13,6 +13,7 @@ variable "enforce_allowed_ip_addresses" {
 variable "custom_allowed_ip_addresses" {
   type        = string
   description = "Specify additional IPv4/IPv6 addresses/subnets that have access to the account, separate multiple values with a comma"
+  default     = ""
 }
 
 variable "shell_settings_enabled" {
