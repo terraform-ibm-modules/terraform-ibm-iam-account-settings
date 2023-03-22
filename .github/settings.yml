@@ -9,7 +9,7 @@ _extends: repo-settings:.github/common-settings.yml
 
 # repo-specific settings
 #
-repository:
+#repository:
   # See https://terraform-ibm-modules.github.io/documentation/#/implementation-guidelines?id=module-names-and-descriptions
 
   # By changing this field, you rename the repository.
