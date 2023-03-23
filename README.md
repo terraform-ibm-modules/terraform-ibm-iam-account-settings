@@ -13,7 +13,7 @@
 [![latest release](https://img.shields.io/github/v/release/terraform-ibm-modules/terraform-ibm-cos?logo=GitHub&sort=semver)](https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/releases/latest)
 [![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/)
 
-This module configures standard IAM account settings with the recommended values, in which the default values are 
+This module configures standard IAM account settings with the recommended values, in which the default values are
 aligned with FSCloud requirements, and exports the values as outputs.
 
 The module handles the following account settings:
