@@ -1,152 +1,137 @@
-<!-- BEGIN MODULE HOOK -->
+# IAM account settings module
 
-<!-- Update the title to match the module name and add a description -->
-# Terraform Modules Template Project
-<!-- UPDATE BADGE: Update the link for the following badge-->
-[![Incubating (Not yet consumable)](https://img.shields.io/badge/status-Incubating%20(Not%20yet%20consumable)-red)](https://terraform-ibm-modules.github.io/documentation/#/badge-status)
-[![Build status](https://github.com/terraform-ibm-modules/terraform-ibm-module-template/actions/workflows/ci.yml/badge.svg)](https://github.com/terraform-ibm-modules/terraform-ibm-module-template/actions/workflows/ci.yml)
-[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
-[![latest release](https://img.shields.io/github/v/release/terraform-ibm-modules/terraform-ibm-module-template?logo=GitHub&sort=semver)](https://github.com/terraform-ibm-modules/terraform-ibm-module-template/releases/latest)
-[![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
-
-<!-- Remove the content in this H2 heading after completing the steps -->
-
-## Submit a new module
-
-:+1::tada: Thank you for taking the time to contribute! :tada::+1:
-
-This template repository exists to help you create Terraform modules for IBM Cloud.
-
-The default structure includes the following files:
-
-- `README.md`: A description of the module
-- `main.tf`: The logic for the module
-- `version.tf`: The required terraform and provider versions
-- `variables.tf`: The input variables for the module
-- `outputs.tf`: The values that are output from the module
-For more information, see [Module structure](https://terraform-ibm-modules.github.io/documentation/#/module-structure) in the project documentation.
-
-You can add other content to support what your module does and how it works. For example, you might add a `scripts/` directory that contains shell scripts that are run by a `local-exec` `null_resource` in the Terraform module.
-
-Follow this process to create and submit a Terraform module.
-
-### Create a repo from this repo template
-
-1.  Create a repository from this repository template by clicking `Use this template` in the upper right of the GitHub UI.
-&emsp;&emsp;&emsp;&emsp;<br>For more information about creating a repository from a template, see the [GitHub docs](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
-1.  Select `terraform-ibm-modules` as the owner.
-1.  Enter a name for the module in format `terraform-ibm-<NAME>`, where `<NAME>` reflects the type of infrastructure that the module manages.
-&emsp;&emsp;&emsp;&emsp;<br>Use hyphens as delimiters for names with multiple words (for example, terraform-ibm-`activity-tracker`).
-1.  Provide a short description of the module.
-&emsp;&emsp;&emsp;&emsp;<br>The description is displayed under the repository name on the [organization page](https://github.com/terraform-ibm-modules) and in the **About** section of the repository. Use the description to help users understand the purpose of your module. For more information, see [module names and descriptions](https://terraform-ibm-modules.github.io/documentation/#/implementation-guidelines?id=module-names-and-descriptions) in the docs.
-
-### Clone the repo and set up your development environment
-
-Locally clone the new repository and set up your development environment by completing the tasks in [Local development setup](https://terraform-ibm-modules.github.io/documentation/#/local-dev-setup) in the project documentation.
-
-### Update the repo name and description in source control
-
-To help make sure that the repo name and description are not changed except through pull requests, they are defined in the `settings.yml` file.
-
-Check to make sure that values are uncommented and correct:
-
-1.  Open the [settings.yml](.github/settings.yml) file.
-1.  If not already updated, uncomment the `name` and `description` properties and set the values to what you specified when you requested the repo.
-
-### Update the Terraform files
-
-Implement the logic for your module by updating the `main.tf`, `version.tf`, `variables.tf`, and `outputs.tf` Terraform files. For more information, see [Creating Terraform on IBM Cloud templates](https://cloud.ibm.com/docs/ibm-cloud-provider-for-terraform?topic=ibm-cloud-provider-for-terraform-create-tf-config).
-
-### Create examples and tests
-
-Add one or more examples in the `examples` directory that consume your new module, and configure tests for them in the `tests` directory. For more information about tests, see [Tests](https://terraform-ibm-modules.github.io/documentation/#/tests).
-
-### Update the content in the readme file
-
-After you implement the logic for your module and create examples and tests, update this readme file in your repository by following these steps:
-
-1.  Update the title heading and add a description about your module.
-1.  Update the badge links.
-1.  Remove all the content in this H2 heading section.
-1.  Complete the [Usage](#usage) and [Required IAM access policies](#required-iam-access-policies) sections. The [Examples](#examples) and [Requirements](#requirements) section are populated by a pre-commit hook.
-
-### Commit your code and submit your module for review
-
-1.  Before you commit any code, review [Contributing to the IBM Cloud Terraform modules project](https://terraform-ibm-modules.github.io/documentation/#/contribute-module) in the project documentation.
-1.  Create a pull request for review.
-
-### Post-merge steps
-
-After the first PR for your module is merged, follow these post-merge steps:
-
-1.  Create a PR to enable the upgrade test by removing the `t.Skip` line in `tests/pr_test.go`.
-
-<!-- Remove the content in this previous H2 heading -->
-## Reference architectures
-
-<!--
-Add links to any reference architectures for this module.
-(Usually in the `/reference-architectures` directory.)
-See "Reference architecture" in Authoring Guidelines in the public documentation at
-https://terraform-ibm-modules.github.io/documentation/#/implementation-guidelines?id=reference-architecture
+<!-- BADGE UPDATES:
+1. Update first badge below to the current status of the module. See options at
+    https://github.com/terraform-ibm-modules/documentation/blob/main/docs/badge-status.md
+2. Update the build status badge to point to the travis pipeline for the module
+    TIP: Simply replace the string "module-template" in the 2 places in the Build Status section below
 -->
+[![Stable (With quality checks)](https://img.shields.io/badge/Status-Stable%20(With%20quality%20checks)-green?style=plastic)](https://terraform-ibm-modules.github.io/documentation/#/badge-status)
+[![Build Status](https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/actions/workflows/ci.yml/badge.svg)](https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/actions/workflows/ci.yml)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+[![latest release](https://img.shields.io/github/v/release/terraform-ibm-modules/terraform-ibm-iam-account-settings?logo=GitHub&sort=semver)](https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/releases/latest)
+[![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/)
+
+This module configures standard IAM account settings with the recommended values, in which the default values are
+aligned with FSCloud requirements, and exports the values as outputs.
+
+The module handles the following account settings:
+
+- Multifactor authentication (None - Federated Users - All - Email/TOPT/U2F based)
+- Restrict API key creation (on - off)
+- Restrict service ID creation (on - off)
+- Session activity timeout (seconds)
+- Session inactivity timeout (seconds)
+- Access token expiration (seconds)
+- Refresh token expiration (seconds)
+- Restrict IP address access (off/Any Allowed - on/Allow only specified IP subnets or IP addresses). Two control modes
+  are supported:
+    - Monitor: traffic that originates outside the specified allowed IP addresses is allowed but logged by audit events
+      that are sent to SIEM and Activity Tracker
+    - Restrict: traffic that originates outside the specified allowed IP addresses is blocked
+- Global shell settings (on - off)
+- Public access group (on - off)
+
+The module supports creating and updating settings that are applied with the `terraform apply` command. With objects
+affected by the `destroy` command, the module preserves the most recent setting and doesn't change objects that are
+configured outside of Terraform's scope.
+
+Because the IBM provider does not handle the account settings, this module uses the
+generic [REST API provider](https://github.com/Mastercard/terraform-provider-restapi). A feature request is tracked in
+the
+issue [Support to disable/enable public access account setting](https://github.com/IBM-Cloud/terraform-provider-ibm/issues/3285).
 
 ## Usage
 
-<!--
-Add an example of the use of the module in the following code block.
+:exclamation: **Important:** Make sure that you set the `API_DATA_IS_SENSITIVE` environment variable to `true` to hide
+sensitive information before you run Terraform operations. For more information, see the generic REST API
+provider [documentation](https://github.com/Mastercard/terraform-provider-restapi#usage):
 
-Use real values instead of "var.<var_name>" or other placeholder values
-unless real values don't help users know what to change.
--->
+```sh
+export API_DATA_IS_SENSITIVE=true`
+```
 
 ```hcl
+##############################################################################
+# Config providers
+##############################################################################
 
+data "ibm_iam_auth_token" "tokendata" {}
+
+provider "restapi" {
+  uri                  = "https:"
+  write_returns_object = true
+  debug                = false # set to true to show detailed logs, but use carefully as it might print API key values.
+  headers              = {
+    Authorization = data.ibm_iam_auth_token.tokendata.iam_access_token
+    Content-Type  = "application/json"
+    if-Match      = "*"
+  }
+}
+
+provider "ibm" {
+  ibmcloud_api_key = var.ibmcloud_api_key # pragma: allowlist secret
+}
+
+##############################################################################
+# Configure IAM Account settings
+##############################################################################
+
+# Replace "master" with a GIT release version to lock into a specific release
+module "iam-account-settings" {
+  source                       = "git::https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings?ref=main"
+  allowed_ip_addresses         = var.allowed_ip_addresses
+  enforce_allowed_ip_addresses = true
+}
 ```
+
+## Compliance and security
+
+This module contributes to the implementation of the following NIST controls for the network layer on an IBM Cloud
+account.
+
+| Account Setting                                        | NIST Family | NIST Control | Description                                                                                                                                                                                                                                   |
+|--------------------------------------------------------|-------------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Force sign out due to inactivity                       | AC          | AC-2(5)      | Require that users log out when an organization-defined time period of expected inactivity is reached.                                                                                                                                        |
+| Restrict API key/Service ID creation                   | AC          | AC-6(1)      | Authorize access for organization-defined individuals or roles to access security functions and security-relevant information. These include user lists, API keys, service IDs, and resources.                                                |
+| Set active session time and sign out due to inactivity | AC          | AC-12        | Implemented automatic termination of a users session after organization-defined session expiration and session invalidation times.                                                                                                            |
+| Restrict IP address access                             | AU          | AU-12(3)     | Provide and implement the capability for organization-defined individuals or roles to change the logging to be performed on traffic that originates outside specified allowed IP addresses based on Restrict IP address access control modes. |
+| Set MFA for users with an IBMid                        | IA          | IA-2(1)      | Implemented multi-factor authentication for access to privileged accounts.                                                                                                                                                                    |
+| Set MFA for all users                                  | IA          | IA-2(2)      | Implemented multi-factor authentication for access to nonprivileged accounts.                                                                                                                                                                 |
+| Restrict IP address access                             | SC          | SC-7(3)      | Limit the number of external network connections to the system. This includes the Restrict IP address access control modes.                                                                                                                   |
+| Force sign out due to inactivity                       | SC          | SC-10        | Terminate the network connection that is associated with a communications session at the end of the session or after organization-defined period of inactivity.                                                                               |
+| Restrict IP address access/Set MFA                     | SI          | SI-4         | Monitor the system to detect unauthorized local, network, and remote connections.                                                                                                                                                             |
 
 ## Required IAM access policies
 
-<!-- PERMISSIONS REQUIRED TO RUN MODULE
-If this module requires permissions, uncomment the following block and update
-the sample permissions, following the format.
-Replace the sample Account and IBM Cloud service names and roles with the
-information in the console at
-Manage > Access (IAM) > Access groups > Access policies.
--->
-
-<!--
 You need the following permissions to run this module.
 
 - Account Management
-    - **Sample Account Service** service
+    - **IAM Access Groups** service
+        - `Administrator` platform access
+    - **IAM Access Management** service
         - `Editor` platform access
-        - `Manager` service access
-    - IAM Services
-        - **Sample Cloud Service** service
-            - `Administrator` platform access
--->
+    - **IAM Identity** service
+        - `Operator` platform access
+    - **IBM Cloud Shell** service
+        - `Administrator` platform access
 
-<!-- NO PERMISSIONS FOR MODULE
-If no permissions are required for the module, uncomment the following
-statement instead the previous block.
--->
-
-<!-- No permissions are needed to run this module.-->
-<!-- END MODULE HOOK -->
 <!-- BEGIN EXAMPLES HOOK -->
 ## Examples
 
-- [ Default example](examples/default)
-- [ Example that uses existing resources](examples/existing-resources)
-- [ Non default example](examples/non-default)
+- [ Account Custom Settings example](examples/custom)
+- [ Default Example](examples/default)
 <!-- END EXAMPLES HOOK -->
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
+| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.49.0 |
+| <a name="requirement_restapi"></a> [restapi](#requirement\_restapi) | >= 1.18.0 |
 
 ## Modules
 
@@ -154,16 +139,62 @@ No modules.
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [ibm_cloud_shell_account_settings.cloud_shell_account_settings](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cloud_shell_account_settings) | resource |
+| [ibm_iam_account_settings.iam_account_settings](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/iam_account_settings) | resource |
+| [restapi_object.account_public_access](https://registry.terraform.io/providers/Mastercard/restapi/latest/docs/resources/object) | resource |
+| [ibm_cloud_shell_account_settings.cloud_shell_account_settings](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/data-sources/cloud_shell_account_settings) | data source |
+| [ibm_iam_account_settings.iam_account_settings](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/data-sources/iam_account_settings) | data source |
 
 ## Inputs
 
-No inputs.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_access_token_expiration"></a> [access\_token\_expiration](#input\_access\_token\_expiration) | Defines the access token expiration in seconds | `string` | `"3600"` | no |
+| <a name="input_active_session_timeout"></a> [active\_session\_timeout](#input\_active\_session\_timeout) | Specify how long (seconds) a user is allowed to work continuosly in the account | `string` | `"3600"` | no |
+| <a name="input_allowed_ip_addresses_cloudshell"></a> [allowed\_ip\_addresses\_cloudshell](#input\_allowed\_ip\_addresses\_cloudshell) | CloudShell IP addresses/ranges in list | `list(any)` | `[]` | no |
+| <a name="input_allowed_ip_addresses_continuous_delivery"></a> [allowed\_ip\_addresses\_continuous\_delivery](#input\_allowed\_ip\_addresses\_continuous\_delivery) | Continuous Delivery IP addresses/ranges in list | `list(any)` | `[]` | no |
+| <a name="input_allowed_ip_addresses_iks_accesshub"></a> [allowed\_ip\_addresses\_iks\_accesshub](#input\_allowed\_ip\_addresses\_iks\_accesshub) | AccessHub IP addresses/ranges in list | `list(any)` | `[]` | no |
+| <a name="input_allowed_ip_addresses_iks_activity_tracker_ldna"></a> [allowed\_ip\_addresses\_iks\_activity\_tracker\_ldna](#input\_allowed\_ip\_addresses\_iks\_activity\_tracker\_ldna) | Activity Tracker (LogDNA) IP addresses/ranges in list | `list(any)` | `[]` | no |
+| <a name="input_allowed_ip_addresses_iks_container_registry"></a> [allowed\_ip\_addresses\_iks\_container\_registry](#input\_allowed\_ip\_addresses\_iks\_container\_registry) | Container Registry IP addresses/ranges in list | `list(any)` | `[]` | no |
+| <a name="input_allowed_ip_addresses_iks_control_plane_fw"></a> [allowed\_ip\_addresses\_iks\_control\_plane\_fw](#input\_allowed\_ip\_addresses\_iks\_control\_plane\_fw) | IKS' Control Plane IP addresses/ranges in list | `list(any)` | `[]` | no |
+| <a name="input_allowed_ip_addresses_iks_sysdig_monitoring"></a> [allowed\_ip\_addresses\_iks\_sysdig\_monitoring](#input\_allowed\_ip\_addresses\_iks\_sysdig\_monitoring) | Cloud Monitoring (Sysdig) IP addresses/ranges in list | `list(any)` | `[]` | no |
+| <a name="input_allowed_ip_addresses_taas_jenkins_tekton"></a> [allowed\_ip\_addresses\_taas\_jenkins\_tekton](#input\_allowed\_ip\_addresses\_taas\_jenkins\_tekton) | Jenkins/Tekton IP addresses/ranges in list | `list(any)` | `[]` | no |
+| <a name="input_allowed_ip_addresses_travis"></a> [allowed\_ip\_addresses\_travis](#input\_allowed\_ip\_addresses\_travis) | Travis IP addresses/ranges in list | `list(any)` | `[]` | no |
+| <a name="input_allowed_ip_schematics_eu_central"></a> [allowed\_ip\_schematics\_eu\_central](#input\_allowed\_ip\_schematics\_eu\_central) | Schematics EU IP addresses/ranges in list | `list(any)` | `[]` | no |
+| <a name="input_allowed_ip_schematics_uk_south"></a> [allowed\_ip\_schematics\_uk\_south](#input\_allowed\_ip\_schematics\_uk\_south) | Schematics UK South IP addresses/ranges in list | `list(any)` | `[]` | no |
+| <a name="input_allowed_ip_schematics_us"></a> [allowed\_ip\_schematics\_us](#input\_allowed\_ip\_schematics\_us) | Schematics US IP addresses/ranges in list | `list(any)` | `[]` | no |
+| <a name="input_api_creation"></a> [api\_creation](#input\_api\_creation) | When restriction is enabled, users in your account require specific access to create API keys, including the account owner | `string` | `"RESTRICTED"` | no |
+| <a name="input_custom_allowed_ip_addresses"></a> [custom\_allowed\_ip\_addresses](#input\_custom\_allowed\_ip\_addresses) | Specify a custom list of IPv4/IPv6 addresses/subnets that have access to the account, separate multiple values with a comma | `string` | `""` | no |
+| <a name="input_enforce_allowed_ip_addresses"></a> [enforce\_allowed\_ip\_addresses](#input\_enforce\_allowed\_ip\_addresses) | If true IP address restriction will be enforced, If false, traffic originated outside specified allowed IP address set is monitored with audit events sent to SIEM and Activity Tracker.   After running in monitored mode to test this variable should explicity be set to true to enfoce IP allow listing | `bool` | `true` | no |
+| <a name="input_ignore_ibm_approved_ip_addresses"></a> [ignore\_ibm\_approved\_ip\_addresses](#input\_ignore\_ibm\_approved\_ip\_addresses) | If true IP address control will only be evaluate custom\_allowed\_ip\_addresses, If false, restricion will be consider both IBM approved IP sets and custom\_allowed\_ip\_addresses (if configured) | `bool` | `false` | no |
+| <a name="input_inactive_session_timeout"></a> [inactive\_session\_timeout](#input\_inactive\_session\_timeout) | Specify how long (seconds) a user is allowed to stay logged in the account while being inactive/idle | `string` | `"900"` | no |
+| <a name="input_mfa"></a> [mfa](#input\_mfa) | Specify Multi-Factor Authentication method in the account | `string` | `"TOTP4ALL"` | no |
+| <a name="input_public_access_enabled"></a> [public\_access\_enabled](#input\_public\_access\_enabled) | Enable/Disable public access group in which resources are open anyone regardless if they are member of your account or not | `bool` | `false` | no |
+| <a name="input_refresh_token_expiration"></a> [refresh\_token\_expiration](#input\_refresh\_token\_expiration) | Defines the refresh token expiration in seconds | `string` | `"259200"` | no |
+| <a name="input_serviceid_creation"></a> [serviceid\_creation](#input\_serviceid\_creation) | When restriction is enabled, users in your account require specific access to create service IDs, including the account owner | `string` | `"RESTRICTED"` | no |
+| <a name="input_shell_settings_enabled"></a> [shell\_settings\_enabled](#input\_shell\_settings\_enabled) | Enable global shell settings to all users in the account | `bool` | `false` | no |
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_account_allowed_ip_addresses"></a> [account\_allowed\_ip\_addresses](#output\_account\_allowed\_ip\_addresses) | Current allowed IP addresses |
+| <a name="output_account_allowed_ip_addresses_control_mode"></a> [account\_allowed\_ip\_addresses\_control\_mode](#output\_account\_allowed\_ip\_addresses\_control\_mode) | Current allowed IP addresses enforcement control mode, will indicate RESTRICT if account\_allowed\_ip\_addresses\_enforced is TRUE |
+| <a name="output_account_allowed_ip_addresses_enforced"></a> [account\_allowed\_ip\_addresses\_enforced](#output\_account\_allowed\_ip\_addresses\_enforced) | Current allowed IP addresses enforcement state |
+| <a name="output_account_approved_ibm_ip_addresses_ignored"></a> [account\_approved\_ibm\_ip\_addresses\_ignored](#output\_account\_approved\_ibm\_ip\_addresses\_ignored) | Ignore state of IBM approved IP addresses |
+| <a name="output_account_iam_access_token_expiration"></a> [account\_iam\_access\_token\_expiration](#output\_account\_iam\_access\_token\_expiration) | Current access token expiration |
+| <a name="output_account_iam_active_session_timeout"></a> [account\_iam\_active\_session\_timeout](#output\_account\_iam\_active\_session\_timeout) | Current active session timeout |
+| <a name="output_account_iam_apikey_creation"></a> [account\_iam\_apikey\_creation](#output\_account\_iam\_apikey\_creation) | Current state of API key creation restriction |
+| <a name="output_account_iam_inactive_session_timeout"></a> [account\_iam\_inactive\_session\_timeout](#output\_account\_iam\_inactive\_session\_timeout) | Current inactive session timeout |
+| <a name="output_account_iam_mfa"></a> [account\_iam\_mfa](#output\_account\_iam\_mfa) | Current MFA setting |
+| <a name="output_account_iam_refresh_token_expiration"></a> [account\_iam\_refresh\_token\_expiration](#output\_account\_iam\_refresh\_token\_expiration) | Current refresh token expiration |
+| <a name="output_account_iam_serviceid_creation"></a> [account\_iam\_serviceid\_creation](#output\_account\_iam\_serviceid\_creation) | Current state of ServiceID creation restriction |
+| <a name="output_account_public_access"></a> [account\_public\_access](#output\_account\_public\_access) | Current state of public access group setting |
+| <a name="output_account_shell_settings_status"></a> [account\_shell\_settings\_status](#output\_account\_shell\_settings\_status) | Current state of global shell setting |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
 <!-- BEGIN CONTRIBUTING HOOK -->
 
 <!-- Leave this section as is so that your module has a link to local development environment set up steps for contributors to follow -->
