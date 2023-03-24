@@ -1,12 +1,503 @@
 {
   "path": ".",
-  "variables": {},
-  "outputs": {},
+  "variables": {
+    "access_token_expiration": {
+      "name": "access_token_expiration",
+      "type": "string",
+      "description": "Defines the access token expiration in seconds",
+      "default": "3600",
+      "source": [
+        "ibm_iam_account_settings.iam_account_settings.system_access_token_expiration_in_seconds"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 143
+      },
+      "computed": true
+    },
+    "active_session_timeout": {
+      "name": "active_session_timeout",
+      "type": "string",
+      "description": "Specify how long (seconds) a user is allowed to work continuosly in the account",
+      "default": "3600",
+      "source": [
+        "ibm_iam_account_settings.iam_account_settings.session_expiration_in_seconds"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 126
+      },
+      "computed": true
+    },
+    "allowed_ip_addresses_cloudshell": {
+      "name": "allowed_ip_addresses_cloudshell",
+      "type": "list(any)",
+      "description": "CloudShell IP addresses/ranges in list",
+      "default": [],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 30
+      }
+    },
+    "allowed_ip_addresses_continuous_delivery": {
+      "name": "allowed_ip_addresses_continuous_delivery",
+      "type": "list(any)",
+      "description": "Continuous Delivery IP addresses/ranges in list",
+      "default": [],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 24
+      }
+    },
+    "allowed_ip_addresses_iks_accesshub": {
+      "name": "allowed_ip_addresses_iks_accesshub",
+      "type": "list(any)",
+      "description": "AccessHub IP addresses/ranges in list",
+      "default": [],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 48
+      }
+    },
+    "allowed_ip_addresses_iks_activity_tracker_ldna": {
+      "name": "allowed_ip_addresses_iks_activity_tracker_ldna",
+      "type": "list(any)",
+      "description": "Activity Tracker (LogDNA) IP addresses/ranges in list",
+      "default": [],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 54
+      }
+    },
+    "allowed_ip_addresses_iks_container_registry": {
+      "name": "allowed_ip_addresses_iks_container_registry",
+      "type": "list(any)",
+      "description": "Container Registry IP addresses/ranges in list",
+      "default": [],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 60
+      }
+    },
+    "allowed_ip_addresses_iks_control_plane_fw": {
+      "name": "allowed_ip_addresses_iks_control_plane_fw",
+      "type": "list(any)",
+      "description": "IKS' Control Plane IP addresses/ranges in list",
+      "default": [],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 36
+      }
+    },
+    "allowed_ip_addresses_iks_sysdig_monitoring": {
+      "name": "allowed_ip_addresses_iks_sysdig_monitoring",
+      "type": "list(any)",
+      "description": "Cloud Monitoring (Sysdig) IP addresses/ranges in list",
+      "default": [],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 42
+      }
+    },
+    "allowed_ip_addresses_taas_jenkins_tekton": {
+      "name": "allowed_ip_addresses_taas_jenkins_tekton",
+      "type": "list(any)",
+      "description": "Jenkins/Tekton IP addresses/ranges in list",
+      "default": [],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 12
+      }
+    },
+    "allowed_ip_addresses_travis": {
+      "name": "allowed_ip_addresses_travis",
+      "type": "list(any)",
+      "description": "Travis IP addresses/ranges in list",
+      "default": [],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 18
+      }
+    },
+    "allowed_ip_schematics_eu_central": {
+      "name": "allowed_ip_schematics_eu_central",
+      "type": "list(any)",
+      "description": "Schematics EU IP addresses/ranges in list",
+      "default": [],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 66
+      }
+    },
+    "allowed_ip_schematics_uk_south": {
+      "name": "allowed_ip_schematics_uk_south",
+      "type": "list(any)",
+      "description": "Schematics UK South IP addresses/ranges in list",
+      "default": [],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 72
+      }
+    },
+    "allowed_ip_schematics_us": {
+      "name": "allowed_ip_schematics_us",
+      "type": "list(any)",
+      "description": "Schematics US IP addresses/ranges in list",
+      "default": [],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 78
+      }
+    },
+    "api_creation": {
+      "name": "api_creation",
+      "type": "string",
+      "description": "When restriction is enabled, users in your account require specific access to create API keys, including the account owner",
+      "default": "RESTRICTED",
+      "source": [
+        "ibm_iam_account_settings.iam_account_settings.restrict_create_platform_apikey"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 96
+      },
+      "options": "RESTRICTED, NOT_RESTRICTED, NOT_SET",
+      "computed": true
+    },
+    "custom_allowed_ip_addresses": {
+      "name": "custom_allowed_ip_addresses",
+      "type": "string",
+      "description": "Specify a custom list of IPv4/IPv6 addresses/subnets that have access to the account, separate multiple values with a comma",
+      "default": "",
+      "pos": {
+        "filename": "variables.tf",
+        "line": 120
+      }
+    },
+    "enforce_allowed_ip_addresses": {
+      "name": "enforce_allowed_ip_addresses",
+      "type": "bool",
+      "description": "If true IP address restriction will be enforced, If false, traffic originated outside specified allowed IP address set is monitored with audit events sent to SIEM and Activity Tracker.   After running in monitored mode to test this variable should explicity be set to true to enfoce IP allow listing",
+      "default": true,
+      "pos": {
+        "filename": "variables.tf",
+        "line": 108
+      }
+    },
+    "ignore_ibm_approved_ip_addresses": {
+      "name": "ignore_ibm_approved_ip_addresses",
+      "type": "bool",
+      "description": "If true IP address control will only be evaluate custom_allowed_ip_addresses, If false, restricion will be consider both IBM approved IP sets and custom_allowed_ip_addresses (if configured)",
+      "default": false,
+      "pos": {
+        "filename": "variables.tf",
+        "line": 114
+      }
+    },
+    "inactive_session_timeout": {
+      "name": "inactive_session_timeout",
+      "type": "string",
+      "description": "Specify how long (seconds) a user is allowed to stay logged in the account while being inactive/idle",
+      "default": "900",
+      "source": [
+        "ibm_iam_account_settings.iam_account_settings.session_invalidation_in_seconds"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 132
+      },
+      "computed": true
+    },
+    "mfa": {
+      "name": "mfa",
+      "type": "string",
+      "description": "Specify Multi-Factor Authentication method in the account",
+      "default": "TOTP4ALL",
+      "source": [
+        "ibm_iam_account_settings.iam_account_settings.mfa"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 90
+      },
+      "options": "NONE, TOTP, TOTP4ALL, LEVEL1, LEVEL2, LEVEL3",
+      "computed": true
+    },
+    "public_access_enabled": {
+      "name": "public_access_enabled",
+      "type": "bool",
+      "description": "Enable/Disable public access group in which resources are open anyone regardless if they are member of your account or not",
+      "default": false,
+      "source": [
+        "restapi_object.account_public_access.data",
+        "restapi_object.account_public_access.force_new"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 84
+      }
+    },
+    "refresh_token_expiration": {
+      "name": "refresh_token_expiration",
+      "type": "string",
+      "description": "Defines the refresh token expiration in seconds",
+      "default": "259200",
+      "source": [
+        "ibm_iam_account_settings.iam_account_settings.system_refresh_token_expiration_in_seconds"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 138
+      },
+      "computed": true
+    },
+    "serviceid_creation": {
+      "name": "serviceid_creation",
+      "type": "string",
+      "description": "When restriction is enabled, users in your account require specific access to create service IDs, including the account owner",
+      "default": "RESTRICTED",
+      "source": [
+        "ibm_iam_account_settings.iam_account_settings.restrict_create_service_id"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 102
+      },
+      "options": "RESTRICTED, NOT_RESTRICTED, NOT_SET",
+      "computed": true
+    },
+    "shell_settings_enabled": {
+      "name": "shell_settings_enabled",
+      "type": "bool",
+      "description": "Enable global shell settings to all users in the account",
+      "default": false,
+      "source": [
+        "ibm_cloud_shell_account_settings.cloud_shell_account_settings.enabled"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 149
+      }
+    }
+  },
+  "outputs": {
+    "account_allowed_ip_addresses": {
+      "name": "account_allowed_ip_addresses",
+      "description": "Current allowed IP addresses",
+      "value": "local.account_iam_allowed_ip_addresses",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 47
+      }
+    },
+    "account_allowed_ip_addresses_control_mode": {
+      "name": "account_allowed_ip_addresses_control_mode",
+      "description": "Current allowed IP addresses enforcement control mode, will indicate RESTRICT if account_allowed_ip_addresses_enforced is TRUE",
+      "value": "local.iam_allowed_ip_addresses_control_mode",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 62
+      }
+    },
+    "account_allowed_ip_addresses_enforced": {
+      "name": "enforce_allowed_ip_addresses",
+      "description": "If true IP address restriction will be enforced, If false, traffic originated outside specified allowed IP address set is monitored with audit events sent to SIEM and Activity Tracker.   After running in monitored mode to test this variable should explicity be set to true to enfoce IP allow listing",
+      "value": "var.enforce_allowed_ip_addresses",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 57
+      },
+      "type": "bool"
+    },
+    "account_approved_ibm_ip_addresses_ignored": {
+      "name": "ignore_ibm_approved_ip_addresses",
+      "description": "If true IP address control will only be evaluate custom_allowed_ip_addresses, If false, restricion will be consider both IBM approved IP sets and custom_allowed_ip_addresses (if configured)",
+      "value": "var.ignore_ibm_approved_ip_addresses",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 52
+      },
+      "type": "bool"
+    },
+    "account_iam_access_token_expiration": {
+      "name": "account_iam_access_token_expiration",
+      "description": "Current access token expiration",
+      "value": "local.account_iam_access_token_expiration",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 39
+      }
+    },
+    "account_iam_active_session_timeout": {
+      "name": "account_iam_active_session_timeout",
+      "description": "Current active session timeout",
+      "value": "local.account_iam_active_session_timeout",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 30
+      }
+    },
+    "account_iam_apikey_creation": {
+      "name": "account_iam_apikey_creation",
+      "description": "Current state of API key creation restriction",
+      "value": "local.account_iam_apikey_creation",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 20
+      }
+    },
+    "account_iam_inactive_session_timeout": {
+      "name": "account_iam_inactive_session_timeout",
+      "description": "Current inactive session timeout",
+      "value": "local.account_iam_inactive_session_timeout",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 35
+      }
+    },
+    "account_iam_mfa": {
+      "name": "account_iam_mfa",
+      "description": "Current MFA setting",
+      "value": "local.account_iam_mfa",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 25
+      }
+    },
+    "account_iam_refresh_token_expiration": {
+      "name": "account_iam_refresh_token_expiration",
+      "description": "Current refresh token expiration",
+      "value": "local.account_iam_refresh_token_expiration",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 43
+      }
+    },
+    "account_iam_serviceid_creation": {
+      "name": "account_iam_serviceid_creation",
+      "description": "Current state of ServiceID creation restriction",
+      "value": "local.account_iam_serviceid_creation",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 15
+      }
+    },
+    "account_public_access": {
+      "name": "account_public_access",
+      "description": "Current state of public access group setting",
+      "value": "local.account_public_access",
+      "sensitive": true,
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 5
+      }
+    },
+    "account_shell_settings_status": {
+      "name": "account_shell_settings_status",
+      "description": "Current state of global shell setting",
+      "value": "local.account_shell_settings_status",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 11
+      }
+    }
+  },
   "required_core": [
     "\u003e= 1.0.0"
   ],
-  "required_providers": {},
-  "managed_resources": {},
-  "data_resources": {},
+  "required_providers": {
+    "ibm": {
+      "source": "IBM-Cloud/ibm",
+      "version_constraints": [
+        "\u003e= 1.49.0"
+      ]
+    },
+    "restapi": {
+      "source": "Mastercard/restapi",
+      "version_constraints": [
+        "\u003e= 1.18.0"
+      ]
+    }
+  },
+  "managed_resources": {
+    "ibm_cloud_shell_account_settings.cloud_shell_account_settings": {
+      "mode": "managed",
+      "type": "ibm_cloud_shell_account_settings",
+      "name": "cloud_shell_account_settings",
+      "attributes": {
+        "enabled": "shell_settings_enabled"
+      },
+      "provider": {
+        "name": "ibm"
+      },
+      "pos": {
+        "filename": "main.tf",
+        "line": 44
+      }
+    },
+    "ibm_iam_account_settings.iam_account_settings": {
+      "mode": "managed",
+      "type": "ibm_iam_account_settings",
+      "name": "iam_account_settings",
+      "attributes": {
+        "mfa": "mfa",
+        "restrict_create_platform_apikey": "api_creation",
+        "restrict_create_service_id": "serviceid_creation",
+        "session_expiration_in_seconds": "active_session_timeout",
+        "session_invalidation_in_seconds": "inactive_session_timeout",
+        "system_access_token_expiration_in_seconds": "access_token_expiration",
+        "system_refresh_token_expiration_in_seconds": "refresh_token_expiration"
+      },
+      "provider": {
+        "name": "ibm"
+      },
+      "pos": {
+        "filename": "main.tf",
+        "line": 30
+      }
+    },
+    "restapi_object.account_public_access": {
+      "mode": "managed",
+      "type": "restapi_object",
+      "name": "account_public_access",
+      "attributes": {
+        "data": "public_access_enabled",
+        "force_new": "public_access_enabled"
+      },
+      "provider": {
+        "name": "restapi"
+      },
+      "pos": {
+        "filename": "main.tf",
+        "line": 51
+      }
+    }
+  },
+  "data_resources": {
+    "data.ibm_cloud_shell_account_settings.cloud_shell_account_settings": {
+      "mode": "data",
+      "type": "ibm_cloud_shell_account_settings",
+      "name": "cloud_shell_account_settings",
+      "provider": {
+        "name": "ibm"
+      },
+      "pos": {
+        "filename": "main.tf",
+        "line": 23
+      }
+    },
+    "data.ibm_iam_account_settings.iam_account_settings": {
+      "mode": "data",
+      "type": "ibm_iam_account_settings",
+      "name": "iam_account_settings",
+      "provider": {
+        "name": "ibm"
+      },
+      "pos": {
+        "filename": "main.tf",
+        "line": 19
+      }
+    }
+  },
   "module_calls": {}
 }
