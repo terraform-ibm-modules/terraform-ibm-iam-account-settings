@@ -4,79 +4,8 @@
 # https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/iam_account_settings
 ##############################################################################
 
-locals {
-  concatenated_allowed_ip_addresses_list = concat(var.allowed_ip_addresses_taas_jenkins_tekton, var.allowed_ip_addresses_travis, var.allowed_ip_addresses_continuous_delivery, var.allowed_ip_addresses_cloudshell, var.allowed_ip_addresses_iks_control_plane_fw, var.allowed_ip_addresses_iks_sysdig_monitoring, var.allowed_ip_addresses_iks_accesshub, var.allowed_ip_addresses_iks_activity_tracker_ldna, var.allowed_ip_addresses_iks_container_registry, concat(var.allowed_ip_schematics_eu_central, var.allowed_ip_schematics_uk_south, var.allowed_ip_schematics_us))
-  concatenated_allowed_ip_addresses      = join(",", local.concatenated_allowed_ip_addresses_list)
-}
-
-variable "allowed_ip_addresses_taas_jenkins_tekton" {
-  description = "Jenkins/Tekton IP addresses/ranges in list"
-  type        = list(any)
-  default     = []
-}
-
-variable "allowed_ip_addresses_travis" {
-  description = "Travis IP addresses/ranges in list"
-  type        = list(any)
-  default     = []
-}
-
-variable "allowed_ip_addresses_continuous_delivery" {
-  description = "Continuous Delivery IP addresses/ranges in list"
-  type        = list(any)
-  default     = []
-}
-
-variable "allowed_ip_addresses_cloudshell" {
-  description = "CloudShell IP addresses/ranges in list"
-  type        = list(any)
-  default     = []
-}
-
-variable "allowed_ip_addresses_iks_control_plane_fw" {
-  description = "IKS' Control Plane IP addresses/ranges in list"
-  type        = list(any)
-  default     = []
-}
-
-variable "allowed_ip_addresses_iks_sysdig_monitoring" {
-  description = "Cloud Monitoring (Sysdig) IP addresses/ranges in list"
-  type        = list(any)
-  default     = []
-}
-
-variable "allowed_ip_addresses_iks_accesshub" {
-  description = "AccessHub IP addresses/ranges in list"
-  type        = list(any)
-  default     = []
-}
-
-variable "allowed_ip_addresses_iks_activity_tracker_ldna" {
-  description = "Activity Tracker (LogDNA) IP addresses/ranges in list"
-  type        = list(any)
-  default     = []
-}
-
-variable "allowed_ip_addresses_iks_container_registry" {
-  description = "Container Registry IP addresses/ranges in list"
-  type        = list(any)
-  default     = []
-}
-
-variable "allowed_ip_schematics_eu_central" {
-  description = "Schematics EU IP addresses/ranges in list"
-  type        = list(any)
-  default     = []
-}
-
-variable "allowed_ip_schematics_uk_south" {
-  description = "Schematics UK South IP addresses/ranges in list"
-  type        = list(any)
-  default     = []
-}
-
-variable "allowed_ip_schematics_us" {
-  description = "Schematics US IP addresses/ranges in list"
+variable "ibm_approved_ip_addresses" {
+  description = "Base set of IBM approved IPs, which are documented and sourced from https://pages.github.ibm.com/ibmcloud/Security/guidance/network-access-guidelines.html#pre-approved-ips and https://cloud.ibm.com/docs/schematics?topic=schematics-allowed-ipaddresses"
   type        = list(any)
   default     = []
 }
