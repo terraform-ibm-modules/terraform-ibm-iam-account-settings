@@ -4,6 +4,10 @@
 # https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/iam_account_settings
 ##############################################################################
 
+locals {
+  concatenated_ibm_approved_ip_addresses = join(",", var.ibm_approved_ip_addresses)
+}
+
 variable "ibm_approved_ip_addresses" {
   description = "Base set of IBM approved IPs, which are documented and sourced from https://pages.github.ibm.com/ibmcloud/Security/guidance/network-access-guidelines.html#pre-approved-ips and https://cloud.ibm.com/docs/schematics?topic=schematics-allowed-ipaddresses"
   type        = list(any)

@@ -66,8 +66,8 @@ resource "restapi_object" "account_public_access" {
 # Variables to extract settings applied
 locals {
   validate_custom_only                  = var.custom_allowed_ip_addresses != "" && var.ignore_ibm_approved_ip_addresses == true ? true : false
-  raw_iam_allowed_ip_addresses          = local.validate_custom_only == false && var.custom_allowed_ip_addresses == "" ? var.ibm_approved_ip_addresses : var.custom_allowed_ip_addresses
-  consolidated_iam_allowed_ip_addresses = var.ignore_ibm_approved_ip_addresses == false && var.custom_allowed_ip_addresses != "" ? "${var.ibm_approved_ip_addresses},${local.raw_iam_allowed_ip_addresses}" : local.raw_iam_allowed_ip_addresses
+  raw_iam_allowed_ip_addresses          = local.validate_custom_only == false && var.custom_allowed_ip_addresses == "" ? local.concatenated_ibm_approved_ip_addresses : var.custom_allowed_ip_addresses
+  consolidated_iam_allowed_ip_addresses = var.ignore_ibm_approved_ip_addresses == false && var.custom_allowed_ip_addresses != "" ? "${local.concatenated_ibm_approved_ip_addresses},${local.raw_iam_allowed_ip_addresses}" : local.raw_iam_allowed_ip_addresses
   iam_allowed_ip_addresses              = var.enforce_allowed_ip_addresses == false ? "?${local.consolidated_iam_allowed_ip_addresses}" : local.consolidated_iam_allowed_ip_addresses
   iam_allowed_ip_addresses_control_mode = var.enforce_allowed_ip_addresses == false ? "MONITOR" : "RESTRICT"
   account_public_access                 = lookup(jsondecode(restapi_object.account_public_access.create_response), "public_access_enabled")

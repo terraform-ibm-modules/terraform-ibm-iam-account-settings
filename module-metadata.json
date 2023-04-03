@@ -11,7 +11,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 143
+        "line": 76
       },
       "computed": true
     },
@@ -25,129 +25,9 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 126
+        "line": 59
       },
       "computed": true
-    },
-    "allowed_ip_addresses_cloudshell": {
-      "name": "allowed_ip_addresses_cloudshell",
-      "type": "list(any)",
-      "description": "CloudShell IP addresses/ranges in list",
-      "default": [],
-      "pos": {
-        "filename": "variables.tf",
-        "line": 30
-      }
-    },
-    "allowed_ip_addresses_continuous_delivery": {
-      "name": "allowed_ip_addresses_continuous_delivery",
-      "type": "list(any)",
-      "description": "Continuous Delivery IP addresses/ranges in list",
-      "default": [],
-      "pos": {
-        "filename": "variables.tf",
-        "line": 24
-      }
-    },
-    "allowed_ip_addresses_iks_accesshub": {
-      "name": "allowed_ip_addresses_iks_accesshub",
-      "type": "list(any)",
-      "description": "AccessHub IP addresses/ranges in list",
-      "default": [],
-      "pos": {
-        "filename": "variables.tf",
-        "line": 48
-      }
-    },
-    "allowed_ip_addresses_iks_activity_tracker_ldna": {
-      "name": "allowed_ip_addresses_iks_activity_tracker_ldna",
-      "type": "list(any)",
-      "description": "Activity Tracker (LogDNA) IP addresses/ranges in list",
-      "default": [],
-      "pos": {
-        "filename": "variables.tf",
-        "line": 54
-      }
-    },
-    "allowed_ip_addresses_iks_container_registry": {
-      "name": "allowed_ip_addresses_iks_container_registry",
-      "type": "list(any)",
-      "description": "Container Registry IP addresses/ranges in list",
-      "default": [],
-      "pos": {
-        "filename": "variables.tf",
-        "line": 60
-      }
-    },
-    "allowed_ip_addresses_iks_control_plane_fw": {
-      "name": "allowed_ip_addresses_iks_control_plane_fw",
-      "type": "list(any)",
-      "description": "IKS' Control Plane IP addresses/ranges in list",
-      "default": [],
-      "pos": {
-        "filename": "variables.tf",
-        "line": 36
-      }
-    },
-    "allowed_ip_addresses_iks_sysdig_monitoring": {
-      "name": "allowed_ip_addresses_iks_sysdig_monitoring",
-      "type": "list(any)",
-      "description": "Cloud Monitoring (Sysdig) IP addresses/ranges in list",
-      "default": [],
-      "pos": {
-        "filename": "variables.tf",
-        "line": 42
-      }
-    },
-    "allowed_ip_addresses_taas_jenkins_tekton": {
-      "name": "allowed_ip_addresses_taas_jenkins_tekton",
-      "type": "list(any)",
-      "description": "Jenkins/Tekton IP addresses/ranges in list",
-      "default": [],
-      "pos": {
-        "filename": "variables.tf",
-        "line": 12
-      }
-    },
-    "allowed_ip_addresses_travis": {
-      "name": "allowed_ip_addresses_travis",
-      "type": "list(any)",
-      "description": "Travis IP addresses/ranges in list",
-      "default": [],
-      "pos": {
-        "filename": "variables.tf",
-        "line": 18
-      }
-    },
-    "allowed_ip_schematics_eu_central": {
-      "name": "allowed_ip_schematics_eu_central",
-      "type": "list(any)",
-      "description": "Schematics EU IP addresses/ranges in list",
-      "default": [],
-      "pos": {
-        "filename": "variables.tf",
-        "line": 66
-      }
-    },
-    "allowed_ip_schematics_uk_south": {
-      "name": "allowed_ip_schematics_uk_south",
-      "type": "list(any)",
-      "description": "Schematics UK South IP addresses/ranges in list",
-      "default": [],
-      "pos": {
-        "filename": "variables.tf",
-        "line": 72
-      }
-    },
-    "allowed_ip_schematics_us": {
-      "name": "allowed_ip_schematics_us",
-      "type": "list(any)",
-      "description": "Schematics US IP addresses/ranges in list",
-      "default": [],
-      "pos": {
-        "filename": "variables.tf",
-        "line": 78
-      }
     },
     "api_creation": {
       "name": "api_creation",
@@ -159,7 +39,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 96
+        "line": 29
       },
       "options": "RESTRICTED, NOT_RESTRICTED, NOT_SET",
       "computed": true
@@ -171,7 +51,7 @@
       "default": "",
       "pos": {
         "filename": "variables.tf",
-        "line": 120
+        "line": 53
       }
     },
     "enforce_allowed_ip_addresses": {
@@ -181,7 +61,17 @@
       "default": true,
       "pos": {
         "filename": "variables.tf",
-        "line": 108
+        "line": 41
+      }
+    },
+    "ibm_approved_ip_addresses": {
+      "name": "ibm_approved_ip_addresses",
+      "type": "list(any)",
+      "description": "Base set of IBM approved IPs, which are documented and sourced from https://pages.github.ibm.com/ibmcloud/Security/guidance/network-access-guidelines.html#pre-approved-ips and https://cloud.ibm.com/docs/schematics?topic=schematics-allowed-ipaddresses",
+      "default": [],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 11
       }
     },
     "ignore_ibm_approved_ip_addresses": {
@@ -191,7 +81,7 @@
       "default": false,
       "pos": {
         "filename": "variables.tf",
-        "line": 114
+        "line": 47
       }
     },
     "inactive_session_timeout": {
@@ -204,7 +94,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 132
+        "line": 65
       },
       "computed": true
     },
@@ -218,7 +108,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 90
+        "line": 23
       },
       "options": "NONE, TOTP, TOTP4ALL, LEVEL1, LEVEL2, LEVEL3",
       "computed": true
@@ -234,7 +124,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 84
+        "line": 17
       }
     },
     "refresh_token_expiration": {
@@ -247,7 +137,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 138
+        "line": 71
       },
       "computed": true
     },
@@ -261,7 +151,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 102
+        "line": 35
       },
       "options": "RESTRICTED, NOT_RESTRICTED, NOT_SET",
       "computed": true
@@ -276,7 +166,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 149
+        "line": 82
       }
     }
   },

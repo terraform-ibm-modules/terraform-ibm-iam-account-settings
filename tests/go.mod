@@ -1,4 +1,4 @@
-module github.com/terraform-ibm-modules/terraform-iam-account-settings
+module github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings
 
 go 1.20
 
