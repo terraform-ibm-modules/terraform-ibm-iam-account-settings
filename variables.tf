@@ -5,11 +5,11 @@
 ##############################################################################
 
 locals {
-  concatenated_ibm_approved_ip_addresses = join(",", var.ibm_approved_ip_addresses)
+  concatenated_ibm_approved_ip_addresses = join(",", var.allowed_ip_addresses)
 }
 
-variable "ibm_approved_ip_addresses" {
-  description = "Base set of IBM approved IPs, which are documented and sourced from https://pages.github.ibm.com/ibmcloud/Security/guidance/network-access-guidelines.html#pre-approved-ips and https://cloud.ibm.com/docs/schematics?topic=schematics-allowed-ipaddresses"
+variable "allowed_ip_addresses" {
+  description = "Defines the IP addresses and subnets from which IAM tokens can be created for the account."
   type        = list(any)
   default     = []
 }
