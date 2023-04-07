@@ -29,6 +29,16 @@
       },
       "computed": true
     },
+    "allowed_ip_addresses": {
+      "name": "allowed_ip_addresses",
+      "type": "list(any)",
+      "description": "Defines the IP addresses and subnets from which IAM tokens can be created for the account.",
+      "default": [],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 11
+      }
+    },
     "api_creation": {
       "name": "api_creation",
       "type": "string",
@@ -62,16 +72,6 @@
       "pos": {
         "filename": "variables.tf",
         "line": 41
-      }
-    },
-    "ibm_approved_ip_addresses": {
-      "name": "ibm_approved_ip_addresses",
-      "type": "list(any)",
-      "description": "Base set of IBM approved IPs, which are documented and sourced from https://pages.github.ibm.com/ibmcloud/Security/guidance/network-access-guidelines.html#pre-approved-ips and https://cloud.ibm.com/docs/schematics?topic=schematics-allowed-ipaddresses",
-      "default": [],
-      "pos": {
-        "filename": "variables.tf",
-        "line": 11
       }
     },
     "ignore_ibm_approved_ip_addresses": {
