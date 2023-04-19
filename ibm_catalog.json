@@ -31,86 +31,6 @@
                 {
                     "architecture": {},
                     "compliance": {},
-                    "configuration": [
-                        {
-                            "default_value": "3600",
-                            "description": "Defines the access token expiration in seconds",
-                            "key": "access_token_expiration",
-                            "type": "string"
-                        },
-                        {
-                            "default_value": "3600",
-                            "description": "Specify how long (seconds) a user is allowed to work continuosly in the account",
-                            "key": "active_session_timeout",
-                            "type": "string"
-                        },
-                        {
-                            "default_value": "[]",
-                            "description": "Defines the IP addresses and subnets from which IAM tokens can be created for the account.",
-                            "key": "allowed_ip_addresses",
-                            "type": "array"
-                        },
-                        {
-                            "default_value": "RESTRICTED",
-                            "description": "When restriction is enabled, users in your account require specific access to create API keys, including the account owner",
-                            "key": "api_creation",
-                            "type": "string"
-                        },
-                        {
-                            "default_value": "",
-                            "description": "Specify a custom list of IPv4/IPv6 addresses/subnets that have access to the account, separate multiple values with a comma",
-                            "key": "custom_allowed_ip_addresses",
-                            "type": "string"
-                        },
-                        {
-                            "default_value": true,
-                            "description": "If true IP address restriction will be enforced, If false, traffic originated outside specified allowed IP address set is monitored with audit events sent to SIEM and Activity Tracker.   After running in monitored mode to test this variable should explicity be set to true to enfoce IP allow listing",
-                            "key": "enforce_allowed_ip_addresses",
-                            "type": "boolean"
-                        },
-                        {
-                            "default_value": false,
-                            "description": "If true IP address control will only be evaluate custom_allowed_ip_addresses, If false, restricion will be consider both IBM approved IP sets and custom_allowed_ip_addresses (if configured)",
-                            "key": "ignore_ibm_approved_ip_addresses",
-                            "type": "boolean"
-                        },
-                        {
-                            "default_value": "900",
-                            "description": "Specify how long (seconds) a user is allowed to stay logged in the account while being inactive/idle",
-                            "key": "inactive_session_timeout",
-                            "type": "string"
-                        },
-                        {
-                            "default_value": "TOTP4ALL",
-                            "description": "Specify Multi-Factor Authentication method in the account",
-                            "key": "mfa",
-                            "type": "string"
-                        },
-                        {
-                            "default_value": false,
-                            "description": "Enable/Disable public access group in which resources are open anyone regardless if they are member of your account or not",
-                            "key": "public_access_enabled",
-                            "type": "boolean"
-                        },
-                        {
-                            "default_value": "259200",
-                            "description": "Defines the refresh token expiration in seconds",
-                            "key": "refresh_token_expiration",
-                            "type": "string"
-                        },
-                        {
-                            "default_value": "RESTRICTED",
-                            "description": "When restriction is enabled, users in your account require specific access to create service IDs, including the account owner",
-                            "key": "serviceid_creation",
-                            "type": "string"
-                        },
-                        {
-                            "default_value": false,
-                            "description": "Enable global shell settings to all users in the account",
-                            "key": "shell_settings_enabled",
-                            "type": "boolean"
-                        }
-                    ],
                     "install_type": "fullstack",
                     "outputs": [
                         {
@@ -188,8 +108,7 @@
             "tags": [
                 "dev_ops",
                 "ibm_created"
-            ],
-            "version": "v2.0.0"
+            ]
         }
     ]
 }
