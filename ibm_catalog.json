@@ -132,7 +132,7 @@
             "label": "Terraform IAM Account Settings Module",
             "long_description": "This module configures standard IAM account settings with recommended values. The default input values are aligned with IBM Cloud Framework for Financial Services, and exports those values as outputs.\n\nWith this module, you can create and update settings. For objects that are affected by the Terraform 'destroy' command, the module preserves the most recent settings, and doesn't change objects that are configured outside of the Terraform logic.",
             "name": "deploy-arch-ibm-account-settings",
-            "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-iam-account-settings#readme",
+            "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings#readme",
             "offering_icon_url": "https://globalcatalog.cloud.ibm.com/api/v1/1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc/artifacts/solution.svg",
             "product_kind": "solution",
             "provider_name": "IBM",
