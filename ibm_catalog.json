@@ -3,7 +3,7 @@
         {
             "features": [
                 {
-                    "description": "Multifactor authentication (None - Federated Users - All - Email/TOPT/U2F based)",
+                    "description": "Supports multifactor authentication (MFA) for all users or federated users. Includes email-based, TOTP, and U2F MFA.",
                     "title": "Multifactor authentication"
                 },
                 {
@@ -24,12 +24,43 @@
                 },
                 {
                     "description": "Global shell settings (on-off)\nPublic access group (on-off)",
-                    "title": "Miscellaneuous"
+                    "title": "Global shell settings and public access group"
                 }
             ],
             "flavors": [
                 {
-                    "architecture": {},
+                    "label": "fscloud",
+                    "name": "fscloud",
+                    "architecture": {
+                        "descriptions": "",
+                        "features": [
+                            {
+                                "description": "Supports multifactor authentication (MFA) for all users or federated users. Includes email-based, TOTP, and U2F MFA.",
+                                "title": "Multifactor authentication"
+                            },
+                            {
+                                "description": "Restrict API key creation (on-off)\nRestrict service ID creation (on-off)",
+                                "title": "Restrict API Key and Service IDs"
+                            },
+                            {
+                                "description": "Session activity timeout (seconds)\nSession inactivity timeout (seconds)",
+                                "title": "Session timeouts"
+                            },
+                            {
+                                "description": "Access token expiration (seconds)\nRefresh token expiration (seconds)",
+                                "title": "Token Expiration"
+                            },
+                            {
+                                "description": "off/Any Allowed - on/Allow only specified IP subnets or IP addresses. \n\nTwo control modes are supported Monitor \u0026 Restrict",
+                                "title": "Restrict IP address access"
+                            },
+                            {
+                                "description": "Global shell settings (on-off)\nPublic access group (on-off)",
+                                "title": "Global shell settings and public access group"
+                            }
+                        ],
+                        "diagrams": []
+                    },
                     "compliance": {},
                     "configuration": [],
                     "install_type": "fullstack",
@@ -47,7 +78,7 @@
                             "key": "account_iam_refresh_token_expiration"
                         },
                         {
-                            "description": "Current allowed IP addresses enforcement control mode, will indicate RESTRICT if account_allowed_ip_addresses_enforced is TRUE",
+                            "description": "Enforcement mode for allowed IP addresses. RESTRICT is returned if account_allowed_ip_addresses_enforced is set to true.",
                             "key": "account_allowed_ip_addresses_control_mode"
                         },
                         {
@@ -83,7 +114,7 @@
                             "key": "account_iam_mfa"
                         },
                         {
-                            "description": "Current state of ServiceID creation restriction",
+                            "description": "Current state of Service ID creation restriction",
                             "key": "account_iam_serviceid_creation"
                         }
                     ],
@@ -99,7 +130,7 @@
                 "account settings"
             ],
             "label": "Terraform IAM Account Settings Module",
-            "long_description": "This module configures standard IAM account settings with the recommended values, in which the default values are aligned with FSCloud requirements, and exports the values as outputs.\n\nThe module supports creating and updating settings that are applied with the terraform apply command. With objects affected by the destroy command, the module preserves the most recent setting and doesn't change objects that are configured outside of Terraform's scope.",
+            "long_description": "This module configures standard IAM account settings with recommended values. The default input values are aligned with IBM Cloud Framework for Financial Services, and exports those values as outputs.\n\nWith this module, you can create and update settings. For objects that are affected by the Terraform 'destroy' command, the module preserves the most recent settings, and doesn't change objects that are configured outside of the Terraform logic.",
             "name": "deploy-arch-ibm-account-settings",
             "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-iam-account-settings#readme",
             "offering_icon_url": "https://globalcatalog.cloud.ibm.com/api/v1/1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc/artifacts/solution.svg",
