@@ -3,60 +3,36 @@
         {
             "features": [
                 {
-                    "description": "Supports multifactor authentication (MFA) for all users or federated users. Includes email-based, TOTP, and U2F MFA.",
-                    "title": "Multifactor authentication"
+                    "title": "Supports multi-factor authentication",
+                    "description": "Supports multi-factor authentication (MFA) for all users or federated users. Includes email-based, TOTP, and U2F MFA."
                 },
                 {
-                    "description": "Restrict API key creation (on-off)\nRestrict service ID creation (on-off)",
-                    "title": "Restrict API Key and Service IDs"
+                    "title": "Supports general IAM settings",
+                    "description": "User can configure the following IAM Account settings:\n1. Restrict API Key creation. \n2. Restrict service ID creation\n 3. Customize session activity and inactivity timeouts (in seconds). \n4. Customize Access and Refresh token expiration (in seconds). \n5. Global Shell Settings. \n6. Public Access Group."
                 },
                 {
-                    "description": "Session activity timeout (seconds)\nSession inactivity timeout (seconds)",
-                    "title": "Session timeouts"
-                },
-                {
-                    "description": "Access token expiration (seconds)\nRefresh token expiration (seconds)",
-                    "title": "Token Expiration"
-                },
-                {
-                    "description": "off/Any Allowed - on/Allow only specified IP subnets or IP addresses. \n\nTwo control modes are supported Monitor \u0026 Restrict",
-                    "title": "Restrict IP address access"
-                },
-                {
-                    "description": "Global shell settings (on-off)\nPublic access group (on-off)",
-                    "title": "Global shell settings and public access group"
+                    "title": "Restrict IP address access",
+                    "description": "User can restrict specified IP subnets or IP addresses. \nIt also supports the following two control modes: \n1. Monitor\n2. Restrict"
                 }
             ],
             "flavors": [
                 {
-                    "label": "fscloud",
+                    "label": "FSCloud",
                     "name": "fscloud",
                     "architecture": {
                         "descriptions": "",
                         "features": [
                             {
-                                "description": "Supports multifactor authentication (MFA) for all users or federated users. Includes email-based, TOTP, and U2F MFA.",
-                                "title": "Multifactor authentication"
+                                "title": "Supports multi-factor authentication",
+                                "description": "Supports multi-factor authentication (MFA) for all users or federated users. Includes email-based, TOTP, and U2F MFA."
                             },
                             {
-                                "description": "Restrict API key creation (on-off)\nRestrict service ID creation (on-off)",
-                                "title": "Restrict API Key and Service IDs"
+                                "title": "Supports general IAM settings",
+                                "description": "User can configure the following IAM Account settings:\n1. Restrict API Key creation. \n2. Restrict service ID creation\n 3. Customize session activity and inactivity timeouts (in seconds). \n4. Customize Access and Refresh token expiration (in seconds). \n5. Global Shell Settings. \n6. Public Access Group."
                             },
                             {
-                                "description": "Session activity timeout (seconds)\nSession inactivity timeout (seconds)",
-                                "title": "Session timeouts"
-                            },
-                            {
-                                "description": "Access token expiration (seconds)\nRefresh token expiration (seconds)",
-                                "title": "Token Expiration"
-                            },
-                            {
-                                "description": "off/Any Allowed - on/Allow only specified IP subnets or IP addresses. \n\nTwo control modes are supported Monitor \u0026 Restrict",
-                                "title": "Restrict IP address access"
-                            },
-                            {
-                                "description": "Global shell settings (on-off)\nPublic access group (on-off)",
-                                "title": "Global shell settings and public access group"
+                                "title": "Restrict IP address access",
+                                "description": "User can restrict specified IP subnets or IP addresses. \nIt also supports the following two control modes: \n1. Monitor\n2. Restrict"
                             }
                         ],
                         "diagrams": []
@@ -129,7 +105,7 @@
                 "iam",
                 "account settings"
             ],
-            "label": "Terraform IAM Account Settings Module",
+            "label": "IAM account settings",
             "long_description": "This module configures standard IAM account settings with recommended values. The default input values are aligned with IBM Cloud Framework for Financial Services, and exports those values as outputs.\n\nWith this module, you can create and update settings. For objects that are affected by the Terraform 'destroy' command, the module preserves the most recent settings, and doesn't change objects that are configured outside of the Terraform logic.",
             "name": "deploy-arch-ibm-account-settings",
             "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings#readme",
