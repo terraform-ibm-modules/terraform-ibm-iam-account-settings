@@ -1,0 +1,110 @@
+{
+    "products": [
+        {
+            "features": [
+                {
+                    "title": "Supports multi-factor authentication",
+                    "description": "Supports multi-factor authentication (MFA) for all users or federated users. Includes email-based, TOTP, and U2F MFA."
+                }
+            ],
+            "flavors": [
+                {
+                    "label": "FSCloud",
+                    "name": "fscloud",
+                    "architecture": {
+                        "descriptions": "",
+                        "features": [
+                            {
+                                "title": "Supports general IAM settings",
+                                "description": "Configure the following IAM settings:\n1. Restrict whether API keys can be created. \n2. Restrict whether service IDs can be created.\n 3. Customize session activity and inactivity timeouts. \n4. Customize the expiration time of both access and refresh token. \n5. Set up global shell settings. \n6. Set up public access group."
+                            },
+                            {
+                                "title": "Restrict IP address access",
+                                "description": "Restrict IP subnets and IP addresses. \nSupports both 'monitor' and 'restrict' control modes."
+                            }
+                        ],
+                        "diagrams": []
+                    },
+                    "compliance": {},
+                    "configuration": [],
+                    "install_type": "fullstack",
+                    "outputs": [
+                        {
+                            "description": "Current active session timeout",
+                            "key": "account_iam_active_session_timeout"
+                        },
+                        {
+                            "description": "Current state of public access group setting",
+                            "key": "account_public_access"
+                        },
+                        {
+                            "description": "Current refresh token expiration",
+                            "key": "account_iam_refresh_token_expiration"
+                        },
+                        {
+                            "description": "Enforcement mode for allowed IP addresses. RESTRICT is returned if account_allowed_ip_addresses_enforced is set to true.",
+                            "key": "account_allowed_ip_addresses_control_mode"
+                        },
+                        {
+                            "description": "Current access token expiration",
+                            "key": "account_iam_access_token_expiration"
+                        },
+                        {
+                            "description": "Ignore state of IBM approved IP addresses",
+                            "key": "account_approved_ibm_ip_addresses_ignored"
+                        },
+                        {
+                            "description": "Current inactive session timeout",
+                            "key": "account_iam_inactive_session_timeout"
+                        },
+                        {
+                            "description": "Current allowed IP addresses",
+                            "key": "account_allowed_ip_addresses"
+                        },
+                        {
+                            "description": "Current state of global shell setting",
+                            "key": "account_shell_settings_status"
+                        },
+                        {
+                            "description": "Current state of API key creation restriction",
+                            "key": "account_iam_apikey_creation"
+                        },
+                        {
+                            "description": "Current allowed IP addresses enforcement state",
+                            "key": "account_allowed_ip_addresses_enforced"
+                        },
+                        {
+                            "description": "Current MFA setting",
+                            "key": "account_iam_mfa"
+                        },
+                        {
+                            "description": "Current state of Service ID creation restriction",
+                            "key": "account_iam_serviceid_creation"
+                        }
+                    ],
+                    "usage": ":exclamation: **Important:** Make sure that you set the `API_DATA_IS_SENSITIVE` environment variable to `true` to hide\nsensitive information before you run Terraform operations. For more information, see the generic REST API\nprovider [documentation](https://github.com/Mastercard/terraform-provider-restapi#usage):\n\nexport API_DATA_IS_SENSITIVE=true`\n\n##############################################################################\n# Config providers\n##############################################################################\n\ndata \"ibm_iam_auth_token\" \"tokendata\" {}\n\nprovider \"restapi\" {\n  uri                  = \"https:\"\n  write_returns_object = true\n  debug                = false # set to true to show detailed logs, but use carefully as it might print API key values.\n  headers              = {\n    Authorization = data.ibm_iam_auth_token.tokendata.iam_access_token\n    Content-Type  = \"application/json\"\n    if-Match      = \"*\"\n  }\n}\n\nprovider \"ibm\" {\n  ibmcloud_api_key = var.ibmcloud_api_key # pragma: allowlist secret\n}\n\n##############################################################################\n# Configure IAM Account settings\n##############################################################################\n\n# Replace \"master\" with a GIT release version to lock into a specific release\nmodule \"iam-account-settings\" {\n  source                       = \"git::https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings?ref=main\"\n  allowed_ip_addresses         = var.allowed_ip_addresses\n  enforce_allowed_ip_addresses = true\n}"
+                }
+            ],
+            "keywords": [
+                "IaC",
+                "infrastructure as code",
+                "terraform",
+                "solution",
+                "iam",
+                "account settings"
+            ],
+            "label": "IAM account settings",
+            "long_description": "This module configures standard IAM account settings with recommended values. The default input values are aligned with IBM Cloud Framework for Financial Services, and exports those values as outputs.\n\nWith this module, you can create and update settings. For objects that are affected by the Terraform 'destroy' command, the module preserves the most recent settings, and doesn't change objects that are configured outside of the Terraform logic.",
+            "name": "deploy-arch-ibm-account-settings",
+            "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings#readme",
+            "offering_icon_url": "https://globalcatalog.cloud.ibm.com/api/v1/1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc/artifacts/solution.svg",
+            "product_kind": "solution",
+            "provider_name": "IBM",
+            "short_description": "Configures standard IAM parameters and account settings",
+            "tags": [
+                "dev_ops",
+                "ibm_created"
+            ]
+        }
+    ]
+}
