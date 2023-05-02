@@ -5,14 +5,6 @@
                 {
                     "title": "Supports multi-factor authentication",
                     "description": "Supports multi-factor authentication (MFA) for all users or federated users. Includes email-based, TOTP, and U2F MFA."
-                },
-                {
-                    "title": "Supports general IAM settings",
-                    "description": "User can configure the following IAM Account settings:\n1. Restrict API Key creation. \n2. Restrict service ID creation\n 3. Customize session activity and inactivity timeouts (in seconds). \n4. Customize Access and Refresh token expiration (in seconds). \n5. Global Shell Settings. \n6. Public Access Group."
-                },
-                {
-                    "title": "Restrict IP address access",
-                    "description": "User can restrict specified IP subnets or IP addresses. \nIt also supports the following two control modes: \n1. Monitor\n2. Restrict"
                 }
             ],
             "flavors": [
@@ -23,16 +15,12 @@
                         "descriptions": "",
                         "features": [
                             {
-                                "title": "Supports multi-factor authentication",
-                                "description": "Supports multi-factor authentication (MFA) for all users or federated users. Includes email-based, TOTP, and U2F MFA."
-                            },
-                            {
                                 "title": "Supports general IAM settings",
-                                "description": "User can configure the following IAM Account settings:\n1. Restrict API Key creation. \n2. Restrict service ID creation\n 3. Customize session activity and inactivity timeouts (in seconds). \n4. Customize Access and Refresh token expiration (in seconds). \n5. Global Shell Settings. \n6. Public Access Group."
+                                "description": "Configure the following IAM settings:\n1. Restrict whether API keys can be created. \n2. Restrict whether service IDs can be created.\n 3. Customize session activity and inactivity timeouts. \n4. Customize the expiration time of both access and refresh token. \n5. Set up global shell settings. \n6. Set up public access group."
                             },
                             {
                                 "title": "Restrict IP address access",
-                                "description": "User can restrict specified IP subnets or IP addresses. \nIt also supports the following two control modes: \n1. Monitor\n2. Restrict"
+                                "description": "Restrict IP subnets and IP addresses. \nSupports both 'monitor' and 'restrict' control modes."
                             }
                         ],
                         "diagrams": []
