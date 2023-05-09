@@ -1,11 +1,5 @@
 # IAM account settings module
 
-<!-- BADGE UPDATES:
-1. Update first badge below to the current status of the module. See options at
-    https://github.com/terraform-ibm-modules/documentation/blob/main/docs/badge-status.md
-2. Update the build status badge to point to the travis pipeline for the module
-    TIP: Simply replace the string "module-template" in the 2 places in the Build Status section below
--->
 [![Stable (With quality checks)](https://img.shields.io/badge/Status-Stable%20(With%20quality%20checks)-green?style=plastic)](https://terraform-ibm-modules.github.io/documentation/#/badge-status)
 [![Build Status](https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/actions/workflows/ci.yml/badge.svg)](https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/actions/workflows/ci.yml)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
@@ -37,10 +31,10 @@ The module supports creating and updating settings that are applied with the `te
 affected by the `destroy` command, the module preserves the most recent setting and doesn't change objects that are
 configured outside of Terraform's scope.
 
-Because the IBM provider does not handle the account settings, this module uses the
-generic [REST API provider](https://github.com/Mastercard/terraform-provider-restapi). A feature request is tracked in
-the
-issue [Support to disable/enable public access account setting](https://github.com/IBM-Cloud/terraform-provider-ibm/issues/3285).
+Because the IBM provider does not handle managing all account settings, this module uses the generic
+[REST API provider](https://github.com/Mastercard/terraform-provider-restapi) to plug the current gaps. A feature
+request with the IBM provider is tracked in the issue
+[Support to disable/enable public access account setting](https://github.com/IBM-Cloud/terraform-provider-ibm/issues/3285).
 
 ## Usage
 
@@ -78,11 +72,10 @@ provider "ibm" {
 # Configure IAM Account settings
 ##############################################################################
 
-# Replace "master" with a GIT release version to lock into a specific release
+# Replace "main" with a GIT release version to lock into a specific release
 module "iam-account-settings" {
   source                       = "git::https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings?ref=main"
-  allowed_ip_addresses         = var.allowed_ip_addresses
-  enforce_allowed_ip_addresses = true
+  allowed_ip_addresses         = ["17.5.7.8.0/16"]
 }
 ```
 
@@ -91,17 +84,25 @@ module "iam-account-settings" {
 This module contributes to the implementation of the following NIST controls for the network layer on an IBM Cloud
 account.
 
-| Account Setting                                        | NIST Family | NIST Control | Description                                                                                                                                                                                                                                   |
-|--------------------------------------------------------|-------------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Force sign out due to inactivity                       | AC          | AC-2(5)      | Require that users log out when an organization-defined time period of expected inactivity is reached.                                                                                                                                        |
-| Restrict API key/Service ID creation                   | AC          | AC-6(1)      | Authorize access for organization-defined individuals or roles to access security functions and security-relevant information. These include user lists, API keys, service IDs, and resources.                                                |
-| Set active session time and sign out due to inactivity | AC          | AC-12        | Implemented automatic termination of a users session after organization-defined session expiration and session invalidation times.                                                                                                            |
-| Restrict IP address access                             | AU          | AU-12(3)     | Provide and implement the capability for organization-defined individuals or roles to change the logging to be performed on traffic that originates outside specified allowed IP addresses based on Restrict IP address access control modes. |
-| Set MFA for users with an IBMid                        | IA          | IA-2(1)      | Implemented multi-factor authentication for access to privileged accounts.                                                                                                                                                                    |
-| Set MFA for all users                                  | IA          | IA-2(2)      | Implemented multi-factor authentication for access to nonprivileged accounts.                                                                                                                                                                 |
-| Restrict IP address access                             | SC          | SC-7(3)      | Limit the number of external network connections to the system. This includes the Restrict IP address access control modes.                                                                                                                   |
-| Force sign out due to inactivity                       | SC          | SC-10        | Terminate the network connection that is associated with a communications session at the end of the session or after organization-defined period of inactivity.                                                                               |
-| Restrict IP address access/Set MFA                     | SI          | SI-4         | Monitor the system to detect unauthorized local, network, and remote connections.                                                                                                                                                             |
+| Account Setting                          | NIST Family | NIST Control | Description                                                                                                                                                                                                                                                           |
+|------------------------------------------|-------------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Set sign out due to inactivity           | AC          | AC-11(a)     | The information system: Prevents further access to the system by initiating a session lock after 15 minutes of inactivity or upon receiving a request from a user.                                                                                                    |
+| Disable public access                    | AC          | AC-14(a)     | No access is permitted without identification or authentication that can be performed on the information system without identification or authentication consistent with organizational missions/business functions.                                                  |
+| Enable multifactor authentication (MFA)  | IA          | IA-2(1)(0)   | The information system implements multifactor authentication for network access to privileged accounts.                                                                                                                                                               |
+| Enable multifactor authentication (MFA)  | IA          | IA-2(2)(0)   | The information system implements multifactor authentication for network access to non-privileged accounts.                                                                                                                                                           |
+| Configure allow listed IPs               | IA          | IA-3(0)      | The information system uniquely identifies and authenticates (organization-defined specific and/or types of devices) before establishing a (local; remote; network) connection.                                                                                       |
+| Set session expiration                   | SC          | SC-10(0)     | The information system terminates the network connection associated with a communications session at the end of the session or after (no longer than 30 minutes for RAS-based sessions or no longer than 60 minutes for non-interactive user sessions) of inactivity. |
+| Restricts users that can create API keys | SC          | SC-12(0)     | The organization establishes and manages cryptographic keys for required cryptography employed within the information system in accordance with organization-defined requirements for key generation, distribution, storage, access, and destruction.                 |
+
+
+**Current limitations:**
+The module currently does not support setting the following FSCloud requirements:
+- Check whether user list visibility restrictions are configured in IAM settings for the account owner
+  - Follow these [steps](https://cloud.ibm.com/docs/account?topic=account-iam-user-setting) as a workaround to set this manually in the UI
+- Check whether the Financial Services Validated setting is enabled in account settings
+  - Follow these [steps](https://cloud.ibm.com/docs/account?topic=account-enabling-fs-validated) as a workaround to set this manually in the UI
+
+Tracking issue with IBM provider -> https://github.com/IBM-Cloud/terraform-provider-ibm/issues/4204
 
 ## Required IAM access policies
 
@@ -152,17 +153,16 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_access_token_expiration"></a> [access\_token\_expiration](#input\_access\_token\_expiration) | Defines the access token expiration in seconds | `string` | `"3600"` | no |
-| <a name="input_active_session_timeout"></a> [active\_session\_timeout](#input\_active\_session\_timeout) | Specify how long (seconds) a user is allowed to work continuosly in the account | `string` | `"3600"` | no |
-| <a name="input_allowed_ip_addresses"></a> [allowed\_ip\_addresses](#input\_allowed\_ip\_addresses) | Defines the IP addresses and subnets from which IAM tokens can be created for the account. | `list(any)` | `[]` | no |
-| <a name="input_api_creation"></a> [api\_creation](#input\_api\_creation) | When restriction is enabled, users in your account require specific access to create API keys, including the account owner | `string` | `"RESTRICTED"` | no |
-| <a name="input_custom_allowed_ip_addresses"></a> [custom\_allowed\_ip\_addresses](#input\_custom\_allowed\_ip\_addresses) | Specify a custom list of IPv4/IPv6 addresses/subnets that have access to the account, separate multiple values with a comma | `string` | `""` | no |
-| <a name="input_enforce_allowed_ip_addresses"></a> [enforce\_allowed\_ip\_addresses](#input\_enforce\_allowed\_ip\_addresses) | If true IP address restriction will be enforced, If false, traffic originated outside specified allowed IP address set is monitored with audit events sent to SIEM and Activity Tracker.   After running in monitored mode to test this variable should explicity be set to true to enfoce IP allow listing | `bool` | `true` | no |
-| <a name="input_ignore_ibm_approved_ip_addresses"></a> [ignore\_ibm\_approved\_ip\_addresses](#input\_ignore\_ibm\_approved\_ip\_addresses) | If true IP address control will only be evaluate custom\_allowed\_ip\_addresses, If false, restricion will be consider both IBM approved IP sets and custom\_allowed\_ip\_addresses (if configured) | `bool` | `false` | no |
+| <a name="input_active_session_timeout"></a> [active\_session\_timeout](#input\_active\_session\_timeout) | Specify how long (seconds) a user is allowed to work continuously in the account | `number` | `"3600"` | no |
+| <a name="input_allowed_ip_addresses"></a> [allowed\_ip\_addresses](#input\_allowed\_ip\_addresses) | List of the IP addresses and subnets from which IAM tokens can be created for the account. | `list(any)` | `[]` | no |
+| <a name="input_api_creation"></a> [api\_creation](#input\_api\_creation) | When restriction is enabled, only users, including the account owner, assigned the User API key creator role on the IAM Identity Service can create API keys. Allowed values are 'RESTRICTED', 'NOT\_RESTRICTED', or 'NOT\_SET' (to 'unset' a previous set value). | `string` | `"RESTRICTED"` | no |
+| <a name="input_enforce_allowed_ip_addresses"></a> [enforce\_allowed\_ip\_addresses](#input\_enforce\_allowed\_ip\_addresses) | If true IP address restriction will be enforced, If false, traffic originated outside specified allowed IP address set is monitored with audit events sent to SIEM and Activity Tracker. After running in monitored mode to test this variable, it should then explicitly be set to true to enforce IP allow listing. | `bool` | `true` | no |
 | <a name="input_inactive_session_timeout"></a> [inactive\_session\_timeout](#input\_inactive\_session\_timeout) | Specify how long (seconds) a user is allowed to stay logged in the account while being inactive/idle | `string` | `"900"` | no |
-| <a name="input_mfa"></a> [mfa](#input\_mfa) | Specify Multi-Factor Authentication method in the account | `string` | `"TOTP4ALL"` | no |
+| <a name="input_max_sessions_per_identity"></a> [max\_sessions\_per\_identity](#input\_max\_sessions\_per\_identity) | Defines the maximum allowed sessions per identity required by the account. Supports any whole number greater than '0', or 'NOT\_SET' to unset account setting and use service default. | `string` | `"NOT_SET"` | no |
+| <a name="input_mfa"></a> [mfa](#input\_mfa) | Specify Multi-Factor Authentication method in the account. Supported valid values are 'NONE' (No MFA trait set), 'TOTP' (For all non-federated IBMId users), 'TOTP4ALL' (For all users), 'LEVEL1' (Email based MFA for all users), 'LEVEL2' (TOTP based MFA for all users), 'LEVEL3' (U2F MFA for all users). | `string` | `"TOTP4ALL"` | no |
 | <a name="input_public_access_enabled"></a> [public\_access\_enabled](#input\_public\_access\_enabled) | Enable/Disable public access group in which resources are open anyone regardless if they are member of your account or not | `bool` | `false` | no |
 | <a name="input_refresh_token_expiration"></a> [refresh\_token\_expiration](#input\_refresh\_token\_expiration) | Defines the refresh token expiration in seconds | `string` | `"259200"` | no |
-| <a name="input_serviceid_creation"></a> [serviceid\_creation](#input\_serviceid\_creation) | When restriction is enabled, users in your account require specific access to create service IDs, including the account owner | `string` | `"RESTRICTED"` | no |
+| <a name="input_serviceid_creation"></a> [serviceid\_creation](#input\_serviceid\_creation) | When restriction is enabled, only users, including the account owner, assigned the Service ID creator role on the IAM Identity Service can create service IDs. Allowed values are 'RESTRICTED', 'NOT\_RESTRICTED', or 'NOT\_SET' (to 'unset' a previous set value). | `string` | `"RESTRICTED"` | no |
 | <a name="input_shell_settings_enabled"></a> [shell\_settings\_enabled](#input\_shell\_settings\_enabled) | Enable global shell settings to all users in the account | `bool` | `false` | no |
 
 ## Outputs
@@ -172,7 +172,6 @@ No modules.
 | <a name="output_account_allowed_ip_addresses"></a> [account\_allowed\_ip\_addresses](#output\_account\_allowed\_ip\_addresses) | Current allowed IP addresses |
 | <a name="output_account_allowed_ip_addresses_control_mode"></a> [account\_allowed\_ip\_addresses\_control\_mode](#output\_account\_allowed\_ip\_addresses\_control\_mode) | Current allowed IP addresses enforcement control mode, will indicate RESTRICT if account\_allowed\_ip\_addresses\_enforced is TRUE |
 | <a name="output_account_allowed_ip_addresses_enforced"></a> [account\_allowed\_ip\_addresses\_enforced](#output\_account\_allowed\_ip\_addresses\_enforced) | Current allowed IP addresses enforcement state |
-| <a name="output_account_approved_ibm_ip_addresses_ignored"></a> [account\_approved\_ibm\_ip\_addresses\_ignored](#output\_account\_approved\_ibm\_ip\_addresses\_ignored) | Ignore state of IBM approved IP addresses |
 | <a name="output_account_iam_access_token_expiration"></a> [account\_iam\_access\_token\_expiration](#output\_account\_iam\_access\_token\_expiration) | Current access token expiration |
 | <a name="output_account_iam_active_session_timeout"></a> [account\_iam\_active\_session\_timeout](#output\_account\_iam\_active\_session\_timeout) | Current active session timeout |
 | <a name="output_account_iam_apikey_creation"></a> [account\_iam\_apikey\_creation](#output\_account\_iam\_apikey\_creation) | Current state of API key creation restriction |

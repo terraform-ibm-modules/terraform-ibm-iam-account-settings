@@ -10,12 +10,6 @@ variable "enforce_allowed_ip_addresses" {
   default     = false
 }
 
-variable "custom_allowed_ip_addresses" {
-  type        = string
-  description = "Specify additional IPv4/IPv6 addresses/subnets that have access to the account, separate multiple values with a comma"
-  default     = ""
-}
-
 variable "shell_settings_enabled" {
   description = "Enable/Disable global shell settings to all users in the account"
   type        = bool
@@ -57,18 +51,15 @@ variable "inactive_session_timeout" {
   type        = string
   description = "Specify how long (seconds) a user is allowed to stay logged in the account while being inactive/idle"
 }
+
 variable "refresh_token_expiration" {
   type        = string
   description = "Defines the refresh token expiration in seconds"
   default     = "86400"
 }
+
 variable "access_token_expiration" {
   type        = string
   description = "Defines the access token expiration in seconds"
   default     = "3600"
-}
-variable "ignore_ibm_approved_ip_addresses" {
-  default     = false
-  type        = bool
-  description = "If true IP address control will only be evaluate custom_allowed_ip_addresses, If false, restricion will be consider both IBM approved IP sets and custom_allowed_ip_addresses (if configured)"
 }

@@ -4,17 +4,6 @@
 # Configures standard account & IAM parameters
 ##############################################################################
 
-
-# Validation (Approach based on https://stackoverflow.com/a/66682419)
-
-locals {
-  validate_condition1 = var.ignore_ibm_approved_ip_addresses == true && var.custom_allowed_ip_addresses == ""
-  validate_msg1       = "Value for 'custom_allowed_ip_addresses' must be passed/added when 'ignore_ibm_approved_ip_addresses = true'"
-  # tflint-ignore: terraform_unused_declarations
-  validate_check1 = regex("^${local.validate_msg1}$", (!local.validate_condition1 ? local.validate_msg1 : ""))
-}
-
-
 # Data source to get account settings
 data "ibm_iam_account_settings" "iam_account_settings" {
 }
@@ -24,12 +13,11 @@ data "ibm_cloud_shell_account_settings" "cloud_shell_account_settings" {
   account_id = data.ibm_iam_account_settings.iam_account_settings.account_id
 }
 
-# Configure IAM account settings with specified allowed IPs
-
-
+# Configure IAM account settings
 resource "ibm_iam_account_settings" "iam_account_settings" {
   if_match                                   = "*"
   allowed_ip_addresses                       = local.iam_allowed_ip_addresses
+  max_sessions_per_identity                  = var.max_sessions_per_identity
   mfa                                        = var.mfa
   restrict_create_service_id                 = var.serviceid_creation
   restrict_create_platform_apikey            = var.api_creation
@@ -40,7 +28,6 @@ resource "ibm_iam_account_settings" "iam_account_settings" {
 }
 
 # Configure global shell settings
-
 resource "ibm_cloud_shell_account_settings" "cloud_shell_account_settings" {
   rev        = data.ibm_cloud_shell_account_settings.cloud_shell_account_settings.rev
   account_id = data.ibm_iam_account_settings.iam_account_settings.account_id
@@ -48,6 +35,7 @@ resource "ibm_cloud_shell_account_settings" "cloud_shell_account_settings" {
 }
 
 # Configure account public access
+# (Using restapi provider for this until official IBM provider support is added -> https://github.com/IBM-Cloud/terraform-provider-ibm/issues/3285)
 resource "restapi_object" "account_public_access" {
   path           = "//iam.cloud.ibm.com/v2/groups/settings?account_id={id}"
   data           = "{\"public_access_enabled\": ${var.public_access_enabled}}"
@@ -63,12 +51,9 @@ resource "restapi_object" "account_public_access" {
   force_new      = [var.public_access_enabled]
 }
 
-# Variables to extract settings applied
 locals {
-  validate_custom_only                  = var.custom_allowed_ip_addresses != "" && var.ignore_ibm_approved_ip_addresses == true ? true : false
-  raw_iam_allowed_ip_addresses          = local.validate_custom_only == false && var.custom_allowed_ip_addresses == "" ? local.concatenated_ibm_approved_ip_addresses : var.custom_allowed_ip_addresses
-  consolidated_iam_allowed_ip_addresses = var.ignore_ibm_approved_ip_addresses == false && var.custom_allowed_ip_addresses != "" ? "${local.concatenated_ibm_approved_ip_addresses},${local.raw_iam_allowed_ip_addresses}" : local.raw_iam_allowed_ip_addresses
-  iam_allowed_ip_addresses              = var.enforce_allowed_ip_addresses == false ? "?${local.consolidated_iam_allowed_ip_addresses}" : local.consolidated_iam_allowed_ip_addresses
+  concatenated_allowed_ip_addresses     = join(",", var.allowed_ip_addresses)
+  iam_allowed_ip_addresses              = var.enforce_allowed_ip_addresses == false ? "?${local.concatenated_allowed_ip_addresses}" : local.concatenated_allowed_ip_addresses
   iam_allowed_ip_addresses_control_mode = var.enforce_allowed_ip_addresses == false ? "MONITOR" : "RESTRICT"
   account_public_access                 = lookup(jsondecode(restapi_object.account_public_access.create_response), "public_access_enabled")
   account_shell_settings_status         = ibm_cloud_shell_account_settings.cloud_shell_account_settings.enabled

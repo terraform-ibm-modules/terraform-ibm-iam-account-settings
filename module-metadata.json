@@ -11,77 +11,57 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 76
+        "line": 104
       },
       "computed": true
     },
     "active_session_timeout": {
       "name": "active_session_timeout",
-      "type": "string",
-      "description": "Specify how long (seconds) a user is allowed to work continuosly in the account",
+      "type": "number",
+      "description": "Specify how long (seconds) a user is allowed to work continuously in the account",
       "default": "3600",
       "source": [
         "ibm_iam_account_settings.iam_account_settings.session_expiration_in_seconds"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 59
+        "line": 74
       },
       "computed": true
     },
     "allowed_ip_addresses": {
       "name": "allowed_ip_addresses",
       "type": "list(any)",
-      "description": "Defines the IP addresses and subnets from which IAM tokens can be created for the account.",
+      "description": "List of the IP addresses and subnets from which IAM tokens can be created for the account.",
       "default": [],
       "pos": {
         "filename": "variables.tf",
-        "line": 11
+        "line": 5
       }
     },
     "api_creation": {
       "name": "api_creation",
       "type": "string",
-      "description": "When restriction is enabled, users in your account require specific access to create API keys, including the account owner",
+      "description": "When restriction is enabled, only users, including the account owner, assigned the User API key creator role on the IAM Identity Service can create API keys. Allowed values are 'RESTRICTED', 'NOT_RESTRICTED', or 'NOT_SET' (to 'unset' a previous set value).",
       "default": "RESTRICTED",
       "source": [
         "ibm_iam_account_settings.iam_account_settings.restrict_create_platform_apikey"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 29
+        "line": 46
       },
       "options": "RESTRICTED, NOT_RESTRICTED, NOT_SET",
       "computed": true
     },
-    "custom_allowed_ip_addresses": {
-      "name": "custom_allowed_ip_addresses",
-      "type": "string",
-      "description": "Specify a custom list of IPv4/IPv6 addresses/subnets that have access to the account, separate multiple values with a comma",
-      "default": "",
-      "pos": {
-        "filename": "variables.tf",
-        "line": 53
-      }
-    },
     "enforce_allowed_ip_addresses": {
       "name": "enforce_allowed_ip_addresses",
       "type": "bool",
-      "description": "If true IP address restriction will be enforced, If false, traffic originated outside specified allowed IP address set is monitored with audit events sent to SIEM and Activity Tracker.   After running in monitored mode to test this variable should explicity be set to true to enfoce IP allow listing",
+      "description": "If true IP address restriction will be enforced, If false, traffic originated outside specified allowed IP address set is monitored with audit events sent to SIEM and Activity Tracker. After running in monitored mode to test this variable, it should then explicitly be set to true to enforce IP allow listing.",
       "default": true,
       "pos": {
         "filename": "variables.tf",
-        "line": 41
-      }
-    },
-    "ignore_ibm_approved_ip_addresses": {
-      "name": "ignore_ibm_approved_ip_addresses",
-      "type": "bool",
-      "description": "If true IP address control will only be evaluate custom_allowed_ip_addresses, If false, restricion will be consider both IBM approved IP sets and custom_allowed_ip_addresses (if configured)",
-      "default": false,
-      "pos": {
-        "filename": "variables.tf",
-        "line": 47
+        "line": 11
       }
     },
     "inactive_session_timeout": {
@@ -94,21 +74,35 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 65
+        "line": 84
+      },
+      "computed": true
+    },
+    "max_sessions_per_identity": {
+      "name": "max_sessions_per_identity",
+      "type": "string",
+      "description": "Defines the maximum allowed sessions per identity required by the account. Supports any whole number greater than '0', or 'NOT_SET' to unset account setting and use service default.",
+      "default": "NOT_SET",
+      "source": [
+        "ibm_iam_account_settings.iam_account_settings.max_sessions_per_identity"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 17
       },
       "computed": true
     },
     "mfa": {
       "name": "mfa",
       "type": "string",
-      "description": "Specify Multi-Factor Authentication method in the account",
+      "description": "Specify Multi-Factor Authentication method in the account. Supported valid values are 'NONE' (No MFA trait set), 'TOTP' (For all non-federated IBMId users), 'TOTP4ALL' (For all users), 'LEVEL1' (Email based MFA for all users), 'LEVEL2' (TOTP based MFA for all users), 'LEVEL3' (U2F MFA for all users).",
       "default": "TOTP4ALL",
       "source": [
         "ibm_iam_account_settings.iam_account_settings.mfa"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 23
+        "line": 29
       },
       "options": "NONE, TOTP, TOTP4ALL, LEVEL1, LEVEL2, LEVEL3",
       "computed": true
@@ -124,7 +118,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 17
+        "line": 23
       }
     },
     "refresh_token_expiration": {
@@ -137,21 +131,21 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 71
+        "line": 94
       },
       "computed": true
     },
     "serviceid_creation": {
       "name": "serviceid_creation",
       "type": "string",
-      "description": "When restriction is enabled, users in your account require specific access to create service IDs, including the account owner",
+      "description": "When restriction is enabled, only users, including the account owner, assigned the Service ID creator role on the IAM Identity Service can create service IDs. Allowed values are 'RESTRICTED', 'NOT_RESTRICTED', or 'NOT_SET' (to 'unset' a previous set value).",
       "default": "RESTRICTED",
       "source": [
         "ibm_iam_account_settings.iam_account_settings.restrict_create_service_id"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 35
+        "line": 60
       },
       "options": "RESTRICTED, NOT_RESTRICTED, NOT_SET",
       "computed": true
@@ -166,7 +160,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 82
+        "line": 114
       }
     }
   },
@@ -177,7 +171,7 @@
       "value": "local.account_iam_allowed_ip_addresses",
       "pos": {
         "filename": "outputs.tf",
-        "line": 47
+        "line": 51
       }
     },
     "account_allowed_ip_addresses_control_mode": {
@@ -186,26 +180,16 @@
       "value": "local.iam_allowed_ip_addresses_control_mode",
       "pos": {
         "filename": "outputs.tf",
-        "line": 62
+        "line": 61
       }
     },
     "account_allowed_ip_addresses_enforced": {
       "name": "enforce_allowed_ip_addresses",
-      "description": "If true IP address restriction will be enforced, If false, traffic originated outside specified allowed IP address set is monitored with audit events sent to SIEM and Activity Tracker.   After running in monitored mode to test this variable should explicity be set to true to enfoce IP allow listing",
+      "description": "If true IP address restriction will be enforced, If false, traffic originated outside specified allowed IP address set is monitored with audit events sent to SIEM and Activity Tracker. After running in monitored mode to test this variable, it should then explicitly be set to true to enforce IP allow listing.",
       "value": "var.enforce_allowed_ip_addresses",
       "pos": {
         "filename": "outputs.tf",
-        "line": 57
-      },
-      "type": "bool"
-    },
-    "account_approved_ibm_ip_addresses_ignored": {
-      "name": "ignore_ibm_approved_ip_addresses",
-      "description": "If true IP address control will only be evaluate custom_allowed_ip_addresses, If false, restricion will be consider both IBM approved IP sets and custom_allowed_ip_addresses (if configured)",
-      "value": "var.ignore_ibm_approved_ip_addresses",
-      "pos": {
-        "filename": "outputs.tf",
-        "line": 52
+        "line": 56
       },
       "type": "bool"
     },
@@ -215,7 +199,7 @@
       "value": "local.account_iam_access_token_expiration",
       "pos": {
         "filename": "outputs.tf",
-        "line": 39
+        "line": 41
       }
     },
     "account_iam_active_session_timeout": {
@@ -224,7 +208,7 @@
       "value": "local.account_iam_active_session_timeout",
       "pos": {
         "filename": "outputs.tf",
-        "line": 30
+        "line": 31
       }
     },
     "account_iam_apikey_creation": {
@@ -233,7 +217,7 @@
       "value": "local.account_iam_apikey_creation",
       "pos": {
         "filename": "outputs.tf",
-        "line": 20
+        "line": 21
       }
     },
     "account_iam_inactive_session_timeout": {
@@ -242,7 +226,7 @@
       "value": "local.account_iam_inactive_session_timeout",
       "pos": {
         "filename": "outputs.tf",
-        "line": 35
+        "line": 36
       }
     },
     "account_iam_mfa": {
@@ -251,7 +235,7 @@
       "value": "local.account_iam_mfa",
       "pos": {
         "filename": "outputs.tf",
-        "line": 25
+        "line": 26
       }
     },
     "account_iam_refresh_token_expiration": {
@@ -260,7 +244,7 @@
       "value": "local.account_iam_refresh_token_expiration",
       "pos": {
         "filename": "outputs.tf",
-        "line": 43
+        "line": 46
       }
     },
     "account_iam_serviceid_creation": {
@@ -269,7 +253,7 @@
       "value": "local.account_iam_serviceid_creation",
       "pos": {
         "filename": "outputs.tf",
-        "line": 15
+        "line": 16
       }
     },
     "account_public_access": {
@@ -322,7 +306,7 @@
       },
       "pos": {
         "filename": "main.tf",
-        "line": 44
+        "line": 31
       }
     },
     "ibm_iam_account_settings.iam_account_settings": {
@@ -330,6 +314,7 @@
       "type": "ibm_iam_account_settings",
       "name": "iam_account_settings",
       "attributes": {
+        "max_sessions_per_identity": "max_sessions_per_identity",
         "mfa": "mfa",
         "restrict_create_platform_apikey": "api_creation",
         "restrict_create_service_id": "serviceid_creation",
@@ -343,7 +328,7 @@
       },
       "pos": {
         "filename": "main.tf",
-        "line": 30
+        "line": 17
       }
     },
     "restapi_object.account_public_access": {
@@ -359,7 +344,7 @@
       },
       "pos": {
         "filename": "main.tf",
-        "line": 51
+        "line": 39
       }
     }
   },
@@ -373,7 +358,7 @@
       },
       "pos": {
         "filename": "main.tf",
-        "line": 23
+        "line": 12
       }
     },
     "data.ibm_iam_account_settings.iam_account_settings": {
@@ -385,7 +370,7 @@
       },
       "pos": {
         "filename": "main.tf",
-        "line": 19
+        "line": 8
       }
     }
   },
