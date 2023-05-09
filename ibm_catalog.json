@@ -25,7 +25,26 @@
                         ],
                         "diagrams": []
                     },
-                    "compliance": {},
+                    "compliance": {
+                        "authority": "scc-v3",
+                        "controls": [
+                            {
+                                "profile": {
+                                    "name": "IBM Cloud for Financial Services",
+                                    "version": "1.2.0"
+                                },
+                                "names": [
+                                    "AC-11(a)",
+                                    "AC-14(a)",
+                                    "IA-2(1)(0)",
+                                    "IA-2(2)(0)",
+                                    "IA-3(0)",
+                                    "SC-10(0)",
+                                    "SC-12(0)"
+                                ]
+                            }
+                        ]
+                    },
                     "configuration": [],
                     "install_type": "fullstack",
                     "outputs": [
@@ -82,7 +101,7 @@
                             "key": "account_iam_serviceid_creation"
                         }
                     ],
-                    "usage": ":exclamation: **Important:** Make sure that you set the `API_DATA_IS_SENSITIVE` environment variable to `true` to hide\nsensitive information before you run Terraform operations. For more information, see the generic REST API\nprovider [documentation](https://github.com/Mastercard/terraform-provider-restapi#usage):\n\nexport API_DATA_IS_SENSITIVE=true`\n\n##############################################################################\n# Config providers\n##############################################################################\n\ndata \"ibm_iam_auth_token\" \"tokendata\" {}\n\nprovider \"restapi\" {\n  uri                  = \"https:\"\n  write_returns_object = true\n  debug                = false # set to true to show detailed logs, but use carefully as it might print API key values.\n  headers              = {\n    Authorization = data.ibm_iam_auth_token.tokendata.iam_access_token\n    Content-Type  = \"application/json\"\n    if-Match      = \"*\"\n  }\n}\n\nprovider \"ibm\" {\n  ibmcloud_api_key = var.ibmcloud_api_key # pragma: allowlist secret\n}\n\n##############################################################################\n# Configure IAM Account settings\n##############################################################################\n\n# Replace \"master\" with a GIT release version to lock into a specific release\nmodule \"iam-account-settings\" {\n  source                       = \"git::https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings?ref=main\"\n  allowed_ip_addresses         = var.allowed_ip_addresses\n  enforce_allowed_ip_addresses = true\n}"
+                    "usage": ":exclamation: **Important:** Make sure that you set the `API_DATA_IS_SENSITIVE` environment variable to `true` to hide\nsensitive information before you run Terraform operations. For more information, see the generic REST API\nprovider [documentation](https://github.com/Mastercard/terraform-provider-restapi#usage):\n\nexport API_DATA_IS_SENSITIVE=true`\n\n##############################################################################\n# Config providers\n##############################################################################\n\ndata \"ibm_iam_auth_token\" \"tokendata\" {}\n\nprovider \"restapi\" {\n  uri                  = \"https:\"\n  write_returns_object = true\n  debug                = false # set to true to show detailed logs, but use carefully as it might print API key values.\n  headers              = {\n    Authorization = data.ibm_iam_auth_token.tokendata.iam_access_token\n    Content-Type  = \"application/json\"\n    if-Match      = \"*\"\n  }\n}\n\nprovider \"ibm\" {\n  ibmcloud_api_key = var.ibmcloud_api_key\n}\n\n##############################################################################\n# Configure IAM Account settings\n##############################################################################\n\n# Replace \"main\" with a version to lock into a specific release\nmodule \"iam-account-settings\" {\n  source                       = \"git::https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings?ref=main\"\n  allowed_ip_addresses         = var.allowed_ip_addresses\n}"
                 }
             ],
             "keywords": [

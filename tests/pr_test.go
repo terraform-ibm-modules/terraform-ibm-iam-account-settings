@@ -8,7 +8,7 @@ import (
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/testhelper"
 )
 
-const defaultExampleTerraformDir = "examples/custom"
+const customExampleTerraformDir = "examples/custom"
 
 func setupOptions(t *testing.T, terraformDir string, prefix string) *testhelper.TestOptions {
 	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
@@ -22,10 +22,10 @@ func setupOptions(t *testing.T, terraformDir string, prefix string) *testhelper.
 	return options
 }
 
-func TestRunDefaultExample(t *testing.T) {
+func TestRunCustomExample(t *testing.T) {
 	t.Parallel()
 
-	options := setupOptions(t, defaultExampleTerraformDir, "iam-act-stgs")
+	options := setupOptions(t, customExampleTerraformDir, "iam-act-cus")
 
 	output, err := options.RunTestConsistency()
 	assert.Nil(t, err, "This should not have errored")

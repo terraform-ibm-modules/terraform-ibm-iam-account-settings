@@ -1,17 +1,23 @@
 ##############################################################################
 # Input Variables
-# See reference for other accepted input values >
-# https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/iam_account_settings
 ##############################################################################
 
-locals {
-  concatenated_ibm_approved_ip_addresses = join(",", var.allowed_ip_addresses)
-}
-
 variable "allowed_ip_addresses" {
-  description = "Defines the IP addresses and subnets from which IAM tokens can be created for the account."
+  description = "List of the IP addresses and subnets from which IAM tokens can be created for the account."
   type        = list(any)
   default     = []
+}
+
+variable "enforce_allowed_ip_addresses" {
+  type        = bool
+  default     = true
+  description = "If true IP address restriction will be enforced, If false, traffic originated outside specified allowed IP address set is monitored with audit events sent to SIEM and Activity Tracker. After running in monitored mode to test this variable, it should then explicitly be set to true to enforce IP allow listing."
+}
+
+variable "max_sessions_per_identity" {
+  description = "Defines the maximum allowed sessions per identity required by the account. Supports any whole number greater than '0', or 'NOT_SET' to unset account setting and use service default."
+  type        = string
+  default     = "NOT_SET"
 }
 
 variable "public_access_enabled" {
@@ -22,61 +28,87 @@ variable "public_access_enabled" {
 
 variable "mfa" {
   type        = string
-  description = "Specify Multi-Factor Authentication method in the account"
+  description = "Specify Multi-Factor Authentication method in the account. Supported valid values are 'NONE' (No MFA trait set), 'TOTP' (For all non-federated IBMId users), 'TOTP4ALL' (For all users), 'LEVEL1' (Email based MFA for all users), 'LEVEL2' (TOTP based MFA for all users), 'LEVEL3' (U2F MFA for all users)."
   default     = "TOTP4ALL"
+  validation {
+    condition = anytrue([
+      var.mfa == "NONE",
+      var.mfa == "TOTP",
+      var.mfa == "TOTP4ALL",
+      var.mfa == "LEVEL1",
+      var.mfa == "LEVEL2",
+      var.mfa == "LEVEL3"
+    ])
+    error_message = "mfa value must be one of NONE, TOTP, TOTP4ALL, LEVEL1, LEVEL2, LEVEL3"
+  }
 }
 
 variable "api_creation" {
   type        = string
-  description = "When restriction is enabled, users in your account require specific access to create API keys, including the account owner"
+  description = "When restriction is enabled, only users, including the account owner, assigned the User API key creator role on the IAM Identity Service can create API keys. Allowed values are 'RESTRICTED', 'NOT_RESTRICTED', or 'NOT_SET' (to 'unset' a previous set value)."
   default     = "RESTRICTED"
+  validation {
+    condition = anytrue([
+      var.api_creation == "RESTRICTED",
+      var.api_creation == "NOT_RESTRICTED",
+      var.api_creation == "NOT_SET"
+    ])
+    error_message = "api_creation value must be one of RESTRICTED, NOT_RESTRICTED, or NOT_SET"
+  }
 }
 
 variable "serviceid_creation" {
   type        = string
-  description = "When restriction is enabled, users in your account require specific access to create service IDs, including the account owner"
+  description = "When restriction is enabled, only users, including the account owner, assigned the Service ID creator role on the IAM Identity Service can create service IDs. Allowed values are 'RESTRICTED', 'NOT_RESTRICTED', or 'NOT_SET' (to 'unset' a previous set value)."
   default     = "RESTRICTED"
-}
-
-variable "enforce_allowed_ip_addresses" {
-  type        = bool
-  default     = true
-  description = "If true IP address restriction will be enforced, If false, traffic originated outside specified allowed IP address set is monitored with audit events sent to SIEM and Activity Tracker.   After running in monitored mode to test this variable should explicity be set to true to enfoce IP allow listing"
-}
-
-variable "ignore_ibm_approved_ip_addresses" {
-  type        = bool
-  default     = false
-  description = "If true IP address control will only be evaluate custom_allowed_ip_addresses, If false, restricion will be consider both IBM approved IP sets and custom_allowed_ip_addresses (if configured)"
-}
-
-variable "custom_allowed_ip_addresses" {
-  type        = string
-  description = "Specify a custom list of IPv4/IPv6 addresses/subnets that have access to the account, separate multiple values with a comma"
-  default     = ""
+  validation {
+    condition = anytrue([
+      var.serviceid_creation == "RESTRICTED",
+      var.serviceid_creation == "NOT_RESTRICTED",
+      var.serviceid_creation == "NOT_SET"
+    ])
+    error_message = "serviceid_creation value must be one of RESTRICTED, NOT_RESTRICTED, or NOT_SET"
+  }
 }
 
 variable "active_session_timeout" {
-  type        = string
-  description = "Specify how long (seconds) a user is allowed to work continuosly in the account"
+  type        = number
+  description = "Specify how long (seconds) a user is allowed to work continuously in the account"
   default     = "3600"
+  validation {
+    condition     = var.active_session_timeout >= 900 && var.active_session_timeout <= 86400
+    error_message = "Accepted values: 900-86400."
+  }
 }
 
 variable "inactive_session_timeout" {
   type        = string
   description = "Specify how long (seconds) a user is allowed to stay logged in the account while being inactive/idle"
   default     = "900"
+  validation {
+    condition     = var.inactive_session_timeout >= 900 && var.inactive_session_timeout <= 7200
+    error_message = "Accepted values: 900-7200."
+  }
 }
 
 variable "refresh_token_expiration" {
   type        = string
   description = "Defines the refresh token expiration in seconds"
   default     = "259200"
+  validation {
+    condition     = var.refresh_token_expiration >= 900 && var.refresh_token_expiration <= 2592000
+    error_message = "Accepted values: 900-2592000."
+  }
 }
+
 variable "access_token_expiration" {
   type        = string
   description = "Defines the access token expiration in seconds"
   default     = "3600"
+  validation {
+    condition     = var.access_token_expiration >= 900 && var.access_token_expiration <= 3600
+    error_message = "Accepted values: 900-3600."
+  }
 }
 
 variable "shell_settings_enabled" {
