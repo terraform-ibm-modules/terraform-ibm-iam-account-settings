@@ -11,6 +11,7 @@
                 {
                     "label": "FSCloud",
                     "name": "fscloud",
+                    "working_directory": "/",
                     "architecture": {
                         "descriptions": "",
                         "features": [
