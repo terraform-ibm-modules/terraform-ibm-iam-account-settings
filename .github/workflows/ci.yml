@@ -20,4 +20,4 @@ jobs:
       craSCCv2: true
       craTarget: "examples/default"
       craGoalIgnoreFile: "cra-tf-validate-ignore-goals.json"
-      craEnvironmentVariables: 'TF_VAR_allowed_ip_addresses=["17.5.7.8.0/16"]'
+      craEnvironmentVariables: 'TF_VAR_allowed_ip_addresses=[\"17.5.7.8.0/16\"]'
