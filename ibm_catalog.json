@@ -11,6 +11,7 @@
                 {
                     "label": "FSCloud",
                     "name": "fscloud",
+                    "working_directory": "ibm-catalog/fscloud",
                     "architecture": {
                         "descriptions": "",
                         "features": [
