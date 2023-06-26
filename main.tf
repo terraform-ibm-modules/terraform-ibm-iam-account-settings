@@ -37,7 +37,7 @@ resource "ibm_cloud_shell_account_settings" "cloud_shell_account_settings" {
 # Configure account public access
 # (Using restapi provider for this until official IBM provider support is added -> https://github.com/IBM-Cloud/terraform-provider-ibm/issues/3285)
 resource "restapi_object" "account_public_access" {
-  path           = "//iam.cloud.ibm.com/v2/groups/settings?account_id={id}"
+  path           = "//private.iam.cloud.ibm.com/v2/groups/settings?account_id={id}"
   data           = "{\"public_access_enabled\": ${var.public_access_enabled}}"
   create_method  = "PATCH"
   create_path    = "//iam.cloud.ibm.com/v2/groups/settings?account_id={id}"
