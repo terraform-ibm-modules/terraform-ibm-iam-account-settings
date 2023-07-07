@@ -15,11 +15,10 @@ data "ibm_cloud_shell_account_settings" "cloud_shell_account_settings" {
 
 # Configure IAM account settings
 resource "ibm_iam_account_settings" "iam_account_settings" {
-  if_match                  = "*"
-  allowed_ip_addresses      = local.iam_allowed_ip_addresses
-  max_sessions_per_identity = var.max_sessions_per_identity
-  mfa                       = var.mfa
-  # private_endpoint = var.private_endpoint
+  if_match                                   = "*"
+  allowed_ip_addresses                       = local.iam_allowed_ip_addresses
+  max_sessions_per_identity                  = var.max_sessions_per_identity
+  mfa                                        = var.mfa
   restrict_create_service_id                 = var.serviceid_creation
   restrict_create_platform_apikey            = var.api_creation
   session_expiration_in_seconds              = var.active_session_timeout
@@ -38,7 +37,7 @@ resource "ibm_cloud_shell_account_settings" "cloud_shell_account_settings" {
 # Configure account public access
 # (Using restapi provider for this until official IBM provider support is added -> https://github.com/IBM-Cloud/terraform-provider-ibm/issues/3285)
 resource "restapi_object" "account_public_access" {
-  path           = var.private_endpoint == false ? "//private.iam.cloud.ibm.com/v2/groups/settings?account_id={id}" : "//iam.cloud.ibm.com/v2/groups/settings?account_id={id}"
+  path           = var.private_endpoint ? "//private.iam.cloud.ibm.com/v2/groups/settings?account_id={id}" : "//iam.cloud.ibm.com/v2/groups/settings?account_id={id}"
   data           = "{\"public_access_enabled\": ${var.public_access_enabled}}"
   create_method  = "PATCH"
   create_path    = "//iam.cloud.ibm.com/v2/groups/settings?account_id={id}"

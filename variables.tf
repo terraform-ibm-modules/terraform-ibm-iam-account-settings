@@ -29,7 +29,7 @@ variable "public_access_enabled" {
 variable "private_endpoint" {
   type        = bool
   description = "To enable/disable the private endpoint in the account public access."
-  default     = false
+  default     = true
 }
 
 variable "mfa" {
