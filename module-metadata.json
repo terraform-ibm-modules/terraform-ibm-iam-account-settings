@@ -110,7 +110,7 @@
     "private_endpoint": {
       "name": "private_endpoint",
       "type": "bool",
-      "description": "To enable/disable the private endpoint in the account_public_access.",
+      "description": "To enable/disable the private endpoint in the account public access.",
       "default": false,
       "source": [
         "restapi_object.account_public_access.path"
