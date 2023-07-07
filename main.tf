@@ -37,21 +37,22 @@ resource "ibm_cloud_shell_account_settings" "cloud_shell_account_settings" {
 # Configure account public access
 # (Using restapi provider for this until official IBM provider support is added -> https://github.com/IBM-Cloud/terraform-provider-ibm/issues/3285)
 resource "restapi_object" "account_public_access" {
-  path           = var.private_endpoint ? "//private.iam.cloud.ibm.com/v2/groups/settings?account_id={id}" : "//iam.cloud.ibm.com/v2/groups/settings?account_id={id}"
+  path           = var.private_endpoint ? "//private.${local.public_endpoint}" : "//${local.public_endpoint}"
   data           = "{\"public_access_enabled\": ${var.public_access_enabled}}"
   create_method  = "PATCH"
-  create_path    = "//iam.cloud.ibm.com/v2/groups/settings?account_id={id}"
+  create_path    = "//${local.public_endpoint}"
   update_method  = "PATCH"
-  update_path    = "//iam.cloud.ibm.com/v2/groups/settings?account_id={id}"
+  update_path    = "//${local.public_endpoint}"
   destroy_method = "GET"
-  destroy_path   = "//iam.cloud.ibm.com/v2/groups/settings?account_id={id}"
-  read_path      = "//iam.cloud.ibm.com/v2/groups/settings?account_id={id}"
+  destroy_path   = "//${local.public_endpoint}"
+  read_path      = "//${local.public_endpoint}"
   object_id      = data.ibm_iam_account_settings.iam_account_settings.account_id
   id_attribute   = data.ibm_iam_account_settings.iam_account_settings.account_id
   force_new      = [var.public_access_enabled]
 }
 
 locals {
+  public_endpoint                       = "iam.cloud.ibm.com/v2/groups/settings?account_id={id}"
   concatenated_allowed_ip_addresses     = join(",", var.allowed_ip_addresses)
   iam_allowed_ip_addresses              = var.enforce_allowed_ip_addresses == false ? "?${local.concatenated_allowed_ip_addresses}" : local.concatenated_allowed_ip_addresses
   iam_allowed_ip_addresses_control_mode = var.enforce_allowed_ip_addresses == false ? "MONITOR" : "RESTRICT"
