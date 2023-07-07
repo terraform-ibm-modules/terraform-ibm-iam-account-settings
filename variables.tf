@@ -28,8 +28,8 @@ variable "public_access_enabled" {
 
 variable "private_endpoint" {
   type        = bool
-  description = "To enable/disable the private endpoint in the account public access."
-  default     = true
+  description = "Set to true to use the private IAM endpoint which is used to configure the public access setting."
+  default     = false
 }
 
 variable "mfa" {
