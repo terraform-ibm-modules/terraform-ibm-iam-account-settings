@@ -26,6 +26,12 @@ variable "public_access_enabled" {
   default     = false
 }
 
+variable "private_endpoint" {
+  type        = bool
+  description = "To enable/disable the private endpoint in the account_public_access."
+  default     = false
+}
+
 variable "mfa" {
   type        = string
   description = "Specify Multi-Factor Authentication method in the account. Supported valid values are 'NONE' (No MFA trait set), 'TOTP' (For all non-federated IBMId users), 'TOTP4ALL' (For all users), 'LEVEL1' (Email based MFA for all users), 'LEVEL2' (TOTP based MFA for all users), 'LEVEL3' (U2F MFA for all users)."
