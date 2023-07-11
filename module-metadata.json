@@ -11,7 +11,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 104
+        "line": 110
       },
       "computed": true
     },
@@ -25,7 +25,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 74
+        "line": 80
       },
       "computed": true
     },
@@ -49,7 +49,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 46
+        "line": 52
       },
       "options": "RESTRICTED, NOT_RESTRICTED, NOT_SET",
       "computed": true
@@ -74,7 +74,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 84
+        "line": 90
       },
       "computed": true
     },
@@ -102,10 +102,23 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 29
+        "line": 35
       },
       "options": "NONE, TOTP, TOTP4ALL, LEVEL1, LEVEL2, LEVEL3",
       "computed": true
+    },
+    "private_endpoint": {
+      "name": "private_endpoint",
+      "type": "bool",
+      "description": "Set to true to use the private IAM endpoint which is used to configure the public access setting.",
+      "default": false,
+      "source": [
+        "restapi_object.account_public_access.path"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 29
+      }
     },
     "public_access_enabled": {
       "name": "public_access_enabled",
@@ -131,7 +144,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 94
+        "line": 100
       },
       "computed": true
     },
@@ -145,7 +158,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 60
+        "line": 66
       },
       "options": "RESTRICTED, NOT_RESTRICTED, NOT_SET",
       "computed": true
@@ -160,7 +173,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 114
+        "line": 120
       }
     }
   },
@@ -337,7 +350,8 @@
       "name": "account_public_access",
       "attributes": {
         "data": "public_access_enabled",
-        "force_new": "public_access_enabled"
+        "force_new": "public_access_enabled",
+        "path": "private_endpoint"
       },
       "provider": {
         "name": "restapi"
