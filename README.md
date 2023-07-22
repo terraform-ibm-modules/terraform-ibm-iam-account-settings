@@ -125,7 +125,7 @@ You need the following permissions to run this module.
 <!-- END EXAMPLES HOOK -->
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-## Requirements
+### Requirements
 
 | Name | Version |
 |------|---------|
@@ -133,11 +133,11 @@ You need the following permissions to run this module.
 | <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.49.0 |
 | <a name="requirement_restapi"></a> [restapi](#requirement\_restapi) | >= 1.18.0 |
 
-## Modules
+### Modules
 
 No modules.
 
-## Resources
+### Resources
 
 | Name | Type |
 |------|------|
@@ -147,7 +147,7 @@ No modules.
 | [ibm_cloud_shell_account_settings.cloud_shell_account_settings](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/data-sources/cloud_shell_account_settings) | data source |
 | [ibm_iam_account_settings.iam_account_settings](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/data-sources/iam_account_settings) | data source |
 
-## Inputs
+### Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
@@ -165,7 +165,7 @@ No modules.
 | <a name="input_serviceid_creation"></a> [serviceid\_creation](#input\_serviceid\_creation) | When restriction is enabled, only users, including the account owner, assigned the Service ID creator role on the IAM Identity Service can create service IDs. Allowed values are 'RESTRICTED', 'NOT\_RESTRICTED', or 'NOT\_SET' (to 'unset' a previous set value). | `string` | `"RESTRICTED"` | no |
 | <a name="input_shell_settings_enabled"></a> [shell\_settings\_enabled](#input\_shell\_settings\_enabled) | Enable global shell settings to all users in the account | `bool` | `false` | no |
 
-## Outputs
+### Outputs
 
 | Name | Description |
 |------|-------------|
