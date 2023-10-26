@@ -41,7 +41,7 @@ variable "api_creation" {
 }
 
 variable "active_session_timeout" {
-  default     = "7200"
+  default     = "28800"
   type        = string
   description = "Specify how long (seconds) a user is allowed to work continuously in the account"
 }
