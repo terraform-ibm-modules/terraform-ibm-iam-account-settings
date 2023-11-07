@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+offerings:
+  - name: deploy-arch-ibm-account-settings
+    kind: solution
+    catalog_id: 7df1e4ca-d54c-4fd0-82ce-3d13247308cd
+    offering_id: ade8ce3d-d311-423b-984a-0b414f3932c1
+    variations:
+      - name: fscloud
+        mark_ready: false
+        install_type: fullstack
+        scc:
+          # Using GoldenEye FSCloud Testing account
+          instance_id: 2fdd3533-0d92-4191-8586-a918e1b376fe
+          region: us-south

@@ -28,21 +28,10 @@
                     },
                     "compliance": {
                         "authority": "scc-v3",
-                        "controls": [
+                        "profiles": [
                             {
-                                "profile": {
-                                    "name": "IBM Cloud for Financial Services",
-                                    "version": "1.2.0"
-                                },
-                                "names": [
-                                    "AC-11(a)",
-                                    "AC-14(a)",
-                                    "IA-2(1)(0)",
-                                    "IA-2(2)(0)",
-                                    "IA-3(0)",
-                                    "SC-10(0)",
-                                    "SC-12(0)"
-                                ]
+                                "profile_name": "IBM Cloud for Financial Services",
+                                "profile_version": "1.5.0"
                             }
                         ]
                     },
