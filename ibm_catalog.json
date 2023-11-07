@@ -24,7 +24,16 @@
                                 "description": "Restrict IP subnets and IP addresses. \nSupports both 'monitor' and 'restrict' control modes."
                             }
                         ],
-                        "diagrams": []
+                        "diagrams": [
+                            {
+                                "diagram": {
+                                    "caption": "IBM Cloud IAM Account Settings",
+                                    "url": "https://www.svgrepo.com/show/532033/cloud.svg",
+                                    "type": "image/svg+xml"
+                                },
+                                "description": "Placeholder"
+                            }
+                        ]
                     },
                     "compliance": {
                         "authority": "scc-v3",
