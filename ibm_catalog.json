@@ -24,7 +24,16 @@
                                 "description": "Restrict IP subnets and IP addresses. \nSupports both 'monitor' and 'restrict' control modes."
                             }
                         ],
-                        "diagrams": []
+                        "diagrams": [
+                            {
+                                "diagram": {
+                                    "caption": "",
+                                    "url": "https://upload.wikimedia.org/wikipedia/commons/1/1d/No_image.svg",
+                                    "type": "image/svg+xml"
+                                },
+                                "description": ""
+                            }
+                        ]
                     },
                     "compliance": {
                         "authority": "scc-v3",
