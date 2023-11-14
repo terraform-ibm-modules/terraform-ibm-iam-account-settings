@@ -56,7 +56,7 @@ locals {
   concatenated_allowed_ip_addresses     = join(",", var.allowed_ip_addresses)
   iam_allowed_ip_addresses              = var.enforce_allowed_ip_addresses == false ? "?${local.concatenated_allowed_ip_addresses}" : local.concatenated_allowed_ip_addresses
   iam_allowed_ip_addresses_control_mode = var.enforce_allowed_ip_addresses == false ? "MONITOR" : "RESTRICT"
-  account_public_access                 = lookup(jsondecode(restapi_object.account_public_access.create_response), "public_access_enabled")
+  account_public_access                 = jsondecode(restapi_object.account_public_access.create_response)["public_access_enabled"]
   account_shell_settings_status         = ibm_cloud_shell_account_settings.cloud_shell_account_settings.enabled
   account_iam_serviceid_creation        = ibm_iam_account_settings.iam_account_settings.restrict_create_service_id
   account_iam_apikey_creation           = ibm_iam_account_settings.iam_account_settings.restrict_create_platform_apikey
