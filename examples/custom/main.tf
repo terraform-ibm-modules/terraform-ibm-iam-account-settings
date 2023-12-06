@@ -7,6 +7,7 @@ module "iam_account_settings" {
   enforce_allowed_ip_addresses = var.enforce_allowed_ip_addresses
   shell_settings_enabled       = var.shell_settings_enabled
   mfa                          = var.mfa
+  user_mfa                     = var.user_mfa
   public_access_enabled        = var.public_access_enabled
   serviceid_creation           = var.serviceid_creation
   active_session_timeout       = var.active_session_timeout
@@ -14,4 +15,5 @@ module "iam_account_settings" {
   access_token_expiration      = var.access_token_expiration
   refresh_token_expiration     = var.refresh_token_expiration
   api_creation                 = var.api_creation
+
 }

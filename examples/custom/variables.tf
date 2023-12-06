@@ -17,9 +17,25 @@ variable "shell_settings_enabled" {
 }
 
 variable "mfa" {
-  default     = "NONE"
+  default     = "TOTP4ALL"
   type        = string
   description = "Specify Multi-Factor Authentication method in the account"
+}
+
+variable "user_mfa" {
+  type = set(object({
+    iam_id = string
+    mfa    = string
+  }))
+  default = [{
+    iam_id = "IBMid-31000293CH"
+    mfa    = "LEVEL3"
+    },
+    {
+      iam_id = "IBMid-50QG4CQSQQ"
+      mfa    = "NONE"
+  }]
+  description = "Specify Multi-Factor Authentication method for specific users the account. Supported valid values are 'NONE' (No MFA trait set), 'TOTP' (For all non-federated IBMId users), 'TOTP4ALL' (For all users), 'LEVEL1' (Email based MFA for all users), 'LEVEL2' (TOTP based MFA for all users), 'LEVEL3' (U2F MFA for all users). Example of format is available here > https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings#usage"
 }
 
 variable "public_access_enabled" {
