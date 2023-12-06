@@ -31,11 +31,6 @@ The module supports creating and updating settings that are applied with the `te
 affected by the `destroy` command, the module preserves the most recent setting and doesn't change objects that are
 configured outside of Terraform's scope.
 
-Because the IBM provider does not handle managing all account settings, this module uses the generic
-[REST API provider](https://github.com/Mastercard/terraform-provider-restapi) to plug the current gaps. A feature
-request with the IBM provider is tracked in the issue
-[Support to disable/enable public access account setting](https://github.com/IBM-Cloud/terraform-provider-ibm/issues/3285).
-
 ## Usage
 
 ```hcl
