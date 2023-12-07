@@ -32,8 +32,8 @@ variable "user_mfa" {
     mfa    = "LEVEL3"
     },
     {
-    iam_id = "IBMid-50xG4CxSQx"
-    mfa    = "NONE"
+      iam_id = "IBMid-50xG4CxSQx"
+      mfa    = "NONE"
   }]
   description = "Specify Multi-Factor Authentication method for specific users the account. Supported valid values are 'NONE' (No MFA trait set), 'TOTP' (For all non-federated IBMId users), 'TOTP4ALL' (For all users), 'LEVEL1' (Email based MFA for all users), 'LEVEL2' (TOTP based MFA for all users), 'LEVEL3' (U2F MFA for all users). Example of format is available here > https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings#usage"
 }

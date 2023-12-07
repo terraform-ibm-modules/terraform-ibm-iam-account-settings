@@ -45,6 +45,7 @@ module "iam-account-settings" {
   allowed_ip_addresses         = ["17.5.7.8.0/16"]
 }
 ```
+## User MFA
 
 When specifying User MFA ([`user_mfa`](#input_user_mfa)), use the following format:
 
@@ -66,6 +67,7 @@ variable "user_mfa" {
   }
 
 ```
+When/if it is necessary to delete/reset the MFA configuration for all users, use the [`user_mfa_reset`](#input_user_mfa_reset) input var.
 
 ## Compliance and security
 
@@ -152,6 +154,7 @@ No modules.
 | <a name="input_serviceid_creation"></a> [serviceid\_creation](#input\_serviceid\_creation) | When restriction is enabled, only users, including the account owner, assigned the Service ID creator role on the IAM Identity Service can create service IDs. Allowed values are 'RESTRICTED', 'NOT\_RESTRICTED', or 'NOT\_SET' (to 'unset' a previous set value). | `string` | `"RESTRICTED"` | no |
 | <a name="input_shell_settings_enabled"></a> [shell\_settings\_enabled](#input\_shell\_settings\_enabled) | Enable global shell settings to all users in the account | `bool` | `false` | no |
 | <a name="input_user_mfa"></a> [user\_mfa](#input\_user\_mfa) | Specify Multi-Factor Authentication method for specific users the account. Supported valid values are 'NONE' (No MFA trait set), 'TOTP' (For all non-federated IBMId users), 'TOTP4ALL' (For all users), 'LEVEL1' (Email based MFA for all users), 'LEVEL2' (TOTP based MFA for all users), 'LEVEL3' (U2F MFA for all users). Example of format is available here > https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings#usage | <pre>set(object({<br>    iam_id = string<br>    mfa    = string<br>  }))</pre> | `[]` | no |
+| <a name="input_user_mfa_reset"></a> [user\_mfa\_reset](#input\_user\_mfa\_reset) | Set to true to delete all user MFA settings configured in the targeted account, and ignoring entries declared in var `user_mfa` | `bool` | `false` | no |
 
 ### Outputs
 

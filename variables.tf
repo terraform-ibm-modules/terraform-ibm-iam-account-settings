@@ -57,6 +57,11 @@ variable "user_mfa" {
   }
 
 }
+variable "user_mfa_reset" {
+  type        = bool
+  description = "Set to true to delete all user MFA settings configured in the targeted account, and ignoring entries declared in var `user_mfa`"
+  default     = false
+}
 
 variable "api_creation" {
   type        = string
