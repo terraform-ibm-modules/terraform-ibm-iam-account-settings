@@ -5,7 +5,6 @@
 output "account_public_access" {
   value       = local.account_public_access
   description = "Current state of public access group setting"
-  sensitive   = true
 }
 
 output "account_shell_settings_status" {
@@ -61,6 +60,11 @@ output "account_allowed_ip_addresses_enforced" {
 output "account_allowed_ip_addresses_control_mode" {
   value       = local.iam_allowed_ip_addresses_control_mode
   description = "Current allowed IP addresses enforcement control mode, will indicate RESTRICT if account_allowed_ip_addresses_enforced is TRUE"
+}
+
+output "account_iam_user_mfa_list" {
+  value       = local.user_mfa_list
+  description = "Current list of users with specific MFA settings"
 }
 
 ##############################################################################
