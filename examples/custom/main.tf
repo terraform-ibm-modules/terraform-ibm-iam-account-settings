@@ -7,7 +7,6 @@ module "iam_account_settings" {
   enforce_allowed_ip_addresses = var.enforce_allowed_ip_addresses
   shell_settings_enabled       = var.shell_settings_enabled
   mfa                          = var.mfa
-  user_mfa                     = var.user_mfa
   public_access_enabled        = var.public_access_enabled
   serviceid_creation           = var.serviceid_creation
   active_session_timeout       = var.active_session_timeout

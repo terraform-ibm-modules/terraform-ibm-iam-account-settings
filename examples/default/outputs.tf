@@ -1,7 +1,6 @@
 output "account_public_access" {
   value       = module.iam_account_settings.account_public_access
   description = "Current state of public access group setting"
-  #sensitive   = true
 }
 
 output "account_shell_settings_status" {
