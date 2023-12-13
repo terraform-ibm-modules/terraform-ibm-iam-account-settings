@@ -27,8 +27,8 @@ resource "ibm_iam_account_settings" "iam_account_settings" {
       mfa    = user_mfa.value.mfa
     }
   }
-  restrict_create_service_id                 = var.serviceid_creation
-  restrict_create_platform_apikey            = var.api_creation
+  restrict_create_service_id                 = var.serviceid_creation #checkov:skip=CKV2_IBM_5:See https://github.com/bridgecrewio/checkov/issues/5824#issuecomment-1854283034
+  restrict_create_platform_apikey            = var.api_creation       #checkov:skip=CKV2_IBM_3:See https://github.com/bridgecrewio/checkov/issues/5824#issuecomment-1854283034
   session_expiration_in_seconds              = var.active_session_timeout
   session_invalidation_in_seconds            = var.inactive_session_timeout
   system_access_token_expiration_in_seconds  = var.access_token_expiration
