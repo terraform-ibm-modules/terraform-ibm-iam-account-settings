@@ -17,7 +17,7 @@ variable "shell_settings_enabled" {
 }
 
 variable "mfa" {
-  default     = "NONE"
+  default     = "TOTP4ALL"
   type        = string
   description = "Specify Multi-Factor Authentication method in the account"
 }
