@@ -31,7 +31,18 @@ The module supports creating and updating settings that are applied with the `te
 affected by the `destroy` command, the module preserves the most recent setting and doesn't change objects that are
 configured outside of Terraform's scope.
 
-## Usage
+<!-- Below content is automatically populated via pre-commit hook -->
+<!-- BEGIN OVERVIEW HOOK -->
+## Overview
+* [terraform-ibm-iam-account-settings](#terraform-ibm-iam-account-settings)
+* [Examples](./examples)
+    * [Account Custom Settings example](./examples/custom)
+    * [Default Example](./examples/default)
+* [Contributing](#contributing)
+<!-- END OVERVIEW HOOK -->
+
+## terraform-ibm-iam-account-settings
+### Usage
 
 ```hcl
 
@@ -107,13 +118,6 @@ You need the following permissions to run this module.
         - `Operator` platform access
     - **IBM Cloud Shell** service
         - `Administrator` platform access
-
-<!-- BEGIN EXAMPLES HOOK -->
-## Examples
-
-- [ Account Custom Settings example](examples/custom)
-- [ Default Example](examples/default)
-<!-- END EXAMPLES HOOK -->
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ### Requirements
