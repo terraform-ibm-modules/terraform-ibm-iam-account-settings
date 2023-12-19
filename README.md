@@ -31,7 +31,27 @@ The module supports creating and updating settings that are applied with the `te
 affected by the `destroy` command, the module preserves the most recent setting and doesn't change objects that are
 configured outside of Terraform's scope.
 
-## Usage
+### Current limitations:
+The module currently does not support setting the following FSCloud requirements:
+- Check whether user list visibility restrictions are configured in IAM settings for the account owner
+  - Follow these [steps](https://cloud.ibm.com/docs/account?topic=account-iam-user-setting) as a workaround to set this manually in the UI
+- Check whether the Financial Services Validated setting is enabled in account settings
+  - Follow these [steps](https://cloud.ibm.com/docs/account?topic=account-enabling-fs-validated) as a workaround to set this manually in the UI
+
+Tracking issue with IBM provider -> https://github.com/IBM-Cloud/terraform-provider-ibm/issues/4204
+
+<!-- Below content is automatically populated via pre-commit hook -->
+<!-- BEGIN OVERVIEW HOOK -->
+## Overview
+* [terraform-ibm-iam-account-settings](#terraform-ibm-iam-account-settings)
+* [Examples](./examples)
+    * [Account Custom Settings example](./examples/custom)
+    * [Default Example](./examples/default)
+* [Contributing](#contributing)
+<!-- END OVERVIEW HOOK -->
+
+## terraform-ibm-iam-account-settings
+### Usage
 
 ```hcl
 
@@ -45,7 +65,7 @@ module "iam-account-settings" {
   allowed_ip_addresses         = ["17.5.7.8.0/16"]
 }
 ```
-## User MFA
+### User MFA
 
 When specifying User MFA ([`user_mfa`](#input_user_mfa)), use the following format:
 
@@ -69,32 +89,7 @@ variable "user_mfa" {
 ```
 When/if it is necessary to delete/reset the MFA configuration for all users, use the [`user_mfa_reset`](#input_user_mfa_reset) input var.
 
-## Compliance and security
-
-This module contributes to the implementation of the following NIST controls for the network layer on an IBM Cloud
-account.
-
-| Account Setting                          | NIST Family | NIST Control | Description                                                                                                                                                                                                                                                           |
-|------------------------------------------|-------------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Set sign out due to inactivity           | AC          | AC-11(a)     | The information system: Prevents further access to the system by initiating a session lock after 15 minutes of inactivity or upon receiving a request from a user.                                                                                                    |
-| Disable public access                    | AC          | AC-14(a)     | No access is permitted without identification or authentication that can be performed on the information system without identification or authentication consistent with organizational missions/business functions.                                                  |
-| Enable multifactor authentication (MFA)  | IA          | IA-2(1)(0)   | The information system implements multifactor authentication for network access to privileged accounts.                                                                                                                                                               |
-| Enable multifactor authentication (MFA)  | IA          | IA-2(2)(0)   | The information system implements multifactor authentication for network access to non-privileged accounts.                                                                                                                                                           |
-| Configure allow listed IPs               | IA          | IA-3(0)      | The information system uniquely identifies and authenticates (organization-defined specific and/or types of devices) before establishing a (local; remote; network) connection.                                                                                       |
-| Set session expiration                   | SC          | SC-10(0)     | The information system terminates the network connection associated with a communications session at the end of the session or after (no longer than 30 minutes for RAS-based sessions or no longer than 60 minutes for non-interactive user sessions) of inactivity. |
-| Restricts users that can create API keys | SC          | SC-12(0)     | The organization establishes and manages cryptographic keys for required cryptography employed within the information system in accordance with organization-defined requirements for key generation, distribution, storage, access, and destruction.                 |
-
-
-**Current limitations:**
-The module currently does not support setting the following FSCloud requirements:
-- Check whether user list visibility restrictions are configured in IAM settings for the account owner
-  - Follow these [steps](https://cloud.ibm.com/docs/account?topic=account-iam-user-setting) as a workaround to set this manually in the UI
-- Check whether the Financial Services Validated setting is enabled in account settings
-  - Follow these [steps](https://cloud.ibm.com/docs/account?topic=account-enabling-fs-validated) as a workaround to set this manually in the UI
-
-Tracking issue with IBM provider -> https://github.com/IBM-Cloud/terraform-provider-ibm/issues/4204
-
-## Required IAM access policies
+### Required IAM access policies
 
 You need the following permissions to run this module.
 
@@ -107,13 +102,6 @@ You need the following permissions to run this module.
         - `Operator` platform access
     - **IBM Cloud Shell** service
         - `Administrator` platform access
-
-<!-- BEGIN EXAMPLES HOOK -->
-## Examples
-
-- [ Account Custom Settings example](examples/custom)
-- [ Default Example](examples/default)
-<!-- END EXAMPLES HOOK -->
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ### Requirements
