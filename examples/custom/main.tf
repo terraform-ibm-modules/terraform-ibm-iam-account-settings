@@ -14,5 +14,6 @@ module "iam_account_settings" {
   access_token_expiration      = var.access_token_expiration
   refresh_token_expiration     = var.refresh_token_expiration
   api_creation                 = var.api_creation
-
+  fs_validated                 = var.fs_validated
+  user_list_visibility         = var.user_list_visibility
 }

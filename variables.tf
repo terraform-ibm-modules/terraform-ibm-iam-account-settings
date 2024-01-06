@@ -137,4 +137,16 @@ variable "shell_settings_enabled" {
   default     = false
 }
 
+variable "fs_validated" {
+  description = "Enable use of financial services validated products in the account"
+  type        = bool
+  default     = false
+}
+
+variable "user_list_visibility" {
+  description = "Enable restriction of user list visibility in the account"
+  type        = bool
+  default     = false
+}
+
 ##############################################################################

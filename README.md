@@ -26,19 +26,12 @@ The module handles the following account settings:
     - Restrict: traffic that originates outside the specified allowed IP addresses is blocked
 - Global shell settings (on - off)
 - Public access group (on - off)
+- Financial Services Validated products (on - off)
+- User List Visibility restrictions (on - off)
 
 The module supports creating and updating settings that are applied with the `terraform apply` command. With objects
 affected by the `destroy` command, the module preserves the most recent setting and doesn't change objects that are
 configured outside of Terraform's scope.
-
-### Current limitations:
-The module currently does not support setting the following FSCloud requirements:
-- Check whether user list visibility restrictions are configured in IAM settings for the account owner
-  - Follow these [steps](https://cloud.ibm.com/docs/account?topic=account-iam-user-setting) as a workaround to set this manually in the UI
-- Check whether the Financial Services Validated setting is enabled in account settings
-  - Follow these [steps](https://cloud.ibm.com/docs/account?topic=account-enabling-fs-validated) as a workaround to set this manually in the UI
-
-Tracking issue with IBM provider -> https://github.com/IBM-Cloud/terraform-provider-ibm/issues/4204
 
 <!-- Below content is automatically populated via pre-commit hook -->
 <!-- BEGIN OVERVIEW HOOK -->
@@ -110,6 +103,7 @@ You need the following permissions to run this module.
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0, <1.6.0 |
 | <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.49.0 |
+| <a name="requirement_restapi"></a> [restapi](#requirement\_restapi) | >= 1.18.2 |
 
 ### Modules
 
@@ -122,6 +116,8 @@ No modules.
 | [ibm_cloud_shell_account_settings.cloud_shell_account_settings](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cloud_shell_account_settings) | resource |
 | [ibm_iam_access_group_account_settings.iam_access_group_account_settings](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/iam_access_group_account_settings) | resource |
 | [ibm_iam_account_settings.iam_account_settings](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/iam_account_settings) | resource |
+| [restapi_object.fs_validated](https://registry.terraform.io/providers/Mastercard/restapi/latest/docs/resources/object) | resource |
+| [restapi_object.user_list_visibility](https://registry.terraform.io/providers/Mastercard/restapi/latest/docs/resources/object) | resource |
 | [ibm_cloud_shell_account_settings.cloud_shell_account_settings](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/data-sources/cloud_shell_account_settings) | data source |
 | [ibm_iam_account_settings.iam_account_settings](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/data-sources/iam_account_settings) | data source |
 
@@ -134,6 +130,7 @@ No modules.
 | <a name="input_allowed_ip_addresses"></a> [allowed\_ip\_addresses](#input\_allowed\_ip\_addresses) | List of the IP addresses and subnets from which IAM tokens can be created for the account. | `list(any)` | `[]` | no |
 | <a name="input_api_creation"></a> [api\_creation](#input\_api\_creation) | When restriction is enabled, only users, including the account owner, assigned the User API key creator role on the IAM Identity Service can create API keys. Allowed values are 'RESTRICTED', 'NOT\_RESTRICTED', or 'NOT\_SET' (to 'unset' a previous set value). | `string` | `"RESTRICTED"` | no |
 | <a name="input_enforce_allowed_ip_addresses"></a> [enforce\_allowed\_ip\_addresses](#input\_enforce\_allowed\_ip\_addresses) | If true IP address restriction will be enforced, If false, traffic originated outside specified allowed IP address set is monitored with audit events sent to SIEM and Activity Tracker. After running in monitored mode to test this variable, it should then explicitly be set to true to enforce IP allow listing. | `bool` | `true` | no |
+| <a name="input_fs_validated"></a> [fs\_validated](#input\_fs\_validated) | Enable use of financial services validated products in the account | `bool` | `false` | no |
 | <a name="input_inactive_session_timeout"></a> [inactive\_session\_timeout](#input\_inactive\_session\_timeout) | Specify how long (seconds) a user is allowed to stay logged in the account while being inactive/idle | `string` | `"900"` | no |
 | <a name="input_max_sessions_per_identity"></a> [max\_sessions\_per\_identity](#input\_max\_sessions\_per\_identity) | Defines the maximum allowed sessions per identity required by the account. Supports any whole number greater than '0', or 'NOT\_SET' to unset account setting and use service default. | `string` | `"NOT_SET"` | no |
 | <a name="input_mfa"></a> [mfa](#input\_mfa) | Specify Multi-Factor Authentication method in the account. Supported valid values are 'NONE' (No MFA trait set), 'TOTP' (For all non-federated IBMId users), 'TOTP4ALL' (For all users), 'LEVEL1' (Email based MFA for all users), 'LEVEL2' (TOTP based MFA for all users), 'LEVEL3' (U2F MFA for all users). | `string` | `"TOTP4ALL"` | no |
@@ -141,6 +138,7 @@ No modules.
 | <a name="input_refresh_token_expiration"></a> [refresh\_token\_expiration](#input\_refresh\_token\_expiration) | Defines the refresh token expiration in seconds | `string` | `"259200"` | no |
 | <a name="input_serviceid_creation"></a> [serviceid\_creation](#input\_serviceid\_creation) | When restriction is enabled, only users, including the account owner, assigned the Service ID creator role on the IAM Identity Service can create service IDs. Allowed values are 'RESTRICTED', 'NOT\_RESTRICTED', or 'NOT\_SET' (to 'unset' a previous set value). | `string` | `"RESTRICTED"` | no |
 | <a name="input_shell_settings_enabled"></a> [shell\_settings\_enabled](#input\_shell\_settings\_enabled) | Enable global shell settings to all users in the account | `bool` | `false` | no |
+| <a name="input_user_list_visibility"></a> [user\_list\_visibility](#input\_user\_list\_visibility) | Enable restriction of user list visibility in the account | `bool` | `false` | no |
 | <a name="input_user_mfa"></a> [user\_mfa](#input\_user\_mfa) | Specify Multi-Factor Authentication method for specific users the account. Supported valid values are 'NONE' (No MFA trait set), 'TOTP' (For all non-federated IBMId users), 'TOTP4ALL' (For all users), 'LEVEL1' (Email based MFA for all users), 'LEVEL2' (TOTP based MFA for all users), 'LEVEL3' (U2F MFA for all users). Example of format is available here > https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings#usage | <pre>set(object({<br>    iam_id = string<br>    mfa    = string<br>  }))</pre> | `[]` | no |
 | <a name="input_user_mfa_reset"></a> [user\_mfa\_reset](#input\_user\_mfa\_reset) | Set to true to delete all user MFA settings configured in the targeted account, and ignoring entries declared in var `user_mfa` | `bool` | `false` | no |
 

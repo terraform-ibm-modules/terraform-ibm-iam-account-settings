@@ -49,8 +49,6 @@ resource "ibm_iam_access_group_account_settings" "iam_access_group_account_setti
 }
 
 locals {
-
-
   user_mfa_list                         = var.user_mfa_reset == true ? [] : (length(var.user_mfa) == 0 ? data.ibm_iam_account_settings.iam_account_settings.user_mfa : var.user_mfa) # Use this as workaround for issue https://github.com/IBM-Cloud/terraform-provider-ibm/issues/4967
   concatenated_allowed_ip_addresses     = join(",", var.allowed_ip_addresses)
   iam_allowed_ip_addresses              = var.enforce_allowed_ip_addresses == false ? "?${local.concatenated_allowed_ip_addresses}" : local.concatenated_allowed_ip_addresses
@@ -65,4 +63,34 @@ locals {
   account_iam_access_token_expiration   = ibm_iam_account_settings.iam_account_settings.system_access_token_expiration_in_seconds
   account_iam_refresh_token_expiration  = ibm_iam_account_settings.iam_account_settings.system_refresh_token_expiration_in_seconds
   account_iam_allowed_ip_addresses      = ibm_iam_account_settings.iam_account_settings.allowed_ip_addresses
+
+  traits_path = "//accounts.cloud.ibm.com/v1/accounts/${data.ibm_iam_account_settings.iam_account_settings.account_id}/traits"
+}
+
+resource "restapi_object" "fs_validated" {
+  path           = local.traits_path
+  data           = "{\"fs_ready\": ${var.fs_validated}}"
+  create_method  = "PATCH"
+  create_path    = local.traits_path
+  destroy_method = "PATCH"
+  destroy_path   = local.traits_path
+  read_method    = "GET"
+  read_path      = local.traits_path
+  update_method  = "PATCH"
+  update_path    = local.traits_path
+  id_attribute   = "fs_validated"
+}
+
+resource "restapi_object" "user_list_visibility" {
+  path           = local.traits_path
+  data           = "{\"team_directory_enabled\": ${var.user_list_visibility}}"
+  create_method  = "PATCH"
+  create_path    = local.traits_path
+  destroy_method = "PATCH"
+  destroy_path   = local.traits_path
+  read_method    = "GET"
+  read_path      = local.traits_path
+  update_method  = "PATCH"
+  update_path    = local.traits_path
+  id_attribute   = "user_list_visibility"
 }

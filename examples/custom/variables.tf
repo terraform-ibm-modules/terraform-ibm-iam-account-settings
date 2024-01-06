@@ -63,3 +63,15 @@ variable "access_token_expiration" {
   description = "Defines the access token expiration in seconds"
   default     = "3600"
 }
+
+variable "fs_validated" {
+  description = "Enable use of financial services validated products in the account"
+  type        = bool
+  default     = false
+}
+
+variable "user_list_visibility" {
+  description = "Enable restriction of user list visibility in the account"
+  type        = bool
+  default     = false
+}
