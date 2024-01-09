@@ -12,4 +12,6 @@ module "iam_account_settings" {
   refresh_token_expiration     = var.refresh_token_expiration
   access_token_expiration      = var.access_token_expiration
   shell_settings_enabled       = false
+  fs_validated                 = true
+  user_list_visibility         = true
 }

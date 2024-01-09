@@ -10,7 +10,7 @@ data "ibm_iam_account_settings" "iam_account_settings" {
 
 provider "restapi" {
   uri                   = "https:"
-  write_returns_object  = false
+  write_returns_object  = true
   create_returns_object = false
   debug                 = false
   headers = {
