@@ -4,15 +4,16 @@
 
 module "iam_account_settings" {
   source                       = "../.."
-  enforce_allowed_ip_addresses = var.enforce_allowed_ip_addresses
-  shell_settings_enabled       = var.shell_settings_enabled
-  mfa                          = var.mfa
-  public_access_enabled        = var.public_access_enabled
-  serviceid_creation           = var.serviceid_creation
-  active_session_timeout       = var.active_session_timeout
-  inactive_session_timeout     = var.inactive_session_timeout
-  access_token_expiration      = var.access_token_expiration
-  refresh_token_expiration     = var.refresh_token_expiration
-  api_creation                 = var.api_creation
-
+  enforce_allowed_ip_addresses = false
+  shell_settings_enabled       = true
+  mfa                          = "TOTP4ALL"
+  public_access_enabled        = true
+  serviceid_creation           = "NOT_RESTRICTED"
+  active_session_timeout       = "28800"
+  inactive_session_timeout     = "3600"
+  access_token_expiration      = "3600"
+  refresh_token_expiration     = "86400"
+  api_creation                 = "NOT_RESTRICTED"
+  fs_validated                 = false
+  user_list_visibility         = false
 }
