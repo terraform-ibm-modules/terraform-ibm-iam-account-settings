@@ -1,3 +1,7 @@
+##############################################################################
+# Outputs
+##############################################################################
+
 output "account_public_access" {
   value       = module.iam_account_settings.account_public_access
   description = "Current state of public access group setting"
@@ -62,3 +66,15 @@ output "account_iam_user_mfa_list" {
   value       = module.iam_account_settings.account_iam_user_mfa_list
   description = "Current list of users with specific MFA settings"
 }
+
+output "account_fs_validated" {
+  value       = var.fs_validated
+  description = "Current Financial Services validated setting"
+}
+
+output "account_user_list_visibility" {
+  value       = var.user_list_visibility
+  description = "Current User List visibility restriction setting"
+}
+
+##############################################################################
