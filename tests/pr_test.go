@@ -9,7 +9,6 @@ import (
 )
 
 const customExampleTerraformDir = "examples/custom"
-const submoduleExampleTerraformDir = "examples/submodule"
 
 func setupOptions(t *testing.T, terraformDir string, prefix string) *testhelper.TestOptions {
 	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
@@ -24,15 +23,9 @@ func setupOptions(t *testing.T, terraformDir string, prefix string) *testhelper.
 }
 
 func TestRunCustomExample(t *testing.T) {
+	t.Parallel()
+
 	options := setupOptions(t, customExampleTerraformDir, "iam-act-cus")
-
-	output, err := options.RunTestConsistency()
-	assert.Nil(t, err, "This should not have errored")
-	assert.NotNil(t, output, "Expected some output")
-}
-
-func TestRunSubmoduleExample(t *testing.T) {
-	options := setupOptions(t, submoduleExampleTerraformDir, "iam-act-submodule")
 
 	output, err := options.RunTestConsistency()
 	assert.Nil(t, err, "This should not have errored")

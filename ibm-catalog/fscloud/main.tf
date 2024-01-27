@@ -1,5 +1,5 @@
 module "iam_account_settings" {
-  source                       = "../../modules/restapi-options"
+  source                       = "../../modules/experimental-options"
   allowed_ip_addresses         = var.allowed_ip_addresses
   enforce_allowed_ip_addresses = true
   max_sessions_per_identity    = var.max_sessions_per_identity

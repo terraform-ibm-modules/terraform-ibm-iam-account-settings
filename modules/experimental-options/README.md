@@ -37,6 +37,8 @@ Tracking issue with IBM provider -> <https://github.com/IBM-Cloud/terraform-prov
 
 For further usage information on the module, please see the [base module readme](../../README.md#usage).
 
+Note: the API used for these settings is experimental and currently unsupported.
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ### Requirements
 

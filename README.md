@@ -46,10 +46,9 @@ If you need to manage these FSCloud requirements via Terraform, please see [this
 ## Overview
 * [terraform-ibm-iam-account-settings](#terraform-ibm-iam-account-settings)
 * [Submodules](./modules)
-    * [restapi-options](./modules/restapi-options)
+    * [experimental-options](./modules/experimental-options)
 * [Examples](./examples)
     * [Account Custom Settings example](./examples/custom)
-    * [Account Submodule Settings example](./examples/submodule)
     * [Default Example](./examples/default)
 * [Contributing](#contributing)
 <!-- END OVERVIEW HOOK -->
