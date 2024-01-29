@@ -3,7 +3,7 @@
 ##################################################################
 
 module "iam_account_settings" {
-  source                       = "../../modules/experimental-options"
+  source                       = "../../modules/experimental-extended-account-settings"
   enforce_allowed_ip_addresses = false
   shell_settings_enabled       = true
   mfa                          = "TOTP4ALL"

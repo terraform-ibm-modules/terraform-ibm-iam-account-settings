@@ -47,7 +47,6 @@ If you need to manage these FSCloud requirements via Terraform, please see [this
 * [terraform-ibm-iam-account-settings](#terraform-ibm-iam-account-settings)
 * [Submodules](./modules)
     * [experimental-extended-account-settings](./modules/experimental-extended-account-settings)
-    * [experimental-options](./modules/experimental-options)
 * [Examples](./examples)
     * [Account Custom Settings example](./examples/custom)
     * [Default Example](./examples/default)
