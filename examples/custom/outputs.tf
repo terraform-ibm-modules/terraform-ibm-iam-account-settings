@@ -64,11 +64,11 @@ output "account_iam_user_mfa_list" {
 }
 
 output "account_fs_validated" {
-  value       = module.iam_account_settings.account_fs_validated
+  value       = module.experimental_settings.account_fs_validated
   description = "Current Financial Services validated setting"
 }
 
 output "account_user_list_visibility" {
-  value       = module.iam_account_settings.account_user_list_visibility
+  value       = module.experimental_settings.account_user_list_visibility
   description = "Current User List visibility restriction setting"
 }

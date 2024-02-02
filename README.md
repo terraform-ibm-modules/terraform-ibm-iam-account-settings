@@ -39,14 +39,14 @@ The module currently does not support setting the following FSCloud requirements
 
 Tracking issue with IBM provider -> <https://github.com/IBM-Cloud/terraform-provider-ibm/issues/4204>
 
-If you need to manage these FSCloud requirements via Terraform, please see [this submodule](./modules/restapi-options) which uses the RestAPI provider to manage these settings.
+If you need to manage these FSCloud requirements via Terraform, please see [the experimental submodule](./modules/experimental) which uses the RestAPI provider to manage these settings.
 
 <!-- Below content is automatically populated via pre-commit hook -->
 <!-- BEGIN OVERVIEW HOOK -->
 ## Overview
 * [terraform-ibm-iam-account-settings](#terraform-ibm-iam-account-settings)
 * [Submodules](./modules)
-    * [experimental-extended-account-settings](./modules/experimental-extended-account-settings)
+    * [experimental](./modules/experimental)
 * [Examples](./examples)
     * [Account Custom Settings example](./examples/custom)
     * [Default Example](./examples/default)

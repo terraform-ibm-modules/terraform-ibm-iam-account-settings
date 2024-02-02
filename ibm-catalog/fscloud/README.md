@@ -8,4 +8,4 @@ The module currently supports setting the following FSCloud requirements using t
 - Check whether user list visibility restrictions are configured in IAM settings for the account owner
 - Check whether the Financial Services Validated setting is enabled in account settings
 
-Tracking issue with IBM provider -> https://github.com/IBM-Cloud/terraform-provider-ibm/issues/4204
+Tracking issue with IBM provider -> <https://github.com/IBM-Cloud/terraform-provider-ibm/issues/4204>
