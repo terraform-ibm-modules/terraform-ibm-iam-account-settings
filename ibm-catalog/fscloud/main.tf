@@ -1,5 +1,5 @@
 module "iam_account_settings" {
-  source                       = "../.."
+  source                       = "../../"
   allowed_ip_addresses         = var.allowed_ip_addresses
   enforce_allowed_ip_addresses = true
   max_sessions_per_identity    = var.max_sessions_per_identity
@@ -12,6 +12,11 @@ module "iam_account_settings" {
   refresh_token_expiration     = var.refresh_token_expiration
   access_token_expiration      = var.access_token_expiration
   shell_settings_enabled       = false
-  fs_validated                 = true
-  user_list_visibility         = true
+}
+
+module "experimental" {
+  source               = "../../modules/experimental"
+  api_endpoint         = "private.accounts.cloud.ibm.com"
+  fs_validated         = true
+  user_list_visibility = true
 }
