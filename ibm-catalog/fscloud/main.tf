@@ -16,7 +16,7 @@ module "iam_account_settings" {
 
 module "experimental" {
   source               = "../../modules/experimental"
-  api_endpoint         = "private.accounts.cloud.ibm.com"
+  api_endpoint         = "private.us-south.accounts.cloud.ibm.com"
   fs_validated         = true
   user_list_visibility = true
 }
