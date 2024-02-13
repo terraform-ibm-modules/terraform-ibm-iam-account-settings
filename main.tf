@@ -64,3 +64,14 @@ locals {
   account_iam_refresh_token_expiration  = ibm_iam_account_settings.iam_account_settings.system_refresh_token_expiration_in_seconds
   account_iam_allowed_ip_addresses      = ibm_iam_account_settings.iam_account_settings.allowed_ip_addresses
 }
+
+module "cbr_zones" {
+  for_each           = { for obj in var.cbr_zones : obj.name => obj }
+  source             = "terraform-ibm-modules/cbr/ibm//modules/cbr-zone-module"
+  version            = "v1.18.0"
+  account_id         = data.ibm_iam_account_settings.iam_account_settings.account_id
+  name               = each.value.name
+  zone_description   = each.value.zone_description
+  addresses          = each.value.addresses
+  excluded_addresses = each.value.excluded_addresses
+}

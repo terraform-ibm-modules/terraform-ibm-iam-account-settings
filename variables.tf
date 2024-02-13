@@ -137,4 +137,29 @@ variable "shell_settings_enabled" {
   default     = false
 }
 
+variable "cbr_zones" {
+  description = "A list of CBR zones created by the module"
+  type = list(object({
+    account_id = optional(string)
+    addresses = optional(list(object({
+      type  = optional(string)
+      value = optional(string)
+      ref = optional(object({
+        account_id       = string
+        location         = optional(string)
+        service_instance = optional(string)
+        service_name     = optional(string)
+        service_type     = optional(string)
+      }))
+    })), [])
+    excluded_addresses = optional(list(object({
+      type  = optional(string)
+      value = optional(string)
+    })), [])
+    name             = string
+    zone_description = optional(string, null)
+  }))
+  default = []
+}
+
 ##############################################################################
