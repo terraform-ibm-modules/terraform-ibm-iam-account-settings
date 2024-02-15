@@ -5,14 +5,14 @@
     {
       "description": "Allow the locked in provider version to be updated to the latest for catalog DA",
       "enabled": true,
-      "matchFileNames": ["ibm-catalog/fscloud/**"],
+      "matchFileNames": ["solutions/fscloud/**"],
       "matchManagers": ["terraform"],
       "matchDepTypes": ["required_provider"],
       "rangeStrategy": "bump",
       "semanticCommitType": "fix",
       "group": true,
       "groupName": "required_provider",
-      "commitMessageExtra": "to latest for the fscloud DA"
+      "commitMessageExtra": "to latest for the fscloud deployable architecture"
     }
   ]
 }
