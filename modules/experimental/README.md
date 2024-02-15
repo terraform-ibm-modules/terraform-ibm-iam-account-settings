@@ -1,7 +1,5 @@
 # Experimental submodule
 
-## Account Settings Support
-
 The submodule handles the following account settings:
 
 - Financial Services Validated products (on - off)
@@ -25,9 +23,6 @@ Note: the API used for these settings is experimental and currently unsupported.
 ### Usage
 
 ```hcl
-##############################################################################
-# Configure Experimental IAM Account settings
-##############################################################################
 provider "ibm" {
   ibmcloud_api_key = var.ibmcloud_api_key # pragma: allowlist secret
 }
