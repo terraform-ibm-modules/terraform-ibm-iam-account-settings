@@ -31,7 +31,7 @@ The module supports creating and updating settings that are applied with the `te
 affected by the `destroy` command, the module preserves the most recent setting and doesn't change objects that are
 configured outside of Terraform's scope.
 
-### Current limitations:
+## Current limitations:
 The module currently does not support setting the following FSCloud requirements using the IBM provider:
 
 - Check whether user list visibility restrictions are configured in IAM settings for the account owner
@@ -39,7 +39,7 @@ The module currently does not support setting the following FSCloud requirements
 
 Tracking issue with IBM provider -> <https://github.com/IBM-Cloud/terraform-provider-ibm/issues/4204>
 
-If you need to manage these FSCloud requirements via Terraform, please see [the experimental submodule](./modules/experimental) which uses the RestAPI provider to manage these settings.
+If you need to manage these FSCloud requirements via Terraform, please see the [experimental submodule](https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/tree/main/modules/experimental) which uses the RestAPI provider to manage these settings.
 
 <!-- Below content is automatically populated via pre-commit hook -->
 <!-- BEGIN OVERVIEW HOOK -->
@@ -57,15 +57,10 @@ If you need to manage these FSCloud requirements via Terraform, please see [the 
 ### Usage
 
 ```hcl
-
-##############################################################################
-# Configure IAM Account settings
-##############################################################################
-
-# Replace "main" with a GIT release version to lock into a specific release
-module "iam-account-settings" {
-  source                       = "git::https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings?ref=main"
-  allowed_ip_addresses         = ["17.5.7.8.0/16"]
+module "iam_account_settings" {
+  source               = "terraform-ibm-modules/iam-account-settings/ibm"
+  version              = "X.X.X"  # Replace "X.X.X" with a release version to lock into a specific release
+  allowed_ip_addresses = ["17.5.7.8.0/16"]
 }
 ```
 ### User MFA
@@ -166,13 +161,9 @@ No modules.
 | <a name="output_account_shell_settings_status"></a> [account\_shell\_settings\_status](#output\_account\_shell\_settings\_status) | Current state of global shell setting |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
-<!-- BEGIN CONTRIBUTING HOOK -->
-
 <!-- Leave this section as is so that your module has a link to local development environment set up steps for contributors to follow -->
 ## Contributing
 
 You can report issues and request features for this module in GitHub issues in the module repo. See [Report an issue or request a feature](https://github.com/terraform-ibm-modules/.github/blob/main/.github/SUPPORT.md).
 
 To set up your local development environment, see [Local development setup](https://terraform-ibm-modules.github.io/documentation/#/local-dev-setup) in the project documentation.
-<!-- Source for this readme file: https://github.com/terraform-ibm-modules/common-dev-assets/tree/main/module-assets/ci/module-template-automation -->
-<!-- END CONTRIBUTING HOOK -->
