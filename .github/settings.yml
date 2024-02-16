@@ -21,4 +21,4 @@ repository:
 
   description: "Configures standard IAM parameters and account settings"
 
-  topics: core-team, terraform, ibm-cloud, terraform-module, iam-account, supported, graduated
+  topics: core-team, terraform, ibm-cloud, terraform-module, iam-account, supported, graduated, deployable-architecture 
