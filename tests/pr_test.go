@@ -27,6 +27,10 @@ func TestRunCustomExample(t *testing.T) {
 
 	options := setupOptions(t, customExampleTerraformDir, "iam-act-cus")
 
+	options.TerraformVars = map[string]interface{}{
+		"prefix": options.Prefix,
+	}
+
 	output, err := options.RunTestConsistency()
 	assert.Nil(t, err, "This should not have errored")
 	assert.NotNil(t, output, "Expected some output")

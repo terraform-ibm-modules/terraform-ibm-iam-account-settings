@@ -15,7 +15,7 @@ module "iam_account_settings" {
   refresh_token_expiration     = "86400"
   api_creation                 = "NOT_RESTRICTED"
   cbr_zones = [{
-    name             = "test-zone-1"
+    name             = "${var.prefix}-zone-1"
     zone_description = "test zone in iam-account-settings module"
     addresses = [{
       type = "serviceRef"
