@@ -67,4 +67,9 @@ output "account_iam_user_mfa_list" {
   description = "Current list of users with specific MFA settings"
 }
 
+output "account_zones" {
+  value       = module.cbr_zones
+  description = "Current CBR zones managed by the module"
+}
+
 ##############################################################################

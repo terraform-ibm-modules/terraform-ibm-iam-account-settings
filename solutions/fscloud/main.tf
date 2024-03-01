@@ -12,6 +12,7 @@ module "iam_account_settings" {
   refresh_token_expiration     = var.refresh_token_expiration
   access_token_expiration      = var.access_token_expiration
   shell_settings_enabled       = false
+  cbr_zones                    = var.cbr_zones
 }
 
 module "experimental" {

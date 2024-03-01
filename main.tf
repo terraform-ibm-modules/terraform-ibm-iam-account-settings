@@ -50,7 +50,7 @@ resource "ibm_iam_access_group_account_settings" "iam_access_group_account_setti
 
 locals {
   user_mfa_list                         = var.user_mfa_reset == true ? [] : (length(var.user_mfa) == 0 ? data.ibm_iam_account_settings.iam_account_settings.user_mfa : var.user_mfa) # Use this as workaround for issue https://github.com/IBM-Cloud/terraform-provider-ibm/issues/4967
-  concatenated_allowed_ip_addresses     = join(",", var.allowed_ip_addresses)
+  concatenated_allowed_ip_addresses     = join(",", var.allowed_ip_addresses, [for k, _ in module.cbr_zones : k])
   iam_allowed_ip_addresses              = var.enforce_allowed_ip_addresses == false ? "?${local.concatenated_allowed_ip_addresses}" : local.concatenated_allowed_ip_addresses
   iam_allowed_ip_addresses_control_mode = var.enforce_allowed_ip_addresses == false ? "MONITOR" : "RESTRICT"
   account_public_access                 = ibm_iam_access_group_account_settings.iam_access_group_account_settings.public_access_enabled
@@ -63,4 +63,15 @@ locals {
   account_iam_access_token_expiration   = ibm_iam_account_settings.iam_account_settings.system_access_token_expiration_in_seconds
   account_iam_refresh_token_expiration  = ibm_iam_account_settings.iam_account_settings.system_refresh_token_expiration_in_seconds
   account_iam_allowed_ip_addresses      = ibm_iam_account_settings.iam_account_settings.allowed_ip_addresses
+}
+
+module "cbr_zones" {
+  for_each           = { for obj in var.cbr_zones : obj.name => obj }
+  source             = "terraform-ibm-modules/cbr/ibm//modules/cbr-zone-module"
+  version            = "v1.19.1"
+  account_id         = data.ibm_iam_account_settings.iam_account_settings.account_id
+  name               = each.value.name
+  zone_description   = each.value.zone_description
+  addresses          = each.value.addresses
+  excluded_addresses = each.value.excluded_addresses
 }

@@ -72,3 +72,8 @@ output "account_user_list_visibility" {
   value       = module.experimental_settings.account_user_list_visibility
   description = "Current User List visibility restriction setting"
 }
+
+output "account_zones" {
+  value       = module.iam_account_settings.account_zones
+  description = "Current CBR zones managed by the module"
+}
