@@ -61,6 +61,20 @@ module "iam_account_settings" {
   source               = "terraform-ibm-modules/iam-account-settings/ibm"
   version              = "X.X.X"  # Replace "X.X.X" with a release version to lock into a specific release
   allowed_ip_addresses = ["17.5.7.8.0/16"]
+
+  # example usage of creating CBR zones within the module
+  # see https://github.com/terraform-ibm-modules/terraform-ibm-cbr/tree/main/modules/cbr-zone-module for more details
+  cbr_zones = [{
+    name             = "default-zone-1"
+    zone_description = "test zone in iam-account-settings module"
+    addresses = [{
+      type = "serviceRef"
+      ref = {
+        account_id   = data.ibm_iam_account_settings.iam_account_settings.account_id
+        service_name = "secrets-manager"
+      }
+    }]
+  }]
 }
 ```
 ### User MFA
