@@ -94,7 +94,7 @@ variable "serviceid_creation" {
 variable "active_session_timeout" {
   type        = number
   description = "Specify how long (seconds) a user is allowed to work continuously in the account"
-  default     = "3600"
+  default     = "86400"
   validation {
     condition     = var.active_session_timeout >= 900 && var.active_session_timeout <= 86400
     error_message = "Accepted values: 900-86400."
@@ -104,7 +104,7 @@ variable "active_session_timeout" {
 variable "inactive_session_timeout" {
   type        = string
   description = "Specify how long (seconds) a user is allowed to stay logged in the account while being inactive/idle"
-  default     = "900"
+  default     = "7200"
   validation {
     condition     = var.inactive_session_timeout >= 900 && var.inactive_session_timeout <= 7200
     error_message = "Accepted values: 900-7200."
