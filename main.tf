@@ -4,13 +4,21 @@
 # Configures standard account & IAM parameters
 ##############################################################################
 
+locals {
+  # If shell_settings_enabled is false, then skip_cloud_shell_calls must be true.
+  cloud_shell_settings_validate_condition = var.shell_settings_enabled == false && var.skip_cloud_shell_calls == false
+  cloud_shell_settings_validate_msg       = "'skip_cloud_shell_calls' must be set to true when 'shell_settings_enabled = true'"
+  # tflint-ignore: terraform_unused_declarations
+  cloud_shell_settings_validate_check = regex("^${local.cloud_shell_settings_validate_msg}$", (!local.cloud_shell_settings_validate_condition ? local.cloud_shell_settings_validate_msg : ""))
+}
+
 # Data source to get account settings
 data "ibm_iam_account_settings" "iam_account_settings" {
 }
 
 # Data source to get shell settings
 data "ibm_cloud_shell_account_settings" "cloud_shell_account_settings" {
-  count      = var.enable_global_cloud_shell_settings == true ? 1 : 0
+  count      = var.skip_cloud_shell_calls == true ? 1 : 0
   account_id = data.ibm_iam_account_settings.iam_account_settings.account_id
 }
 
@@ -38,7 +46,7 @@ resource "ibm_iam_account_settings" "iam_account_settings" {
 
 # Configure global shell settings
 resource "ibm_cloud_shell_account_settings" "cloud_shell_account_settings" {
-  count      = var.enable_global_cloud_shell_settings == true ? 1 : 0
+  count      = var.skip_cloud_shell_calls == true ? 1 : 0
   rev        = data.ibm_cloud_shell_account_settings.cloud_shell_account_settings[0].rev
   account_id = data.ibm_iam_account_settings.iam_account_settings.account_id
   enabled    = var.shell_settings_enabled

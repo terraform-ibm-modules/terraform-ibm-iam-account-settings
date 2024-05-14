@@ -162,7 +162,7 @@ variable "cbr_zones" {
   default = []
 }
 
-variable "enable_global_cloud_shell_settings" {
+variable "skip_cloud_shell_calls" {
   type        = bool
   description = "Enable/Disable Global Cloud Shell settings in the account."
   default     = false
