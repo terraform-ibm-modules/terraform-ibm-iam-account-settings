@@ -10,6 +10,7 @@ data "ibm_iam_account_settings" "iam_account_settings" {
 
 # Data source to get shell settings
 data "ibm_cloud_shell_account_settings" "cloud_shell_account_settings" {
+  count      = var.enable_global_cloud_shell_settings == true ? 1 : 0
   account_id = data.ibm_iam_account_settings.iam_account_settings.account_id
 }
 
@@ -37,7 +38,8 @@ resource "ibm_iam_account_settings" "iam_account_settings" {
 
 # Configure global shell settings
 resource "ibm_cloud_shell_account_settings" "cloud_shell_account_settings" {
-  rev        = data.ibm_cloud_shell_account_settings.cloud_shell_account_settings.rev
+  count      = var.enable_global_cloud_shell_settings == true ? 1 : 0
+  rev        = data.ibm_cloud_shell_account_settings.cloud_shell_account_settings[0].rev
   account_id = data.ibm_iam_account_settings.iam_account_settings.account_id
   enabled    = var.shell_settings_enabled
 }
@@ -54,7 +56,7 @@ locals {
   iam_allowed_ip_addresses              = var.enforce_allowed_ip_addresses == false ? "?${local.concatenated_allowed_ip_addresses}" : local.concatenated_allowed_ip_addresses
   iam_allowed_ip_addresses_control_mode = var.enforce_allowed_ip_addresses == false ? "MONITOR" : "RESTRICT"
   account_public_access                 = ibm_iam_access_group_account_settings.iam_access_group_account_settings.public_access_enabled
-  account_shell_settings_status         = ibm_cloud_shell_account_settings.cloud_shell_account_settings.enabled
+  account_shell_settings_status         = var.enable_global_cloud_shell_settings == true ? ibm_cloud_shell_account_settings.cloud_shell_account_settings[0].enabled : var.shell_settings_enabled
   account_iam_serviceid_creation        = ibm_iam_account_settings.iam_account_settings.restrict_create_service_id
   account_iam_apikey_creation           = ibm_iam_account_settings.iam_account_settings.restrict_create_platform_apikey
   account_iam_mfa                       = ibm_iam_account_settings.iam_account_settings.mfa
