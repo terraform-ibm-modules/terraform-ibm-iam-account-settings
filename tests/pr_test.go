@@ -28,7 +28,8 @@ func TestRunCustomExample(t *testing.T) {
 	options := setupOptions(t, customExampleTerraformDir, "iam-act-cus")
 
 	options.TerraformVars = map[string]interface{}{
-		"prefix": options.Prefix,
+		"prefix":                 options.Prefix,
+		"skip_cloud_shell_calls": true,
 	}
 
 	output, err := options.RunTestConsistency()

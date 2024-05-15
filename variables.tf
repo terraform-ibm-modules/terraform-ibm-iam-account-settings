@@ -164,7 +164,7 @@ variable "cbr_zones" {
 
 variable "skip_cloud_shell_calls" {
   type        = bool
-  description = "Enable/Disable Global Cloud Shell settings in the account."
+  description = "Skip Cloud Shell calls in the account."
   default     = false
 }
 ##############################################################################

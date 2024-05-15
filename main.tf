@@ -5,9 +5,9 @@
 ##############################################################################
 
 locals {
-  # If shell_settings_enabled is false, then skip_cloud_shell_calls must be true.
-  cloud_shell_settings_validate_condition = var.shell_settings_enabled == false && var.skip_cloud_shell_calls == false
-  cloud_shell_settings_validate_msg       = "'skip_cloud_shell_calls' must be set to true when 'shell_settings_enabled = true'"
+  # If shell_settings_enabled is true, then skip_cloud_shell_calls must be false.
+  cloud_shell_settings_validate_condition = var.shell_settings_enabled == true && var.skip_cloud_shell_calls == true
+  cloud_shell_settings_validate_msg       = "'skip_cloud_shell_calls' must be set to false when 'shell_settings_enabled = true'."
   # tflint-ignore: terraform_unused_declarations
   cloud_shell_settings_validate_check = regex("^${local.cloud_shell_settings_validate_msg}$", (!local.cloud_shell_settings_validate_condition ? local.cloud_shell_settings_validate_msg : ""))
 }
@@ -18,10 +18,9 @@ data "ibm_iam_account_settings" "iam_account_settings" {
 
 # Data source to get shell settings
 data "ibm_cloud_shell_account_settings" "cloud_shell_account_settings" {
-  count      = var.skip_cloud_shell_calls == true ? 1 : 0
+  count      = var.skip_cloud_shell_calls == true ? 0 : 1
   account_id = data.ibm_iam_account_settings.iam_account_settings.account_id
 }
-
 
 # Configure IAM account settings
 resource "ibm_iam_account_settings" "iam_account_settings" {
@@ -46,7 +45,7 @@ resource "ibm_iam_account_settings" "iam_account_settings" {
 
 # Configure global shell settings
 resource "ibm_cloud_shell_account_settings" "cloud_shell_account_settings" {
-  count      = var.skip_cloud_shell_calls == true ? 1 : 0
+  count      = var.skip_cloud_shell_calls == true ? 0 : 1
   rev        = data.ibm_cloud_shell_account_settings.cloud_shell_account_settings[0].rev
   account_id = data.ibm_iam_account_settings.iam_account_settings.account_id
   enabled    = var.shell_settings_enabled
@@ -64,7 +63,7 @@ locals {
   iam_allowed_ip_addresses              = var.enforce_allowed_ip_addresses == false ? "?${local.concatenated_allowed_ip_addresses}" : local.concatenated_allowed_ip_addresses
   iam_allowed_ip_addresses_control_mode = var.enforce_allowed_ip_addresses == false ? "MONITOR" : "RESTRICT"
   account_public_access                 = ibm_iam_access_group_account_settings.iam_access_group_account_settings.public_access_enabled
-  account_shell_settings_status         = var.skip_cloud_shell_calls == true ? ibm_cloud_shell_account_settings.cloud_shell_account_settings[0].enabled : var.shell_settings_enabled
+  account_shell_settings_status         = var.skip_cloud_shell_calls == true ? null : ibm_cloud_shell_account_settings.cloud_shell_account_settings[0].enabled
   account_iam_serviceid_creation        = ibm_iam_account_settings.iam_account_settings.restrict_create_service_id
   account_iam_apikey_creation           = ibm_iam_account_settings.iam_account_settings.restrict_create_platform_apikey
   account_iam_mfa                       = ibm_iam_account_settings.iam_account_settings.mfa

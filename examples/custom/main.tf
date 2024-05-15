@@ -6,6 +6,7 @@ module "iam_account_settings" {
   source                       = "../../"
   enforce_allowed_ip_addresses = false
   shell_settings_enabled       = true
+  skip_cloud_shell_calls       = false
   mfa                          = "TOTP4ALL"
   public_access_enabled        = true
   serviceid_creation           = "NOT_RESTRICTED"
