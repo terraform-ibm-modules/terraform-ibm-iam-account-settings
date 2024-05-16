@@ -6,7 +6,7 @@ module "iam_account_settings" {
   source                       = "../../"
   enforce_allowed_ip_addresses = false
   shell_settings_enabled       = true
-  skip_cloud_shell_calls       = false
+  skip_cloud_shell_calls       = true # temporary workaround https://github.ibm.com/GoldenEye/issues/issues/9146
   mfa                          = "TOTP4ALL"
   public_access_enabled        = true
   serviceid_creation           = "NOT_RESTRICTED"
