@@ -132,7 +132,7 @@ variable "access_token_expiration" {
 }
 
 variable "shell_settings_enabled" {
-  description = "Enable global shell settings to all users in the account"
+  description = "Enable global shell settings to all users in the account. If `skip_cloud_shell_calls` is set to true, then this setting is ignored."
   type        = bool
   default     = false
 }
@@ -162,4 +162,9 @@ variable "cbr_zones" {
   default = []
 }
 
+variable "skip_cloud_shell_calls" {
+  type        = bool
+  description = "Skip Cloud Shell calls in the account."
+  default     = false
+}
 ##############################################################################
