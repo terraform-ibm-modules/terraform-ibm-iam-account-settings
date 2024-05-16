@@ -4,14 +4,6 @@
 # Configures standard account & IAM parameters
 ##############################################################################
 
-locals {
-  # If shell_settings_enabled is true, then skip_cloud_shell_calls must be false.
-  cloud_shell_settings_validate_condition = var.shell_settings_enabled == true && var.skip_cloud_shell_calls == true
-  cloud_shell_settings_validate_msg       = "'skip_cloud_shell_calls' must be set to false when 'shell_settings_enabled = true'."
-  # tflint-ignore: terraform_unused_declarations
-  cloud_shell_settings_validate_check = regex("^${local.cloud_shell_settings_validate_msg}$", (!local.cloud_shell_settings_validate_condition ? local.cloud_shell_settings_validate_msg : ""))
-}
-
 # Data source to get account settings
 data "ibm_iam_account_settings" "iam_account_settings" {
 }
