@@ -127,7 +127,7 @@ You need the following permissions to run this module.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_cbr_zones"></a> [cbr\_zones](#module\_cbr\_zones) | terraform-ibm-modules/cbr/ibm//modules/cbr-zone-module | v1.19.1 |
+| <a name="module_cbr_zones"></a> [cbr\_zones](#module\_cbr\_zones) | terraform-ibm-modules/cbr/ibm//modules/cbr-zone-module | v1.23.0 |
 
 ### Resources
 
