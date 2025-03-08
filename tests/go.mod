@@ -2,7 +2,7 @@ module github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings
 
 go 1.23.0
 
-toolchain go1.24.0
+toolchain go1.24.1
 
 require (
 	github.com/stretchr/testify v1.10.0
