@@ -69,7 +69,7 @@ locals {
 module "cbr_zones" {
   for_each           = { for obj in var.cbr_zones : obj.name => obj }
   source             = "terraform-ibm-modules/cbr/ibm//modules/cbr-zone-module"
-  version            = "v1.24.1"
+  version            = "v1.29.0"
   account_id         = data.ibm_iam_account_settings.iam_account_settings.account_id
   name               = each.value.name
   zone_description   = each.value.zone_description
