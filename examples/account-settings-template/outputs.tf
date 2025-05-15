@@ -11,3 +11,8 @@ output "account_settings_template_id" {
   description = "ID of the account settings template"
   value       = split("/", module.account_settings_template.account_settings_template_id_raw)[0]
 }
+
+output "account_settings_template_assignment_ids" {
+  description = "List of assignment IDs to child accounts"
+  value       = module.account_settings_template.account_settings_template_assignment_ids
+}

@@ -23,6 +23,8 @@ output "account_settings_template_version" {
 }
 
 output "account_settings_template_assignment_ids" {
-  description = "The list of assignment IDs to child accounts"
-  value       = split("/", ibm_iam_account_settings_template.account_settings_template_instance.id)[0]
+  description = "List of assignment IDs to child accounts"
+  value = {
+    for k, v in ibm_iam_account_settings_template_assignment.account_settings_template_assignment_instance : k => v.id
+  }
 }
