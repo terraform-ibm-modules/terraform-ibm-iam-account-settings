@@ -14,9 +14,9 @@ resource "ibm_iam_account_settings_template" "account_settings_template_instance
   description = var.template_description
 
   account_settings {
-    allowed_ip_addresses = local.iam_allowed_ip_addresses
+    allowed_ip_addresses      = local.iam_allowed_ip_addresses
     max_sessions_per_identity = var.max_sessions_per_identity
-    mfa = var.mfa
+    mfa                       = var.mfa
     dynamic "user_mfa" {
       for_each = local.user_mfa_list
       content {
@@ -36,9 +36,9 @@ resource "ibm_iam_account_settings_template" "account_settings_template_instance
 }
 
 locals {
-  user_mfa_list                         = var.user_mfa_reset == true ? [] : (length(var.user_mfa) == 0 ? data.ibm_iam_account_settings.iam_account_settings.user_mfa : var.user_mfa) # Use this as workaround for issue https://github.com/IBM-Cloud/terraform-provider-ibm/issues/4967
-  concatenated_allowed_ip_addresses     = join(",", var.allowed_ip_addresses)
-  iam_allowed_ip_addresses              = var.enforce_allowed_ip_addresses == false ? "?${local.concatenated_allowed_ip_addresses}" : local.concatenated_allowed_ip_addresses
+  user_mfa_list                     = var.user_mfa_reset == true ? [] : (length(var.user_mfa) == 0 ? data.ibm_iam_account_settings.iam_account_settings.user_mfa : var.user_mfa) # Use this as workaround for issue https://github.com/IBM-Cloud/terraform-provider-ibm/issues/4967
+  concatenated_allowed_ip_addresses = join(",", var.allowed_ip_addresses)
+  iam_allowed_ip_addresses          = var.enforce_allowed_ip_addresses == false ? "?${local.concatenated_allowed_ip_addresses}" : local.concatenated_allowed_ip_addresses
 }
 
 data "ibm_enterprise_accounts" "all_accounts" {}
@@ -69,7 +69,7 @@ locals {
   # tflint-ignore: terraform_unused_declarations
   validate_group_ids = !local.all_groups ? length(local.compared_list) != length(var.account_group_ids_to_assign) ? tobool("Could not find all of the groups listed in the 'account_group_ids_to_assign' value. Please verify all values are correct") : true : true
 
-  combined_targets = local.all_groups ? {
+  combined_group_targets = local.all_groups ? {
     for target in local.group_targets :
     "${target.type}-${target.id}" => target
     } : {
@@ -77,6 +77,38 @@ locals {
     "${target.type}-${target.id}" => target if contains(var.account_group_ids_to_assign, target.id)
   }
 
+  # tflint-ignore: terraform_unused_declarations
+  validate_targets = length(var.account_group_ids_to_assign) == 0 && length(var.account_ids_to_assign) == 0 ? tobool("At least one account or account group is required to assign") : true
+
+  account_targets = [
+    for account in data.ibm_enterprise_accounts.all_accounts.accounts : {
+      id   = account.id
+      type = "Account"
+    }
+  ]
+
+  compared_account_list = flatten(
+    [
+      for account in local.account_targets :
+      [
+        for provided_account in var.account_ids_to_assign :
+        provided_account if account.id == provided_account
+      ]
+    ]
+  )
+  all_accounts = length(var.account_ids_to_assign) > 0 ? var.account_ids_to_assign[0] == "all" ? true : false : false
+  # tflint-ignore: terraform_unused_declarations
+  validate_account_ids = !local.all_accounts ? length(local.compared_account_list) != length(var.account_ids_to_assign) ? tobool("Could not find all of the accounts listed in the 'account_ids_to_assign' value. Please verify all values are correct") : true : true
+
+  combined_account_targets = local.all_accounts ? {
+    for target in local.account_targets :
+    "${target.type}-${target.id}" => target
+    } : {
+    for target in local.account_targets :
+    "${target.type}-${target.id}" => target if contains(var.account_ids_to_assign, target.id)
+  }
+
+  combined_targets = merge(local.combined_group_targets, local.combined_account_targets)
 }
 
 resource "ibm_iam_account_settings_template_assignment" "account_settings_template_assignment_instance" {

@@ -46,14 +46,17 @@ If you need to manage these FSCloud requirements via Terraform, please see the [
 ## Overview
 * [terraform-ibm-iam-account-settings](#terraform-ibm-iam-account-settings)
 * [Submodules](./modules)
+    * [account-settings-template](./modules/account-settings-template)
     * [experimental](./modules/experimental)
 * [Examples](./examples)
     * [Account Custom Settings example](./examples/custom)
+    * [Account Settings Template example](./examples/account-settings-template)
     * [Default Example](./examples/default)
 * [Contributing](#contributing)
 <!-- END OVERVIEW HOOK -->
 
 ## terraform-ibm-iam-account-settings
+
 ### Usage
 
 ```hcl
@@ -77,6 +80,7 @@ module "iam_account_settings" {
   }]
 }
 ```
+
 ### User MFA
 
 When specifying User MFA ([`user_mfa`](#input_user_mfa)), use the following format:
@@ -99,6 +103,7 @@ variable "user_mfa" {
   }
 
 ```
+
 When/if it is necessary to delete/reset the MFA configuration for all users, use the [`user_mfa_reset`](#input_user_mfa_reset) input var.
 
 ### Required IAM access policies

@@ -19,5 +19,12 @@ variable "account_group_ids_to_assign" {
   type        = list(string)
   default     = ["all"]
   description = "A list of account group IDs to assign the template to. Support passing the string 'all' in the list to assign to all account groups."
-  nullable    = false
+  nullable    = true
+}
+
+variable "account_ids_to_assign" {
+  type        = list(string)
+  default     = []
+  description = "A list of account IDs to assign the template to. Support passing the string 'all' in the list to assign to all child accounts in the enterprise."
+  nullable    = true
 }
