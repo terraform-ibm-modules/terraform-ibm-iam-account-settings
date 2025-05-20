@@ -9,6 +9,7 @@ import (
 )
 
 const customExampleTerraformDir = "examples/custom"
+const templateExampleDir = "examples/account-settings-template"
 
 func setupOptions(t *testing.T, terraformDir string, prefix string) *testhelper.TestOptions {
 	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
@@ -19,6 +20,22 @@ func setupOptions(t *testing.T, terraformDir string, prefix string) *testhelper.
 		ImplicitRequired: false,
 	})
 
+	return options
+}
+
+func setupTemplateOptions(t *testing.T, terraformDir string, prefix string) *testhelper.TestOptions {
+
+	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
+		Testing:      t,
+		TerraformDir: terraformDir,
+		Prefix:       prefix,
+	})
+	terraformVars := map[string]interface{}{
+		"prefix": options.Prefix,
+		// Workaround for provider bug https://github.com/IBM-Cloud/terraform-provider-ibm/issues/6216
+		"account_group_ids_to_assign": []string{},
+	}
+	options.TerraformVars = terraformVars
 	return options
 }
 
@@ -34,4 +51,24 @@ func TestRunCustomExample(t *testing.T) {
 	output, err := options.RunTestConsistency()
 	assert.Nil(t, err, "This should not have errored")
 	assert.NotNil(t, output, "Expected some output")
+}
+
+func TestRunTemplateExample(t *testing.T) {
+	t.Parallel()
+
+	options := setupTemplateOptions(t, templateExampleDir, "as-template")
+
+	output, err := options.RunTestConsistency()
+	assert.Nil(t, err, "This should not have errored")
+	assert.NotNil(t, output, "Expected some output")
+}
+
+func TestRunTemplateUpgrade(t *testing.T) {
+
+	options := setupTemplateOptions(t, templateExampleDir, "template-upg")
+	output, err := options.RunTestUpgrade()
+	if !options.UpgradeTestSkipped {
+		assert.Nil(t, err, "This should not have errored")
+		assert.NotNil(t, output, "Expected some output")
+	}
 }
