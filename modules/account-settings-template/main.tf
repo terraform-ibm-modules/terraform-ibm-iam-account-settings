@@ -77,9 +77,6 @@ locals {
     "${target.type}-${target.id}" => target if contains(var.account_group_ids_to_assign, target.id)
   }
 
-  # tflint-ignore: terraform_unused_declarations
-  validate_targets = length(var.account_group_ids_to_assign) == 0 && length(var.account_ids_to_assign) == 0 ? tobool("At least one account or account group is required to assign") : true
-
   account_targets = [
     for account in data.ibm_enterprise_accounts.all_accounts.accounts : {
       id   = account.id
