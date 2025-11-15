@@ -49,9 +49,9 @@ If you need to manage these FSCloud requirements via Terraform, please see the [
     * [account-settings-template](./modules/account-settings-template)
     * [experimental](./modules/experimental)
 * [Examples](./examples)
-    * <div style="display: inline-block;"><a href="./examples/account-settings-template">Account Settings Template example</a></div> <div style="display: inline-block; vertical-align: middle;"><a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=ias-account-settings-template-example&repository=github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/tree/main/examples/account-settings-template" target="_blank"><img src="https://cloud.ibm.com/media/docs/images/icons/Deploy_to_cloud.svg" alt="Deploy to IBM Cloud button"></a></div>
-    * <div style="display: inline-block;"><a href="./examples/custom">Account Custom Settings example</a></div> <div style="display: inline-block; vertical-align: middle;"><a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=ias-custom-example&repository=github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/tree/main/examples/custom" target="_blank"><img src="https://cloud.ibm.com/media/docs/images/icons/Deploy_to_cloud.svg" alt="Deploy to IBM Cloud button"></a></div>
-    * <div style="display: inline-block;"><a href="./examples/default">Default Example</a></div> <div style="display: inline-block; vertical-align: middle;"><a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=ias-default-example&repository=github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/tree/main/examples/default" target="_blank"><img src="https://cloud.ibm.com/media/docs/images/icons/Deploy_to_cloud.svg" alt="Deploy to IBM Cloud button"></a></div>
+    * <div style="display: inline-block;"><a href="./examples/account-settings-template">Account Settings Template example</a></div> <div style="display: inline-block; vertical-align: middle;"><a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=ias-account-settings-template-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/tree/main/examples/account-settings-template" target="_blank"><img src="https://cloud.ibm.com/media/docs/images/icons/Deploy_to_cloud.svg" alt="Deploy to IBM Cloud button"></a></div>
+    * <div style="display: inline-block;"><a href="./examples/custom">Account Custom Settings example</a></div> <div style="display: inline-block; vertical-align: middle;"><a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=ias-custom-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/tree/main/examples/custom" target="_blank"><img src="https://cloud.ibm.com/media/docs/images/icons/Deploy_to_cloud.svg" alt="Deploy to IBM Cloud button"></a></div>
+    * <div style="display: inline-block;"><a href="./examples/default">Default Example</a></div> <div style="display: inline-block; vertical-align: middle;"><a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=ias-default-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/tree/main/examples/default" target="_blank"><img src="https://cloud.ibm.com/media/docs/images/icons/Deploy_to_cloud.svg" alt="Deploy to IBM Cloud button"></a></div>
 * [Contributing](#contributing)
 <!-- END OVERVIEW HOOK -->
 
@@ -132,7 +132,7 @@ You need the following permissions to run this module.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_cbr_zones"></a> [cbr\_zones](#module\_cbr\_zones) | terraform-ibm-modules/cbr/ibm//modules/cbr-zone-module | v1.33.8 |
+| <a name="module_cbr_zones"></a> [cbr\_zones](#module\_cbr\_zones) | terraform-ibm-modules/cbr/ibm//modules/cbr-zone-module | v1.34.0 |
 
 ### Resources
 
