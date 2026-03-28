@@ -45,16 +45,33 @@ If you need to manage these FSCloud requirements via Terraform, please see the [
 <!-- Below content is automatically populated via pre-commit hook -->
 <!-- BEGIN OVERVIEW HOOK -->
 ## Overview
-* [terraform-ibm-iam-account-settings](#terraform-ibm-iam-account-settings)
-* [Submodules](./modules)
-    * [account-settings-template](./modules/account-settings-template)
-    * [experimental](./modules/experimental)
-* [Examples](./examples)
-:information_source: Ctrl/Cmd+Click or right-click on the Schematics deploy button to open in a new tab
-    * <a href="./examples/account-settings-template">Account Settings Template example</a> <a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=iam-account-settings-account-settings-template-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/tree/main/examples/account-settings-template"><img src="https://img.shields.io/badge/Deploy%20with IBM%20Cloud%20Schematics-0f62fe?logo=ibm&logoColor=white&labelColor=0f62fe" alt="Deploy with IBM Cloud Schematics" style="height: 16px; vertical-align: text-bottom; margin-left: 5px;"></a>
-    * <a href="./examples/custom">Account Custom Settings example</a> <a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=iam-account-settings-custom-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/tree/main/examples/custom"><img src="https://img.shields.io/badge/Deploy%20with IBM%20Cloud%20Schematics-0f62fe?logo=ibm&logoColor=white&labelColor=0f62fe" alt="Deploy with IBM Cloud Schematics" style="height: 16px; vertical-align: text-bottom; margin-left: 5px;"></a>
-    * <a href="./examples/default">Default Example</a> <a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=iam-account-settings-default-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/tree/main/examples/default"><img src="https://img.shields.io/badge/Deploy%20with IBM%20Cloud%20Schematics-0f62fe?logo=ibm&logoColor=white&labelColor=0f62fe" alt="Deploy with IBM Cloud Schematics" style="height: 16px; vertical-align: text-bottom; margin-left: 5px;"></a>
-* [Contributing](#contributing)
+<ul>
+  <li><a href="#terraform-ibm-iam-account-settings">terraform-ibm-iam-account-settings</a></li>
+  <li><a href="./modules">Submodules</a>
+    <ul>
+      <li><a href="./modules/account-settings-template">account-settings-template</a></li>
+      <li><a href="./modules/experimental">experimental</a></li>
+    </ul>
+  </li>
+  <li><a href="./examples">Examples</a>
+    <ul>
+      <li>
+        <a href="./examples/account-settings-template">Account Settings Template example</a>
+        <a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=iam-account-settings-account-settings-template-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/tree/main/examples/account-settings-template"><img src="https://img.shields.io/badge/Deploy%20with%20IBM%20Cloud%20Schematics-0f62fe?style=flat&logo=ibm&logoColor=white&labelColor=0f62fe" alt="Deploy with IBM Cloud Schematics" style="height: 16px; vertical-align: text-bottom; margin-left: 5px;"></a>
+      </li>
+      <li>
+        <a href="./examples/custom">Account Custom Settings example</a>
+        <a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=iam-account-settings-custom-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/tree/main/examples/custom"><img src="https://img.shields.io/badge/Deploy%20with%20IBM%20Cloud%20Schematics-0f62fe?style=flat&logo=ibm&logoColor=white&labelColor=0f62fe" alt="Deploy with IBM Cloud Schematics" style="height: 16px; vertical-align: text-bottom; margin-left: 5px;"></a>
+      </li>
+      <li>
+        <a href="./examples/default">Default Example</a>
+        <a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=iam-account-settings-default-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/tree/main/examples/default"><img src="https://img.shields.io/badge/Deploy%20with%20IBM%20Cloud%20Schematics-0f62fe?style=flat&logo=ibm&logoColor=white&labelColor=0f62fe" alt="Deploy with IBM Cloud Schematics" style="height: 16px; vertical-align: text-bottom; margin-left: 5px;"></a>
+      </li>
+    </ul>
+    ℹ️ Ctrl/Cmd+Click or right-click on the Schematics deploy button to open in a new tab.
+  </li>
+  <li><a href="#contributing">Contributing</a></li>
+</ul>
 <!-- END OVERVIEW HOOK -->
 
 ## terraform-ibm-iam-account-settings
