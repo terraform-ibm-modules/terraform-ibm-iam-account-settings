@@ -47,24 +47,24 @@ If you need to manage these FSCloud requirements via Terraform, please see the [
 ## Overview
 <ul>
   <li><a href="#terraform-ibm-iam-account-settings">terraform-ibm-iam-account-settings</a></li>
-  <li><a href="./modules">Submodules</a>
+  <li><a href="https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/tree/main/modules">Submodules</a>
     <ul>
-      <li><a href="./modules/account-settings-template">account-settings-template</a></li>
-      <li><a href="./modules/experimental">experimental</a></li>
+      <li><a href="https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/tree/main/modules/account-settings-template">account-settings-template</a></li>
+      <li><a href="https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/tree/main/modules/experimental">experimental</a></li>
     </ul>
   </li>
-  <li><a href="./examples">Examples</a>
+  <li><a href="https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/tree/main/examples">Examples</a>
     <ul>
       <li>
-        <a href="./examples/account-settings-template">Account Settings Template example</a>
+        <a href="https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/tree/main/examples/account-settings-template">Account Settings Template example</a>
         <a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=iam-account-settings-account-settings-template-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/tree/main/examples/account-settings-template"><img src="https://img.shields.io/badge/Deploy%20with%20IBM%20Cloud%20Schematics-0f62fe?style=flat&logo=ibm&logoColor=white&labelColor=0f62fe" alt="Deploy with IBM Cloud Schematics" style="height: 16px; vertical-align: text-bottom; margin-left: 5px;"></a>
       </li>
       <li>
-        <a href="./examples/custom">Account Custom Settings example</a>
+        <a href="https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/tree/main/examples/custom">Account Custom Settings example</a>
         <a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=iam-account-settings-custom-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/tree/main/examples/custom"><img src="https://img.shields.io/badge/Deploy%20with%20IBM%20Cloud%20Schematics-0f62fe?style=flat&logo=ibm&logoColor=white&labelColor=0f62fe" alt="Deploy with IBM Cloud Schematics" style="height: 16px; vertical-align: text-bottom; margin-left: 5px;"></a>
       </li>
       <li>
-        <a href="./examples/default">Default Example</a>
+        <a href="https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/tree/main/examples/default">Default Example</a>
         <a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=iam-account-settings-default-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/tree/main/examples/default"><img src="https://img.shields.io/badge/Deploy%20with%20IBM%20Cloud%20Schematics-0f62fe?style=flat&logo=ibm&logoColor=white&labelColor=0f62fe" alt="Deploy with IBM Cloud Schematics" style="height: 16px; vertical-align: text-bottom; margin-left: 5px;"></a>
       </li>
     </ul>
