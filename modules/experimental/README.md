@@ -58,7 +58,7 @@ module "experimental-iam-account-settings" {
 ### Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
 | <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.89.0, < 3.0.0 |
 | <a name="requirement_restapi"></a> [restapi](#requirement\_restapi) | >= 1.18.2,< 2.0.0 |
@@ -70,7 +70,7 @@ No modules.
 ### Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [restapi_object.fs_validated](https://registry.terraform.io/providers/Mastercard/restapi/latest/docs/resources/object) | resource |
 | [restapi_object.user_list_visibility](https://registry.terraform.io/providers/Mastercard/restapi/latest/docs/resources/object) | resource |
 | [ibm_iam_account_settings.iam_account_settings](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/data-sources/iam_account_settings) | data source |
@@ -78,7 +78,7 @@ No modules.
 ### Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_api_endpoint"></a> [api\_endpoint](#input\_api\_endpoint) | Endpoint to use for API calls for `var.fs_validated` and `var.user_list_visibility` | `string` | `"accounts.cloud.ibm.com"` | no |
 | <a name="input_fs_validated"></a> [fs\_validated](#input\_fs\_validated) | Enable use of financial services validated products in the account | `bool` | `true` | no |
 | <a name="input_user_list_visibility"></a> [user\_list\_visibility](#input\_user\_list\_visibility) | Enable restriction of user list visibility in the account | `bool` | `true` | no |
@@ -86,7 +86,7 @@ No modules.
 ### Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_account_fs_validated"></a> [account\_fs\_validated](#output\_account\_fs\_validated) | Current Financial Services validated setting |
 | <a name="output_account_user_list_visibility"></a> [account\_user\_list\_visibility](#output\_account\_user\_list\_visibility) | Current User List visibility restriction setting |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
