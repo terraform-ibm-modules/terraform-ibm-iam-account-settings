@@ -4,11 +4,7 @@ terraform {
     # Use "greater than or equal to" range in modules
     ibm = {
       source  = "IBM-Cloud/ibm"
-      version = ">= 1.89.0, < 3.0.0"
-    }
-    restapi = {
-      source  = "Mastercard/restapi"
-      version = ">= 1.18.2,< 2.0.0"
+      version = ">= 2.9.0, < 3.0.0"
     }
   }
 }

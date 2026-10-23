@@ -1,14 +1,10 @@
 terraform {
   required_version = ">= 1.9.0"
   required_providers {
-    # Pin to the lowest provider version of the range defined in the main module to ensure lowest version still works
+    # Pin to the lowest provider version that supports ibm_account_traits (used by modules/experimental)
     ibm = {
       source  = "IBM-Cloud/ibm"
-      version = "1.89.0"
-    }
-    restapi = {
-      source  = "Mastercard/restapi"
-      version = "1.18.2"
+      version = "2.9.0"
     }
   }
 }

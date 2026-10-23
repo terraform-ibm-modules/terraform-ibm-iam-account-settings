@@ -1,38 +1,24 @@
-data "ibm_iam_account_settings" "iam_account_settings" {
+# Account traits, set with the IBM provider's ibm_account_traits resource
+# (PATCH /v1/accounts/{account_id}/traits) on the provider's account.
+# The values map to the API exactly as the restapi version did.
+resource "ibm_account_traits" "this" {
+  endpoint               = var.api_endpoint
+  fs_ready               = var.fs_validated
+  team_directory_enabled = var.user_list_visibility
 }
 
-locals {
-  traits_path = "//${var.api_endpoint}/v1/accounts/${data.ibm_iam_account_settings.iam_account_settings.account_id}/traits"
+# Drop the old restapi objects from state without calling their destroy. Their
+# destroy was a no-op GET, so nothing in the account changes during the upgrade.
+removed {
+  from = restapi_object.fs_validated
+  lifecycle {
+    destroy = false
+  }
 }
 
-resource "restapi_object" "fs_validated" {
-  path           = local.traits_path
-  data           = "{\"fs_ready\": ${var.fs_validated}}"
-  create_method  = "PATCH"
-  create_path    = local.traits_path
-  destroy_method = "GET"
-  destroy_path   = local.traits_path
-  read_method    = "GET"
-  read_path      = local.traits_path
-  update_method  = "PATCH"
-  update_path    = local.traits_path
-  object_id      = data.ibm_iam_account_settings.iam_account_settings.account_id
-  id_attribute   = data.ibm_iam_account_settings.iam_account_settings.account_id
-  force_new      = [var.fs_validated]
-}
-
-resource "restapi_object" "user_list_visibility" {
-  path           = local.traits_path
-  data           = "{\"team_directory_enabled\": ${var.user_list_visibility}}"
-  create_method  = "PATCH"
-  create_path    = local.traits_path
-  destroy_method = "GET"
-  destroy_path   = local.traits_path
-  read_method    = "GET"
-  read_path      = local.traits_path
-  update_method  = "PATCH"
-  update_path    = local.traits_path
-  object_id      = data.ibm_iam_account_settings.iam_account_settings.account_id
-  id_attribute   = data.ibm_iam_account_settings.iam_account_settings.account_id
-  force_new      = [var.user_list_visibility]
+removed {
+  from = restapi_object.user_list_visibility
+  lifecycle {
+    destroy = false
+  }
 }

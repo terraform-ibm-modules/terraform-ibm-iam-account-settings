@@ -40,7 +40,7 @@ The module currently does not support setting the following FSCloud requirements
 
 Tracking issue with IBM provider -> <https://github.com/IBM-Cloud/terraform-provider-ibm/issues/4204>
 
-If you need to manage these FSCloud requirements via Terraform, please see the [experimental submodule](https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/tree/main/modules/experimental) which uses the RestAPI provider to manage these settings.
+If you need to manage these FSCloud requirements via Terraform, please see the [experimental submodule](https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/tree/main/modules/experimental) which manages these settings with the `ibm_account_traits` resource.
 
 <!-- Below content is automatically populated via pre-commit hook -->
 <!-- BEGIN OVERVIEW HOOK -->
